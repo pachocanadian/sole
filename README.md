@@ -17,3 +17,8 @@ ROADMAP:
 * Will allow for different queueing algorithms for the elevator itself
 * Time system will be based on ticks, e.g. 1 second, with travel time between floors, speed of elevator door opening, etc. being based on real world times. The simulation will allow for arbitrary scaling of time, e.g. 20 ticks per real world second.
 * Will allow for support of different types of elevators - e.g. historically slow freight elevators vs Star Trek turbolifts
+
+TEAM MEMBERS:
+Christian Pearson
+* Linux 4.15.0-51-generic #55-Ubuntu SMP x86_64 x86_64 x86_64 GNU/Linux
+* IDE: Vim, VSCode
