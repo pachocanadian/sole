@@ -24,6 +24,6 @@ Christian Pearson
 * Linux 4.15.0-51-generic #55-Ubuntu SMP x86_64 x86_64 x86_64 GNU/Linux
 * IDE: Vim, VSCode
 
-Mike Carr
+Mike Carr <mcarr@pachogrande.com>
 * Windows 10 x64, Windows 7 x64
 * IDE: PyDev
