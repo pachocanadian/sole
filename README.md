@@ -2,12 +2,16 @@
 
 SOLE is a Python based project which will simulate elevator operation within a given building including the creation or destruction of people within the simulation.
 
-## ROADMAP
+## STANDARDS
+
 * All code in repo to use Python Black (https://github.com/python/black)
 * Cross platform support (Windows and Linux). 
-* Capacity for GUI display
 * Vector graphics to allow for arbitrary scaling
 * Open source audio for things like elevator dinging at floors
+
+## Where are we going?
+
+* Capacity for GUI display
 * Will allow for arbitrary building files
    * E.g. floors named unusually, exclusion of 13th floor
    * E.g. service elevators which have dedicated floor assignments (lobby to penthouse)
