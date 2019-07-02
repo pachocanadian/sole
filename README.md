@@ -13,6 +13,7 @@ SOLE is a Python based project which will simulate elevator operation within a g
    * E.g. service elevators which have dedicated floor assignments (lobby to penthouse)
    * E.g. certain floors being residences vs businesses
 * People will be extended to allow for ages, names, history
+   * E.g. want to provide an ActurialPerson class which will instantiate members according to a standard population distribution for height/weight/age/BMI
 * Will provide for analysis of efficiencies, wait times, etc.
 * Will allow for different queueing algorithms for the elevator itself
 * Time system will be based on ticks, e.g. 1 second, with travel time between floors, speed of elevator door opening, etc. being based on real world times. The simulation will allow for arbitrary scaling of time, e.g. 20 ticks per real world second.
