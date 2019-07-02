@@ -1,9 +1,9 @@
-# sole
-SOLE - Simulator Of Lifts and Elevators
+# SOLE - Simulator Of Lifts and Elevators
 
 SOLE is a Python based project which will simulate elevator operation within a given building including the creation or destruction of people within the simulation.
 
 ROADMAP:
+* All code in repo to use Python Black (https://github.com/python/black)
 * Cross platform support (Windows and Linux). 
 * Capacity for GUI display
 * Vector graphics to allow for arbitrary scaling
@@ -22,3 +22,7 @@ TEAM MEMBERS:
 Christian Pearson
 * Linux 4.15.0-51-generic #55-Ubuntu SMP x86_64 x86_64 x86_64 GNU/Linux
 * IDE: Vim, VSCode
+
+Mike Carr
+* Windows 10 x64, Windows 7 x64
+* IDE: PyDev
