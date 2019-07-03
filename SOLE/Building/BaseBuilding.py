@@ -1,6 +1,9 @@
+import uuid
+
+
 class BaseBuilding:
     def __init__(self):
-        self._id = "BaseBuilding"
+        self._id = uuid.uuid1()
 
     def getFloors(self):
         return self.floors
