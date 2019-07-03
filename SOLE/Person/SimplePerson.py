@@ -3,4 +3,4 @@ from SOLE.Person.BasePerson import *
 
 class SimplePerson(BasePerson):
     def __init__(self):
-        self.id = "SimplePerson"
+        self._id = "SimplePerson"

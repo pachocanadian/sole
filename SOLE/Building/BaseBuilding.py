@@ -1,8 +1,5 @@
-# BaseBuilding, all Buildings should support these methods at a minimum
 class BaseBuilding:
-    def __init__(self, f, e):
-        self.floors = f
-        self.elevators = e
+    def __init__(self):
         self._id = "BaseBuilding"
 
     def getFloors(self):
