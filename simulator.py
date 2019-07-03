@@ -3,8 +3,13 @@ import SOLE
 b = SOLE.Elevator.SimpleElevator()
 print("SimpleElevator id=" + str(b.id()))
 
-c = SOLE.Floor.SimpleFloor()
-print("SimpleFloor id=" + str(c.id()))
+floors = []
+for floorLabel in range(3):
+    f = SOLE.Floor.SimpleFloor(floorLabel)
+    floors.append(f)
+
+for x in floors:
+    print("Floor label {} with id={}".format(x.label, x.id()))
 
 d = SOLE.Person.SimplePerson()
 print("SimplePerson id=" + str(d.id()))
