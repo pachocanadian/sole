@@ -1,7 +1,7 @@
 import SOLE
 
 b = SOLE.Elevator.SimpleElevator()
-print("SimpleElevator id=" + str(b.id()))
+print("SimpleElevator uuid=" + str(b.uuid()))
 
 floors = []
 for floorLabel in range(3):
@@ -9,10 +9,10 @@ for floorLabel in range(3):
     floors.append(f)
 
 for x in floors:
-    print("Floor label {} with id={}".format(x.label, x.id()))
+    print("Floor label {} with uuid={}".format(x.label, x.uuid()))
 
 d = SOLE.Person.SimplePerson()
-print("SimplePerson id=" + str(d.id()))
+print("SimplePerson uuid=" + str(d.uuid()))
 
 a = SOLE.Building.SimpleBuilding()
-print("SimpleBuilding id=" + str(a.id()))
+print("SimpleBuilding uuid=" + str(a.uuid()))

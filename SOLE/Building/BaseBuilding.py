@@ -3,7 +3,7 @@ import uuid
 
 class BaseBuilding:
     def __init__(self):
-        self._id = uuid.uuid1()
+        self._uuid = uuid.uuid1()
 
     def getFloors(self):
         return self.floors
@@ -17,5 +17,5 @@ class BaseBuilding:
     def setElevators(self, e):
         self.elevators = e
 
-    def id(self):
-        return self._id
+    def uuid(self):
+        return self._uuid
