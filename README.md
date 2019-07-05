@@ -25,7 +25,7 @@ SOLE is a Python based project which will simulate elevator operation within a g
 
 ## TEAM MEMBERS
 
-Christian Pearson
+Christian Pearson <christian.pearson@stemist.ca>
 * Linux 4.15.0-51-generic #55-Ubuntu SMP x86_64 x86_64 x86_64 GNU/Linux
 * IDE: Vim, VSCode
 
