@@ -32,6 +32,11 @@ SOLE is a Python based project which will simulate elevator operation within a g
 * The simulator will create people as it sees fit. In the typical case, people will be created on any of the floors with a destination of any other floor. That is, random start floor and random destination floor. Later simulators might purposefully create people in residential floors and send them to commercial floors or things like this.
 * Upon creation people will move from their starting floor to their destination floor. Upon reaching their destination floor, in the initial case, they will be destroyed.
 * Initially the elevator will impose no restrictions on people entering the elevator. However, we may allow for cases where the elevator imposes restrictions on # of bodies, overall weight, volume of space, etc.
+* The simulator operates on the unit of the tick() with this method being repeatedly called on the simulator. The simulator will then iterate throughout its contained objects - probably all elevators first, all floors second, all people third. Need to think through the logic but probably something like that.
+* Each tick the elevator will do something like checking if it has people in it and disembarking them; checking if it is at a floor and loading any waiting people; if in motion to a destination floor will continue to that destination floor (picking people up as it iterates through floors); and lastly, if not in motion then will look at the requests and move towards a destination floor.
+* Initially the floors and people will tick but will do nothing. The elevator will be the object that operates the people.
+* At the end of each tick() cycle on the simulator, it will create people if it feels it appropriate based on whatever parameters are imposed.
+* There are many things not being stated above - what is the distance between floors (is it constant or variable), what is the speed of the elevator, how many ticks should it take to open/close doors, how long does it take for people to enter/exit. All of these things will be expanded upon as we move forward and likely will have different simulator/people/elevator objects depending on how we'd like things to operate. All relevant issues though as if we're going to link a GUI to things then we want the animations to line up with the ticks.
 
 
 ## TEAM MEMBERS
