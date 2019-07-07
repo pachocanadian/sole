@@ -23,6 +23,17 @@ SOLE is a Python based project which will simulate elevator operation within a g
 * Time system will be based on ticks, e.g. 1 second, with travel time between floors, speed of elevator door opening, etc. being based on real world times. The simulation will allow for arbitrary scaling of time, e.g. 20 ticks per real world second.
 * Will allow for support of different types of elevators - e.g. historically slow freight elevators vs Star Trek turbolifts
 
+## SIMULATOR FLOW
+
+* Presently, there will be one and only one simulator.
+* The simulator will host one and only one building.
+* A building will be made up of at least two floors. Each floor will have a label. Typically labelled like ['Lobby', '1', 2', '3'].
+* A building will be made up of at least one elevator. The elevator will connect two or more floors. Typically every elevator in a building will connect every floor, although there may exceptions to this. We impose the restriction that all floors must be connected - that is, that someone on any floor must be able to reach all other floors through some combination of elevators.
+* The simulator will create people as it sees fit. In the typical case, people will be created on any of the floors with a destination of any other floor. That is, random start floor and random destination floor. Later simulators might purposefully create people in residential floors and send them to commercial floors or things like this.
+* Upon creation people will move from their starting floor to their destination floor. Upon reaching their destination floor, in the initial case, they will be destroyed.
+* Initially the elevator will impose no restrictions on people entering the elevator. However, we may allow for cases where the elevator imposes restrictions on # of bodies, overall weight, volume of space, etc.
+
+
 ## TEAM MEMBERS
 
 Christian Pearson <christian.pearson@stemist.ca>
