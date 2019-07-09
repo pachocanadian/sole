@@ -5,11 +5,11 @@ print("SimpleElevator uuid=" + str(b.uuid()))
 
 floors = []
 for floorLabel in range(3):
-    f = SOLE.Floor.SimpleFloor(floorLabel)
+    f = SOLE.Floor.SimpleFloor({"label": floorLabel})
     floors.append(f)
 
 for x in floors:
-    print("Floor label {} with uuid={}".format(x.label, x.uuid()))
+    print("Floor label {} with uuid={}".format(x.get("label"), x.uuid()))
 
 d = SOLE.Person.SimplePerson({"name": "Foo"})
 print(
