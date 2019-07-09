@@ -1,35 +1,24 @@
+from pprint import pprint
 import SOLE
 
-b = SOLE.Elevator.SimpleElevator()
-print("SimpleElevator uuid=" + str(b.uuid()))
 
+b = SOLE.Elevator.SimpleElevator()
+print(b)
+
+floorLabels = ["Lobby", 1, 2, 3]
 floors = []
-for floorLabel in range(3):
+for floorLabel in floorLabels:
     f = SOLE.Floor.SimpleFloor({"label": floorLabel})
     floors.append(f)
 
 for x in floors:
-    print("Floor label {} with uuid={}".format(x.get("label"), x.uuid()))
+    print(x)
 
 d = SOLE.Person.SimplePerson({"name": "Foo"})
-print(
-    "SimplePerson uuid="
-    + str(d.uuid())
-    + " with name="
-    + d.get("name")
-    + " and badkey="
-    + d.get("badkey")
-)
+print(d)
 
 e = SOLE.Person.SimplePerson()
-print(
-    "SimplePerson uuid="
-    + str(e.uuid())
-    + " with name="
-    + e.get("name")
-    + " and badkey="
-    + e.get("badkey")
-)
+print(e)
 
-a = SOLE.Building.SimpleBuilding()
-print("SimpleBuilding uuid=" + str(a.uuid()))
+a = SOLE.Building.SimpleBuilding({"floors": floors})
+print(a)

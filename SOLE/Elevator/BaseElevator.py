@@ -10,6 +10,10 @@ class BaseElevator:
             for key in attributes:
                 self.set(key, attributes[key])
 
+    def __str__(self):
+        """allow print() to function in some intelligible way"""
+        return str(self.__class__) + ": " + str(self.__dict__)
+
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
         if name == "uuid":
