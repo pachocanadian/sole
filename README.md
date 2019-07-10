@@ -53,6 +53,13 @@ Building
 * Total elevators
 * Total people
 
+Floors
+* Identifier
+* Name (e.g. "Lobby, floor 1, floor 2")\
+* Distance from ground?
+* Number of people at this floor?
+* A type of floor, as reason for people to go to this floor?
+
 Elevators
 * Identifier
 * Number of people inside
