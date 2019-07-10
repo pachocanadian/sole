@@ -38,6 +38,38 @@ SOLE is a Python based project which will simulate elevator operation within a g
 * At the end of each tick() cycle on the simulator, it will create people if it feels it appropriate based on whatever parameters are imposed.
 * There are many things not being stated above - what is the distance between floors (is it constant or variable), what is the speed of the elevator, how many ticks should it take to open/close doors, how long does it take for people to enter/exit. All of these things will be expanded upon as we move forward and likely will have different simulator/people/elevator objects depending on how we'd like things to operate. All relevant issues though as if we're going to link a GUI to things then we want the animations to line up with the ticks.
 
+## Object properties and interactions
+
+Global
+* Tick rate
+* Start time of simulation
+* End time of simulation
+* Time elapsed
+* Objects created
+* Objects destroyed
+
+Building
+* Floors
+* Total elevators
+* Total people
+
+Elevators
+* Identifier
+* Number of people inside
+* Specific list of people inside
+* Direction of travel (up or down)
+* Currently at floor X
+* Rate of travel per tick
+* Accessable at which floors?
+* Total floors traversed
+* Choice of direction logic (alternate directions as long as there is a call to move both up and down? Does elevator conditionally prioritize a direction?)
+* Current status: "Idle, moving up, moving down, doors open, doors closed"
+
+People
+* Identifier
+* Name?
+* Status: "Inside elevator, waiting for elevator, entering, departing"
+* Choice of direction: "Calling elevator to move up/down" 
 
 ## TEAM MEMBERS
 
