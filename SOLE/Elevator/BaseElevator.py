@@ -32,3 +32,9 @@ class BaseElevator:
     def uuid(self):
         """uuid() will return a unique identifier for the object"""
         return self._uuid
+
+    def moveUp(rate, tick):
+        """Move elevator up by distance per tick."""
+
+    def moveDown(rate, tick):
+        """Move elevator down by distance per tick."""
