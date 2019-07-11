@@ -5,11 +5,10 @@ import SOLE
 floorLabels = ["Lobby", 1, 2, 3]
 floors = []
 for floorLabel in floorLabels:
-    f = SOLE.Floor.SimpleFloor({"label": floorLabel, "height": 2.75})
+    f = SOLE.Floor.SimpleFloor({"label": floorLabel})
+    print(f)
     floors.append(f)
 
-for x in floors:
-    print(x)
 
 basic_elevator = SOLE.Elevator.SimpleElevator(
     {"floors": floors, "location": "Lobby", "status": "waiting"}
@@ -17,7 +16,7 @@ basic_elevator = SOLE.Elevator.SimpleElevator(
 print(basic_elevator)
 
 
-d = SOLE.Person.SimplePerson({"name": "Foo"})
+d = SOLE.Person.SimplePerson()
 print(d)
 
 e = SOLE.Person.SimplePerson()

@@ -2,10 +2,21 @@ import uuid
 
 
 class BaseElevator:
+    default_attributes = {
+        "height": 2.44,
+        "elevation": None,  # will calculate dynamically each tick
+        "startingFloor": None,  # set on construction but generally the bottommost floor
+        "destinationFloor": None,  # set dynamically during normal operation, in normal operation will return to startingFloor
+        "velocity": 0,  # we start at rest. positive velocity is up, negative velocity is down
+        "label": None,  # if the elevator has a friendly identifier
+        "maximum_up_speed": 1,  # elevators generally can go up faster than down
+        "maximum_down_speed": 1,  # elevators generally can go up faster than down
+    }
+
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self._uuid = uuid.uuid1()
-        self.attribute = dict()
+        self.attribute = BaseElevator.default_attributes
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])

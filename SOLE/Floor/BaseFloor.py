@@ -2,10 +2,17 @@ import uuid
 
 
 class BaseFloor:
+    default_attributes = {
+        "height": 3,
+        "elevation_bottom": None,
+        "elevation_top": None,
+        "label": None,
+    }
+
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self._uuid = uuid.uuid1()
-        self.attribute = dict()
+        self.attribute = BaseFloor.default_attributes
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
