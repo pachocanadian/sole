@@ -58,21 +58,29 @@ Floors
 * `UUID`
 * `elevation_bottom` - height in metres of bottom of floor
 * `elevation_top` - height in metres of top of floor
-* `label` - e.g. "Lobby, floor 1, floor 2")\
+* `label` - e.g. Lobby, floor 1, floor 2 - (should this be unique???)
    * Number of people at this floor?
    * A type of floor, as reason for people to go to this floor?
 
 Elevators
 * `UUID`
-* Number of people inside
-* Specific list of people inside
-* Direction of travel (up or down)
-* Currently at floor X
-* Rate of travel per tick
-* Accessable at which floors?
-* Total floors traversed
-* Choice of direction logic (alternate directions as long as there is a call to move both up and down? Does elevator conditionally prioritize a direction?)
-* Current status: "Idle, moving up, moving down, doors open, doors closed"
+* `height` - in metres
+* `elevation` - in metres, of floor of elevator (should this be elevation_bottom?)
+* `startingFloor` - the UUID of the starting floor for this elevator
+* `destinationFloor` - the UUID of the floor that we are going to
+* `velocity` - the velocity in metres per tick, 0 at rest, positive moving upwards, negative moving downwards
+* `label` - a friendly identifier
+* `maximium_up_speed` - real world elevators often have different max up and down speeds
+* `maximium_down_speed` - real world elevators often have different max up and down speeds
+   * Number of people inside
+   * Specific list of people inside
+   * Direction of travel (up or down)
+   * Currently at floor X
+   * Rate of travel per tick
+   * Accessable at which floors?
+   * Total floors traversed
+   * Choice of direction logic (alternate directions as long as there is a call to move both up and down? Does elevator conditionally prioritize a direction?)
+   * Current status: "Idle, moving up, moving down, doors open, doors closed"
 
 People
 * `UUID`
