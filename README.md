@@ -84,9 +84,10 @@ Elevators
 
 People
 * `UUID`
-* Name?
-* Status: "Inside elevator, waiting for elevator, entering, departing"
-* Choice of direction: "Calling elevator to move up/down" 
+* `height` - in metres
+   * Name?
+   * Status: "Inside elevator, waiting for elevator, entering, departing"
+   * Choice of direction: "Calling elevator to move up/down" 
 
 ## TEAM MEMBERS
 
