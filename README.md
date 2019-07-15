@@ -49,19 +49,21 @@ Global
 * Objects destroyed
 
 Building
+* `UUID`
 * Floors
 * Total elevators
 * Total people
 
 Floors
-* Identifier
-* Name (e.g. "Lobby, floor 1, floor 2")\
-* Distance from ground?
-* Number of people at this floor?
-* A type of floor, as reason for people to go to this floor?
+* `UUID`
+* `elevation_bottom` - height in metres of bottom of floor
+* `elevation_top` - height in metres of top of floor
+* `label` - e.g. "Lobby, floor 1, floor 2")\
+   * Number of people at this floor?
+   * A type of floor, as reason for people to go to this floor?
 
 Elevators
-* Identifier
+* `UUID`
 * Number of people inside
 * Specific list of people inside
 * Direction of travel (up or down)
@@ -73,7 +75,7 @@ Elevators
 * Current status: "Idle, moving up, moving down, doors open, doors closed"
 
 People
-* Identifier
+* `UUID`
 * Name?
 * Status: "Inside elevator, waiting for elevator, entering, departing"
 * Choice of direction: "Calling elevator to move up/down" 
