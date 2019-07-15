@@ -1,6 +1,11 @@
+#!/usr/bin/env python3
+
 from pprint import pprint
 import SOLE
+import time
 
+# Simulation parameters
+startTime = time.clock()
 
 floorLabels = ["Lobby", 1, 2, 3]
 floors = []
@@ -16,6 +21,7 @@ basic_elevator = SOLE.Elevator.SimpleElevator(
 print(basic_elevator)
 
 
+# Instantiate starting objects
 d = SOLE.Person.SimplePerson()
 print(d)
 
@@ -24,3 +30,7 @@ print(e)
 
 a = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": [basic_elevator]})
 print(a)
+
+timeElapsed = time.clock() - startTime
+
+print(f"Simulation started at: {startTime}. \n Time elapsed: {timeElapsed}")
