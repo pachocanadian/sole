@@ -50,9 +50,9 @@ Global
 
 Building
 * `UUID`
-* Floors
-* Total elevators
-* Total people
+   * Floors
+   * Total elevators
+   * Total people
 
 Floors
 * `UUID`
