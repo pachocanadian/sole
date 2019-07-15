@@ -29,7 +29,7 @@ class BaseElevator:
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
         if name == "uuid":
             raise Exception("cannot manually set uuid for an object of this type")
-        
+
         self.attribute[name] = value
         return self
 
@@ -45,7 +45,5 @@ class BaseElevator:
         return self._uuid
 
     def changeMovement(self, value):
-        ''' Modify velocity. Pass positive float for up, negative for down, and 0 for no velocity.'''
+        """ Modify velocity. Pass positive float for up, negative for down, and 0 for no velocity."""
         self.set("velocity", value)
-
-        
