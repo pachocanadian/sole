@@ -47,3 +47,7 @@ class BaseElevator:
     def changeMovement(self, value):
         """ Modify velocity. Pass positive float for up, negative for down, and 0 for no velocity."""
         self.set("velocity", value)
+
+    def tick(self):
+        """tick() will advance one step for this object and any/all objects contained by it"""
+        return

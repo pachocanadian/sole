@@ -38,3 +38,7 @@ class BasePerson:
     def uuid(self):
         """uuid() will return a unique identifier for the object"""
         return self._uuid
+
+    def tick(self):
+        """tick() will advance one step for this object and any/all objects contained by it"""
+        return
