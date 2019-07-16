@@ -5,7 +5,7 @@ import SOLE
 import time
 
 # Simulation parameters
-startTime = time.clock()
+startTime = time.time()
 
 floorLabels = ["Lobby", 1, 2, 3]
 floors = []
@@ -31,6 +31,10 @@ print(e)
 a = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": [basic_elevator]})
 print(a)
 
-timeElapsed = time.clock() - startTime
+timeElapsed = time.time() - startTime
 
-print(f"Simulation started at: {startTime}. \n Time elapsed: {timeElapsed}")
+print(
+    "Simulation started at: {}. \n Time elapsed: {}".format(
+        time.strftime("%x %X", time.localtime(startTime)), timeElapsed
+    )
+)
