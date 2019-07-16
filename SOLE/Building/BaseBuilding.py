@@ -1,4 +1,5 @@
 import uuid
+import SOLE
 
 
 class BaseBuilding:
@@ -35,6 +36,7 @@ class BaseBuilding:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
+        SOLE.log("BaseBuilding->tick() for {}".format(self.uuid()))
         # for e in elevator: e.tick()
         # for p in people: p.tick()
         # for f in floors: f.tick()

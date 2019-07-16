@@ -3,7 +3,7 @@ import uuid
 
 class BasePerson:
     default_attributes = {"height": 1.77}
-    #
+
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self._uuid = uuid.uuid1()
