@@ -1,4 +1,5 @@
 import uuid
+import SOLE
 
 
 class BasePerson:
@@ -31,7 +32,10 @@ class BasePerson:
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            return self.attribute[name]
+            if isinstance(self.attribute[name], list):
+                return list(self.attribute[name])
+            else:
+                return self.attribute[name]
         else:
             return ""
 
@@ -41,4 +45,5 @@ class BasePerson:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
+        SOLE.log("BasePerson->tick() for {}".format(self.uuid()))
         return

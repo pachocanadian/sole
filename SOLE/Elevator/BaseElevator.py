@@ -1,16 +1,17 @@
 import uuid
+import SOLE
 
 
 class BaseElevator:
     default_attributes = {
         "height": 2.44,
         "elevation": None,  # will calculate dynamically each tick
-        "startingFloor": None,  # set on construction but generally the bottommost floor
         "destinationFloor": None,  # set dynamically during normal operation, in normal operation will return to startingFloor
         "velocity": 0,  # we start at rest. positive velocity is up, negative velocity is down
-        "label": None,  # if the elevator has a friendly identifier
+        "label": None,  # if the object has a friendly identifier
         "maximum_up_speed": 1,  # elevators generally can go up faster than down
         "maximum_down_speed": 1,  # elevators generally can go up faster than down
+        "carrying": [],  # a list of Person objects presently within the elevator
     }
 
     def __init__(self, attributes=None):
@@ -36,7 +37,10 @@ class BaseElevator:
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            return self.attribute[name]
+            if isinstance(self.attribute[name], list):
+                return list(self.attribute[name])
+            else:
+                return self.attribute[name]
         else:
             return ""
 
@@ -50,4 +54,7 @@ class BaseElevator:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
+        SOLE.log("BaseElevator->tick() for {}".format(self.uuid()))
+        for p in self.get("carrying"):
+            p.tick()
         return

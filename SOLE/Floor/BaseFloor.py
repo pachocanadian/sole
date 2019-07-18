@@ -1,12 +1,14 @@
 import uuid
+import SOLE
 
 
 class BaseFloor:
     default_attributes = {
         "height": 3,
-        "elevation_bottom": None,
+        "elevation": None,
         "elevation_top": None,
-        "label": None,
+        "label": None,  # if the object has a friendly identifier
+        "carrying": [],  # a list of Person objects presently within the elevator
     }
 
     def __init__(self, attributes=None):
@@ -36,7 +38,10 @@ class BaseFloor:
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            return self.attribute[name]
+            if isinstance(self.attribute[name], list):
+                return list(self.attribute[name])
+            else:
+                return self.attribute[name]
         else:
             return ""
 
@@ -46,4 +51,7 @@ class BaseFloor:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
+        SOLE.log("BaseFloor->tick() for {}".format(self.uuid()))
+        for p in self.get("carrying"):
+            p.tick()
         return
