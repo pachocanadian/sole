@@ -1,4 +1,5 @@
 import uuid
+import json
 import SOLE
 
 
@@ -14,7 +15,9 @@ class BaseFloor:
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self._uuid = uuid.uuid1()
-        self.attribute = BaseFloor.default_attributes
+        self.attribute = {}
+        for key in BaseFloor.default_attributes:
+            self.set(key, BaseFloor.default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
@@ -32,16 +35,13 @@ class BaseFloor:
             if not (str(value).strip()):
                 raise Exception("attribute label must not be empty")
 
-        self.attribute[name] = value
+        self.attribute[name] = json.dumps(value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            if isinstance(self.attribute[name], list):
-                return list(self.attribute[name])
-            else:
-                return self.attribute[name]
+            return json.loads(self.attribute[name])
         else:
             return ""
 
