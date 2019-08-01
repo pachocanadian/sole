@@ -92,7 +92,7 @@ People
 ## TEAM MEMBERS
 
 Christian Pearson <christian.pearson@stemist.ca>
-* Linux 4.15.0-51-generic #55-Ubuntu SMP x86_64 x86_64 x86_64 GNU/Linux
+* Fedora 30 5.1.19-300.fc30.x86_64
 * IDE: Vim, VSCode
 
 Mike Carr <mcarr@pachogrande.com>
