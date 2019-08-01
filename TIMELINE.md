@@ -50,6 +50,6 @@ class elevator:
 		if ([targetFloor.height - posY] <= 1) AND ([currentFloor - targetFloor] <= 1):
 			# Stop elevator when destination reached
 			rate = 0
-		
+			posY = FloorObject.height	
 		
 				
