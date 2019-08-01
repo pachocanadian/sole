@@ -6,12 +6,13 @@ Wait at floor: 10 ticks
 Current floor
 
 Timeline reference
-----------
-Time		Velocity		Elevation		Status
-0 ticks		+1 m / t		0 m			Going to floor 2
-1 ticks		+1 m / t		1 m 			Going to floor 2
-2 ticks		+1 m / t		2 m 			Going to floor 2
-3 ticks		+0 m / t		2.5 m			At floor 2
+
+Time | Velocity	| Elevation | Status
+---- | -------- | --------- | ------
+0 ticks |  +1 m / t |  0 m |  Going to floor 2
+1 ticks |  +1 m / t |  1 m  | Going to floor 2
+2 ticks |  +1 m / t |  2 m  | Going to floor 2
+3 ticks |  +0 m / t |  2.5 m | At floor 2
  
 Pseudocode
 ----------
