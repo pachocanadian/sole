@@ -15,9 +15,8 @@ def timestamp():
         time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), current_tick
     )
 
-
 def log(message, loglevel=4):
     print("{} {}".format(timestamp(), message))
 
 def new_id():
-    return uuid.uuid1()
+    return str(uuid.uuid1())
