@@ -1,4 +1,3 @@
-import uuid
 import SOLE
 
 
@@ -7,11 +6,11 @@ class BaseBuilding:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self._uuid = uuid.uuid1()
         self.attribute = BaseBuilding.default_attributes
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
+        self.set("id", SOLE.new_id())
         running_height = 0
         for f in self.get("floors"):
             SOLE.log("manipulating floor {}".format(f.get("uuid")))
@@ -26,9 +25,6 @@ class BaseBuilding:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        if name == "uuid":
-            raise Exception("cannot manually set uuid for an object of this type")
-
         self.attribute[name] = value
         return self
 
@@ -42,13 +38,9 @@ class BaseBuilding:
         else:
             return ""
 
-    def uuid(self):
-        """uuid() will return a unique identifier for the object"""
-        return self._uuid
-
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("BaseBuilding->tick() for {}".format(self.uuid()))
+        SOLE.log("BaseBuilding->tick() for {}".format(self.get('id')))
         for f in self.get("floors"):
             f.tick()
         for e in self.get("elevators"):

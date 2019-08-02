@@ -1,6 +1,7 @@
 __all__ = ["Building", "Elevator", "Floor", "Person"]
 
 import time
+import uuid
 from SOLE.Building import *
 from SOLE.Elevator import *
 from SOLE.Floor import *
@@ -17,3 +18,6 @@ def timestamp():
 
 def log(message, loglevel=4):
     print("{} {}".format(timestamp(), message))
+
+def new_id():
+    return uuid.uuid1()
