@@ -26,7 +26,7 @@ SOLE is a Python based project which will simulate elevator operation within a g
 
 ## INTERNALS
 
-See [https://github.com/pachocanadian/sole/wiki/Internals]
+See https://github.com/pachocanadian/sole/wiki/Internals
 
 ## SIMULATOR FLOW
 
