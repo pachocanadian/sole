@@ -8,6 +8,7 @@ SOLE is a Python based project which will simulate elevator operation within a g
 * Cross platform support (Windows and Linux). 
 * SVG Vector graphics to allow for arbitrary scaling
 * Open source audio for things like elevator dinging at floors
+* Attributes within our project use snake_case rather than PascalCase or camelCase
 
 ## Where are we going?
 
@@ -37,57 +38,6 @@ SOLE is a Python based project which will simulate elevator operation within a g
 * Initially the floors and people will tick but will do nothing. The elevator will be the object that operates the people.
 * At the end of each tick() cycle on the simulator, it will create people if it feels it appropriate based on whatever parameters are imposed.
 * There are many things not being stated above - what is the distance between floors (is it constant or variable), what is the speed of the elevator, how many ticks should it take to open/close doors, how long does it take for people to enter/exit. All of these things will be expanded upon as we move forward and likely will have different simulator/people/elevator objects depending on how we'd like things to operate. All relevant issues though as if we're going to link a GUI to things then we want the animations to line up with the ticks.
-
-## Object properties and interactions
-
-Global
-* Tick rate
-* Start time of simulation
-* End time of simulation
-* Time elapsed
-* Objects created
-* Objects destroyed
-
-Building
-* `UUID`
-   * Floors
-   * Total elevators
-   * Total people
-
-Floors
-* `UUID`
-* `elevation_bottom` - height in metres of bottom of floor
-* `elevation_top` - height in metres of top of floor
-* `label` - e.g. Lobby, floor 1, floor 2 - (should this be unique???)
-   * Number of people at this floor?
-   * A type of floor, as reason for people to go to this floor?
-
-Elevators
-* `UUID`
-* `height` - in metres
-* `elevation` - in metres, of floor of elevator (should this be elevation_bottom?)
-* `startingFloor` - the UUID of the starting floor for this elevator
-* `destinationFloor` - the UUID of the floor that we are going to
-* `velocity` - the velocity in metres per tick, 0 at rest, positive moving upwards, negative moving downwards
-* `label` - a friendly identifier
-* `maximium_up_speed` - real world elevators often have different max up and down speeds
-* `maximium_down_speed` - real world elevators often have different max up and down speeds
-   * Number of people inside
-   * Specific list of people inside
-   * Direction of travel (up or down)
-   * Currently at floor X
-   * Rate of travel per tick
-   * Accessable at which floors?
-   * Total floors traversed
-   * Choice of direction logic (alternate directions as long as there is a call to move both up and down? Does elevator conditionally prioritize a direction?)
-   * Current status: "Idle, moving up, moving down, doors open, doors closed"
-
-People
-* `UUID`
-* `height` - in metres
-   * Name?
-   * Status: "Inside elevator, waiting for elevator, entering, departing"
-   * Choice of direction: "Calling elevator to move up/down" 
 
 ## TEAM MEMBERS
 
