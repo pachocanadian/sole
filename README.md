@@ -24,6 +24,10 @@ SOLE is a Python based project which will simulate elevator operation within a g
 * Time system will be based on ticks, e.g. 1 second, with travel time between floors, speed of elevator door opening, etc. being based on real world times. The simulation will allow for arbitrary scaling of time, e.g. 20 ticks per real world second.
 * Will allow for support of different types of elevators - e.g. historically slow freight elevators vs Star Trek turbolifts
 
+## INTERNALS
+
+See [https://github.com/pachocanadian/sole/wiki/Internals]
+
 ## SIMULATOR FLOW
 
 * Presently, there will be one and only one simulator.
