@@ -6,7 +6,7 @@ SOLE is a Python based project which will simulate elevator operation within a g
 
 * All code in repo to use Python Black (https://github.com/python/black)
 * Cross platform support (Windows and Linux). 
-* Vector graphics to allow for arbitrary scaling
+* SVG Vector graphics to allow for arbitrary scaling
 * Open source audio for things like elevator dinging at floors
 
 ## Where are we going?
