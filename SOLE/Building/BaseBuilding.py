@@ -13,7 +13,7 @@ class BaseBuilding:
         self.set("id", SOLE.new_id())
         running_height = 0
         for f in self.get("floors"):
-            SOLE.log("manipulating floor {}".format(f.get("uuid")))
+            SOLE.log("manipulating floor {}".format(f.get("id")))
             f.set("elevation", running_height)
             running_height += f.get("height")
             f.set("elevation_top", running_height)

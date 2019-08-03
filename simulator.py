@@ -34,7 +34,7 @@ for f in list_of_floors:
     print(f)
 #    print(
 #        "Floor {} {} has a height of {}, a bottom elevation of {} and a top elevation of {}".format(
-#            f.get("uuid"),
+#            f.get("id"),
 #           f.get("label"),
 #           f.get("height"),
 #           f.get("elevation"),
