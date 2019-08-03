@@ -1,4 +1,3 @@
-import uuid
 import json
 import SOLE
 
@@ -14,13 +13,13 @@ class BaseFloor:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self._uuid = uuid.uuid1()
         self.attribute = {}
         for key in BaseFloor.default_attributes:
             self.set(key, BaseFloor.default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
+        self.set('id', SOLE.new_id())
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
@@ -28,9 +27,6 @@ class BaseFloor:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        if name == "uuid":
-            raise Exception("cannot manually set uuid for an object of this type")
-
         if name == "label":
             if not (str(value).strip()):
                 raise Exception("attribute label must not be empty")
@@ -45,13 +41,9 @@ class BaseFloor:
         else:
             return ""
 
-    def uuid(self):
-        """uuid() will return a unique identifier for the object"""
-        return self._uuid
-
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("BaseFloor->tick() for {}".format(self.uuid()))
+        SOLE.log("BaseFloor->tick() for {}".format(self.get('id')))
         for p in self.get("carrying"):
             p.tick()
         return
