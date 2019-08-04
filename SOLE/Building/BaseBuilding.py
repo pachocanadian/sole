@@ -10,7 +10,7 @@ class BaseBuilding:
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
-        self.set("id", SOLE.new_id())
+        self.set("id", SOLE.new_id("BaseBuilding"))
         running_height = 0
         for f in self.get("floors"):
             SOLE.log("manipulating floor {}".format(f.get("id")))
@@ -40,7 +40,7 @@ class BaseBuilding:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("BaseBuilding->tick() for {}".format(self.get('id')))
+        SOLE.log("BaseBuilding->tick() for {}".format(self.get("id")))
         for f in self.get("floors"):
             f.tick()
         for e in self.get("elevators"):

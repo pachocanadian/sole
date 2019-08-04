@@ -19,7 +19,7 @@ class BaseFloor:
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
-        self.set('id', SOLE.new_id())
+        self.set("id", SOLE.new_id("BaseFloor"))
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
@@ -43,7 +43,7 @@ class BaseFloor:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("BaseFloor->tick() for {}".format(self.get('id')))
+        SOLE.log("BaseFloor->tick() for {}".format(self.get("id")))
         for p in self.get("carrying"):
             p.tick()
         return

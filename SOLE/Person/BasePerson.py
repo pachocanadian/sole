@@ -10,7 +10,7 @@ class BasePerson:
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
-        self.set('id', SOLE.new_id())
+        self.set("id", SOLE.new_id("BasePerson"))
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
@@ -37,5 +37,5 @@ class BasePerson:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("BasePerson->tick() for {}".format(self.get('id')))
+        SOLE.log("BasePerson->tick() for {}".format(self.get("id")))
         return
