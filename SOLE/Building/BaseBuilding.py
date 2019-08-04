@@ -40,7 +40,7 @@ class BaseBuilding:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("BaseBuilding->tick() for {}".format(self.get("id")))
+        SOLE.log("[{}] BaseBuilding->tick()".format(self.get("id")))
         for f in self.get("floors"):
             f.tick()
         for e in self.get("elevators"):

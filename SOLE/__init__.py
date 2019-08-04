@@ -38,4 +38,4 @@ def new_id(classref="UnspecifiedClass"):
         counter = 1
         sole_id_log[key] = counter
 
-    return "%s-%05d-%s" % (key, counter, str(uuid.uuid4()))
+    return "%s-%05d" % (key, counter)
