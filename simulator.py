@@ -32,15 +32,6 @@ for t in range(10):
 list_of_floors = a.get("floors")
 for f in list_of_floors:
     print(f)
-#    print(
-#        "Floor {} {} has a height of {}, a bottom elevation of {} and a top elevation of {}".format(
-#            f.get("id"),
-#           f.get("label"),
-#           f.get("height"),
-#           f.get("elevation"),
-#           f.get("elevation_top"),
-#       )
-#   )
 
 timeElapsed = time.time() - startTime
 
