@@ -17,7 +17,12 @@ for floorLabel in floorLabels:
 
 initialLocation = floorLabels[0]
 elevator = SOLE.Elevator.SimpleElevator(
-    {"floors": floors, "elevation": 0, "status": "waiting", "destinationFloor": 3}
+    {
+        "floors": floors,
+        "elevation": 0,
+        "status": "waiting",
+        "destinationFloor": floors[3].get("id"),
+    }
 )
 
 SOLE.log("Creating initial building")
