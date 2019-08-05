@@ -1,5 +1,5 @@
-import json
 import SOLE
+import pickle
 
 
 class BaseFloor:
@@ -31,13 +31,13 @@ class BaseFloor:
             if not (str(value).strip()):
                 raise Exception("attribute label must not be empty")
 
-        self.attribute[name] = json.dumps(value)
+        self.attribute[name] = pickle.dumps(value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            return json.loads(self.attribute[name])
+            return pickle.loads(self.attribute[name])
         else:
             return ""
 
