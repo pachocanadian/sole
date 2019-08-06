@@ -49,9 +49,10 @@ class BaseElevator:
         SOLE.log("[{}] BaseElevator->tick()".format(self.get("id")))
         for p in self.get("carrying"):
             p.tick()
+
         SOLE.log(
-            "[{}] current destination floor is {}".format(
-                self.get("id"), self.get("destinationFloor")
+            "[{}] current destination floor is {} with current elevation {}".format(
+                self.get("id"), self.get("destinationFloor"), self.get("elevation")
             )
         )
 

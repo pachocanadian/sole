@@ -3,7 +3,7 @@ import pickle
 
 
 class BaseBuilding:
-    default_attributes = {"height": None, "floors": [], "elevators": []}
+    default_attributes = {"height": None, "floors": [], "elevators": [] }
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
@@ -12,13 +12,21 @@ class BaseBuilding:
             for key in attributes:
                 self.set(key, attributes[key])
         self.set("id", SOLE.new_id("BaseBuilding"))
+        elevation_of = dict()
         running_height = 0
         for f in self.get("floors"):
-            SOLE.log("manipulating floor {}".format(f.get("id")))
+            floor_id = f.get("id")
+            SOLE.log("manipulating floor {}".format( floor_id ))
             f.set("elevation", running_height)
+            elevation_of[floor_id] = running_height
             running_height += f.get("height")
             f.set("elevation_top", running_height)
+            f.set("building", self)
         self.set("height", running_height)
+        self.set("elevation_of", elevation_of)
+
+        for e in self.get("elevators"):
+            e.set("building", self)
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
