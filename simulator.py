@@ -9,13 +9,13 @@ import time
 SOLE.log("Starting simulation")
 startTime = time.time()
 
-floorLabels = ["Lobby", 1, 2, 3]
+floor_labels = ["Lobby", 1, 2, 3]
 floors = []
-for floorLabel in floorLabels:
-    f = SOLE.Floor.SimpleFloor({"label": floorLabel})
+for fl in floor_labels:
+    f = SOLE.Floor.SimpleFloor({"label": fl})
     floors.append(f)
 
-initialLocation = floorLabels[0]
+initialLocation = floor_labels[0]
 elevator = SOLE.Elevator.SimpleElevator(
     {
         "floors": floors,
