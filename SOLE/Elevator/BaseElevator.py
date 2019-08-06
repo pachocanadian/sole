@@ -1,11 +1,11 @@
 import SOLE
-
+import pickle
 
 class BaseElevator:
     default_attributes = {
         "height": 2.44,
         "elevation": None,  # will calculate dynamically each tick
-        "destinationFloor": None,  # set dynamically during normal operation, in normal operation will return to startingFloor
+        "destination_floor": None,  # set dynamically during normal operation, in normal operation will return to startingFloor
         "velocity": 0,  # we start at rest. positive velocity is up, negative velocity is down
         "label": None,  # if the object has a friendly identifier
         "maximum_up_speed": 1,  # elevators generally can go up faster than down
@@ -15,7 +15,9 @@ class BaseElevator:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self.attribute = BaseElevator.default_attributes
+        self.attribute = {}
+        for key in BaseElevator.default_attributes:
+            self.set(key, BaseElevator.default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
@@ -27,16 +29,13 @@ class BaseElevator:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        self.attribute[name] = value
+        self.attribute[name] = pickle.dumps(value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            if isinstance(self.attribute[name], list):
-                return list(self.attribute[name])
-            else:
-                return self.attribute[name]
+            return pickle.loads(self.attribute[name])
         else:
             return ""
 
@@ -50,9 +49,15 @@ class BaseElevator:
         for p in self.get("carrying"):
             p.tick()
 
+        b = self.get("building")
+        destination_floor = self.get("destination_floor")
+
         SOLE.log(
-            "[{}] current destination floor is {} with current elevation {}".format(
-                self.get("id"), self.get("destinationFloor"), self.get("elevation")
+            "[{}] current destination floor is {} ({}) with elevator at {}".format(
+                self.get("id"), 
+                destination_floor, 
+                b.elevation_of(destination_floor),
+                self.get("elevation")
             )
         )
 

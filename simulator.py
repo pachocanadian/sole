@@ -15,18 +15,21 @@ for fl in floor_labels:
     f = SOLE.Floor.SimpleFloor({"label": fl})
     floors.append(f)
 
-initialLocation = floor_labels[0]
+initial_location = floor_labels[0]
 elevator = SOLE.Elevator.SimpleElevator(
     {
         "floors": floors,
         "elevation": 0,
         "status": "waiting",
-        "destinationFloor": floors[3].get("id"),
+        "destination_floor": floors[3].get("id"),
     }
 )
 
+elevators = []
+elevators.append(elevator)
+
 SOLE.log("Creating initial building")
-a = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": [elevator]})
+a = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
 
 for t in range(10):
     SOLE.current_tick += 1

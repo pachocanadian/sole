@@ -12,21 +12,24 @@ class BaseBuilding:
             for key in attributes:
                 self.set(key, attributes[key])
         self.set("id", SOLE.new_id("BaseBuilding"))
-        elevation_of = dict()
+        _elevation_of = dict()
         running_height = 0
         for f in self.get("floors"):
             floor_id = f.get("id")
             SOLE.log("manipulating floor {}".format( floor_id ))
             f.set("elevation", running_height)
-            elevation_of[floor_id] = running_height
+            _elevation_of[floor_id] = running_height
             running_height += f.get("height")
             f.set("elevation_top", running_height)
             f.set("building", self)
         self.set("height", running_height)
-        self.set("elevation_of", elevation_of)
+        self.set("_elevation_of", _elevation_of)
 
-        for e in self.get("elevators"):
+        elevators = self.get("elevators")
+        for e in elevators:
             e.set("building", self)
+        self.set("elevators", elevators)
+
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
@@ -43,6 +46,13 @@ class BaseBuilding:
             return pickle.loads(self.attribute[name])
         else:
             return ""
+
+    def elevation_of(self, object_id):
+        eo = self.get("_elevation_of")
+        if object_id in eo:
+            return eo[object_id]
+        else:
+            return None
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
