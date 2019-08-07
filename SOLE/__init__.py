@@ -21,6 +21,8 @@ LOG_EMERG = 128
 
 verbosity = LOG_NOTICE | LOG_WARNING | LOG_ERR | LOG_CRIT | LOG_ALERT | LOG_EMERG
 
+tick_ratio_to_real_time = 10 # 10 ticks per real world second. 1m/s is 0.1m/t
+
 sole_id_log = dict()
 
 def timestamp():
