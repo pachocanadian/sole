@@ -7,12 +7,14 @@ Current floor
 
 Timeline reference
 
-Time | Velocity	| Elevation | Status
----- | -------- | --------- | ------
-0 ticks |  +1 m / t |  0 m |  Going to floor 2
-1 ticks |  +1 m / t |  1 m  | Going to floor 2
-2 ticks |  +1 m / t |  2 m  | Going to floor 2
-3 ticks |  +0 m / t |  2.5 m | At floor 2
+Time | Velocity	| Elevation | Status | Current Floor
+---- | -------- | --------- | ------ | -------------
+0 ticks |  +1 m / t |  0 m |  Going to floor 2  |  Lobby
+1 ticks |  +1 m / t |  1 m  | Going to floor 2  |  None
+2 ticks |  +1 m / t |  2 m  | Going to floor 2  |  None
+3 ticks |  +1 m / t |  3 m | Going to floor 2  |  None
+4 ticks |  +1 m / t |  4 m | Going to floor 2  |  None
+5 ticks |  0 m / t |  5 m  | At floor 2  |  Floor 2
  
 Pseudocode
 ----------
@@ -44,7 +46,8 @@ class elevator:
 		# Change currentFloor if posY equals or exceeds floor.
 		if posY => FloorObject.height:
 			currentFloor = FloorObject.id
-		
+		else return None
+	
 		# To reach target floor, elevator must wait, because velocity is integer.
 		# if abs value of diff in height <= 1 AND abs value diff currentFloor and target <= 1
 		# Then elevator is about to reach/exceed the height of target and must stop
