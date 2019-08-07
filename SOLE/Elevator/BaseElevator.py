@@ -45,7 +45,7 @@ class BaseElevator:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("[{}] BaseElevator->tick()".format(self.get("id")))
+        SOLE.log("[{}] BaseElevator->tick()".format(self.get("id")), SOLE.LOG_INFO)
         for p in self.get("carrying"):
             p.tick()
 
@@ -58,7 +58,8 @@ class BaseElevator:
                 destination_floor, 
                 b.elevation_of(destination_floor),
                 self.get("elevation")
-            )
+            ),
+            SOLE.LOG_INFO
         )
 
         return

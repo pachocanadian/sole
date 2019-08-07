@@ -10,8 +10,18 @@ from SOLE.Person import *
 
 current_tick = 0
 
-sole_id_log = dict()
+LOG_DEBUG = 1
+LOG_INFO = 2
+LOG_NOTICE = 4
+LOG_WARNING = 8
+LOG_ERR = 16
+LOG_CRIT = 32
+LOG_ALERT = 64
+LOG_EMERG = 128
 
+VERBOSITY = LOG_NOTICE | LOG_WARNING | LOG_ERR | LOG_CRIT | LOG_ALERT | LOG_EMERG
+
+sole_id_log = dict()
 
 def timestamp():
     return "[{0}] [{1:05d}]".format(
@@ -19,8 +29,9 @@ def timestamp():
     )
 
 
-def log(message, loglevel=4):
-    print("{} {}".format(timestamp(), message))
+def log(message, loglevel=LOG_NOTICE):
+    if( (loglevel & VERBOSITY) > 0):
+        print("{} {}".format(timestamp(), message))
 
 
 def new_id(classref="UnspecifiedClass"):

@@ -37,5 +37,5 @@ class BasePerson:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("[{}] BasePerson->tick()".format(self.get("id")))
+        SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
         return

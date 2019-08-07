@@ -16,7 +16,7 @@ class BaseBuilding:
         running_height = 0
         for f in self.get("floors"):
             floor_id = f.get("id")
-            SOLE.log("manipulating floor {}".format( floor_id ))
+            SOLE.log("manipulating floor {}".format( floor_id ), SOLE.LOG_INFO)
             f.set("elevation", running_height)
             _elevation_of[floor_id] = running_height
             running_height += f.get("height")
@@ -56,7 +56,7 @@ class BaseBuilding:
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
-        SOLE.log("[{}] BaseBuilding->tick()".format(self.get("id")))
+        SOLE.log("[{}] BaseBuilding->tick()".format(self.get("id")), SOLE.LOG_INFO)
         for f in self.get("floors"):
             f.tick()
         for e in self.get("elevators"):
