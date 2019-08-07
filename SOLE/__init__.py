@@ -19,7 +19,7 @@ LOG_CRIT = 32
 LOG_ALERT = 64
 LOG_EMERG = 128
 
-VERBOSITY = LOG_NOTICE | LOG_WARNING | LOG_ERR | LOG_CRIT | LOG_ALERT | LOG_EMERG
+verbosity = LOG_NOTICE | LOG_WARNING | LOG_ERR | LOG_CRIT | LOG_ALERT | LOG_EMERG
 
 sole_id_log = dict()
 
@@ -30,7 +30,7 @@ def timestamp():
 
 
 def log(message, loglevel=LOG_NOTICE):
-    if( (loglevel & VERBOSITY) > 0):
+    if( (loglevel & verbosity) > 0):
         print("{} {}".format(timestamp(), message))
 
 

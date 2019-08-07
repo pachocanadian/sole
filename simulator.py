@@ -4,7 +4,7 @@ from pprint import pprint
 import SOLE
 import time
 
-SOLE.VERBOSITY = SOLE.LOG_INFO | SOLE.LOG_NOTICE | SOLE.LOG_WARNING | SOLE.LOG_ERR | SOLE.LOG_CRIT | SOLE.LOG_ALERT | SOLE.LOG_EMERG
+SOLE.verbosity = SOLE.LOG_INFO | SOLE.LOG_NOTICE | SOLE.LOG_WARNING | SOLE.LOG_ERR | SOLE.LOG_CRIT | SOLE.LOG_ALERT | SOLE.LOG_EMERG
 
 # Simulation parameters
 SOLE.log("Starting simulation")
