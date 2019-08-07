@@ -23,7 +23,7 @@ verbosity = LOG_NOTICE | LOG_WARNING | LOG_ERR | LOG_CRIT | LOG_ALERT | LOG_EMER
 
 tick_ratio_to_real_time = 10 # 10 ticks per real world second. 1m/s is 0.1m/t
 
-sole_id_log = dict()
+_sole_id_log = dict()
 
 def timestamp():
     return "[{0}] [{1:05d}]".format(
@@ -44,11 +44,11 @@ def new_id(classref="UnspecifiedClass"):
         key = "UN"
 
     counter = 0
-    if key in sole_id_log:
-        counter = sole_id_log[key] + 1
-        sole_id_log[key] = counter
+    if key in _sole_id_log:
+        counter = _sole_id_log[key] + 1
+        _sole_id_log[key] = counter
     else:
         counter = 1
-        sole_id_log[key] = counter
+        _sole_id_log[key] = counter
 
     return "%s-%05d" % (key, counter)
