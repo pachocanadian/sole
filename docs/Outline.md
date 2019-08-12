@@ -1,7 +1,5 @@
-vvv To be moved to appropriate documentation vvv
-
 ## Basic Elevator Behaviour Outline
-------------
+
 A SOLE elevator behaves as follows:
 
 A person on floor x requests an elevator so they can move to floor y. 
@@ -12,7 +10,7 @@ The elevator moves the person to floor y and stops, allowing the person to get o
 Additional requests are ignored until the elevator completes the first request it receieves. 
 
 ### Basic Elevator Example Scenario
-------------
+
 Assuming one elevator idle at Lobby:
 
 1) Person A at floor 2 requests an elevator to move them to floor 1.
@@ -54,7 +52,7 @@ Time (sec)   | Velocity	 | Elevation | Status                  | Current Floor |
 
 Floor height: 2.5 m / floor
 
-Elevation	|	Floor		|	
+Elevation (m)	|	Floor		|	
 ---------------	|	-------		|
 10		|	Floor 4		|
 7.5		|	Floor 3 	|	
@@ -62,48 +60,3 @@ Elevation	|	Floor		|
 2.5		|	Floor 1		|
 0		|	Lobby		|
 
-
-
-Pseudocode (incomplete)
-* Below is not yet clean and not representative of finalized algorithm, including comment syle/verbage...
-----------
-
-class elevator:	
-	
-	# Variables
-	int floorHeight
-	int moveRate
-	int posY
-	int currentFloor	
-	int targetFloor
-	
-
-	# Methods - Called once per tick
-	
-	ChangePosition(rate):
-		# Elevator's position must be changed by referencing movement rate.
-		# +1 = up by 1 m / tick
-		# 0 = stationary
-		# -1 = down by 1 m / tick
-		posY += rate
-		
-	ReturnCurrentFloor():
-		return currentFloor
-
-	MonitorCurrentFloor(FloorObject, targetFloor):
-		# As each floor has a static height in space, compare to elevator's height.
-		# Change currentFloor if posY equals or exceeds floor.
-		for floor in Basebuilding.floors:
-			if posY == building.elevationAt(floor):
-				currentFloor = floor.id
-		else return None
-	
-		# To reach target floor, elevator must wait, because velocity is integer.
-		# if absolute value abs() of difference in height <= 1 AND abs(difference between currentFloor and target <= 1)
-		# Then elevator is about to reach/exceed the height of target and must stop
-		if (abs(elevationAt(targetFloor) - posY) <= 1) AND (posY - elevationAt(targetFloor)] <= 1):
-			# Stop elevator when destination reached
-			rate = 0
-			posY = elevationAt(targetFloor)	
-		
-		# Check for movement request interrupts... incomplete		
