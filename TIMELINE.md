@@ -1,43 +1,68 @@
-Variables
-----------
-Floor height: 2.5 m / floor
-Elevator movement rate: 1 m / tick
-Wait at floor: 10 ticks
-Current floor
-People aboard
+vvv To be moved to appropriate documentation vvv
 
-
-Assumptions
+## Basic Elevator Behaviour Outline
 ------------
-Elevator commits to moving to the first floor it is instructed to move toward unless it receives a request to move to another floor that is between its current position and the target floor. Additional move instructions must then be queued up to a limit (initially 3, for simplicity).
+A SOLE elevator behaves as follows:
 
-Assuming elevator start position of lobby:
-1) Elevator receives request to move to floor 2
-2) Elevator begins moving to floor 2.
-3) Elevator receives new request to move to floor 1
-4) Elevator must now stop at floor 1, before then moving to floor 2.
-5) If elevator receives a move request (e.g. "move to floor 3") that is not in between lobby and floor 2, AND elevator has not reached floor 2, elevator will prioritize movement between lobby and floor 2 and add the request to move to floor 3 to an array of pending move instructions.
-6) Additional movement requests after that point that fit the definition of (5) are stacked into a list of pending movements, up to a limit of 2 in addition to the first movement (total 3). 
+A person on floor x requests an elevator so they can move to floor y. 
+Receiving a request causes an elevator to start moving to floor x to pick up the person.
+The elevator reaches floor x and stops, allowing the person to get onto it.
+The elevator moves the person to floor y and stops, allowing the person to get off.
 
-Timeline reference (needs additional fleshing out to account for new assuptions)
+Additional requests are ignored until the elevator completes the first request it receieves. 
+
+### Basic Elevator Example Scenario
+------------
+Assuming one elevator idle at Lobby:
+
+1) Person A at floor 2 requests an elevator to move them to floor 1.
+2) Elevator at Lobby receives request and begins to move to floor 2
+3) Elevator reaches floor 2, stops, and picks up person.
+4) Person B requests an elevator to move Person B to Lobby [Request is ignored].
+5) Elevator (person A onboard) begins moving to floor 1.
+6) Elevator (person A onboard) reaches floor 1 and stops, letting person A off.
+7) Elevator is now idle and can repeat step 1 for a new request.
+
+
+### Basic Elevator Timeline and Ruleset 
 -------------------
-Assuming real time may be a large multiple of ticks, ticks are kept unmultiplied for simplicity.
+* Boarding an elevator takes 5 seconds.
+* Leaving an elevator takes 5 seconds.
+* Elevator prepares for 1 second in an "about to do x" state before doing x.
+* Acceleration is instantaneous
+* Elevator base velocity units are +1 m/s, 0 m/s or -1 m/s.
 
-Time (ticks) | Velocity	| Elevation | Status | Current Floor | People aboard
----- | -------- | --------- | ------ | ------------- | -------------
-0 |  +0 m / t |  0 m |  About to go to floor 2  |  Lobby  |  None
-1 |  +1 m / t |  1 m  | Going to floor 2  |  None  |  None
-2 |  +1 m / t |  2 m  | Going to floor 2  |  None  |  None
-3 |  +1 m / t |  3 m | Going to floor 2  |  None  | None
-4 |  +1 m / t |  4 m | Going to floor 2  |  None  | None
-5 |  0 m / t |  5 m  | At floor 2  |  Floor 2  |  None
-6 |  0 m / t |  5 m  | People entering  |  Floor 2  |  +x people
-7 |  0 m / t |  5 m  | About to go to floor 1  |  Floor 2  | x people
-8 |  1 m / t |  4 m  | Going to floor 1  |  None  |  x people
-9 |  1 m / t |  3 m  | Going to floor 1  |  None  |  x people
-10 | 0 m / t |  2.5 m  | At floor 1  |  Floor 1  |  x people
-11 | 0 m / t |  2.5 m  | People exiting  | Floor 1  | -x people
-12 | 0 m / t |  2.5 m  | Standing by  | Floor 1  |  None
+Time (sec)   | Velocity	 | Elevation | Status                  | Current Floor | People aboard
+------------ | --------  | --------- | --------------------    | ------------- | -------------
+0            |  +0 m / s |  0 m      | Idle                    |  Lobby        |  None
+1	     |  +0 m / s |  0 m      | About to go to floor 2  |  Lobby        |
+2            |  +1 m / s |  1 m      | Going to floor 2        |  None         |  None
+3            |  +1 m / s |  2 m      | Going to floor 2	       |  None         |  None
+4            |  +1 m / s |  3 m      | Going to floor 2        |  None         |  None
+5            |  +1 m / s |  4 m      | Going to floor 2        |  None         |  None
+6            |  0 m / s  |  5 m      | At floor 2              |  Floor 2      |  None
+7 - 11       |  0 m / s  |  5 m      | People entering         |  Floor 2      | +x people
+12           |  0 m / s  |  5 m      | About to go to floor 1  |  Floor 2      |  x people
+13           |  1 m / s  |  4 m      | Going to floor 1        |  None         |  x people
+14           |  1 m / s  |  3 m      | Going to floor 1        |  None         |  x people
+15           |  0 m / s  |  2.5 m    | At floor 1              |  Floor 1      |  x people
+16 - 21      |  0 m / s  |  2.5 m    | People exiting          |  Floor 1      | -x people
+22           |  0 m / s  |  2.5 m    | Idle	               |  Floor 1      |  None
+
+
+## Building Layout
+
+Floor height: 2.5 m / floor
+
+Elevation	|	Floor		|	
+---------------	|	-------		|
+10		|	Floor 4		|
+7.5		|	Floor 3 	|	
+5		|	Floor 2 	|
+2.5		|	Floor 1		|
+0		|	Lobby		|
+
+
 
 Pseudocode (incomplete)
 * Below is not yet clean and not representative of finalized algorithm, including comment syle/verbage...
