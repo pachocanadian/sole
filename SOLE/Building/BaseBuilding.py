@@ -13,6 +13,8 @@ class BaseBuilding:
                 self.set(key, attributes[key])
         self.set("id", SOLE.new_id("BaseBuilding"))
         _elevation_of = dict()
+        _at_elevation = dict()
+        _ref_to = dict()
         running_height = 0
 
         floors = self.get("floors")
@@ -22,17 +24,23 @@ class BaseBuilding:
                 SOLE.log("manipulating floor {}".format( floor_id ), SOLE.LOG_INFO)
                 f.set("elevation", running_height)
                 _elevation_of[floor_id] = running_height
+                _at_elevation[running_height] = floor_id
+                _ref_to[floor_id] = f
                 running_height += f.get("height")
                 f.set("elevation_top", running_height)
                 f.set("building", self)
             self.set("height", running_height)
         self.set("_elevation_of", _elevation_of)
+        self.set("_at_elevation", _at_elevation)
 
         elevators = self.get("elevators")
         if(type(elevators) == list):
             for e in elevators:
+                elevator_id = e.get("id")
+                _ref_to[elevator_id] = e
                 e.set("building", self)
-            self.set("elevators", elevators)
+
+        self.set("_ref_to", _ref_to)
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
@@ -52,8 +60,25 @@ class BaseBuilding:
 
     def elevation_of(self, object_id):
         eo = self.get("_elevation_of")
+        if(object_id is None):
+            return 0
+
         if object_id in eo:
             return eo[object_id]
+        else:
+            return None
+
+    def at_elevation(self, height):
+        ae = self.get("_at_elevation")
+        if height in ae:
+            return ae[height]
+        else:
+            return None
+
+    def ref_to(self, object_id):
+        rt = self.get("_ref_to")
+        if object_id in rt:
+            return rt[object_id]
         else:
             return None
 

@@ -32,7 +32,7 @@ elevators.append(elevator)
 SOLE.log("Creating initial building")
 a = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
 
-for t in range(10):
+for t in range(50):
     SOLE.current_tick += 1
     a.tick()
 
