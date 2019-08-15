@@ -28,12 +28,9 @@ class BasePerson:
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            if isinstance(self.attribute[name], list):
-                return list(self.attribute[name])
-            else:
-                return self.attribute[name]
+            return self.attribute[name]
         else:
-            return ""
+            return None
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
