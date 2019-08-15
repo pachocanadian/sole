@@ -7,29 +7,34 @@ class BaseBuilding:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self.attribute = BaseBuilding.default_attributes
+        self.attribute = {}
+        for key in BaseBuilding.default_attributes:
+            self.set(key, BaseBuilding.default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
         self.set("id", SOLE.new_id("BaseBuilding"))
         _elevation_of = dict()
         running_height = 0
-        for f in self.get("floors"):
-            floor_id = f.get("id")
-            SOLE.log("manipulating floor {}".format( floor_id ), SOLE.LOG_INFO)
-            f.set("elevation", running_height)
-            _elevation_of[floor_id] = running_height
-            running_height += f.get("height")
-            f.set("elevation_top", running_height)
-            f.set("building", self)
-        self.set("height", running_height)
+
+        floors = self.get("floors")
+        if(type(floors) == list):
+            for f in floors:
+                floor_id = f.get("id")
+                SOLE.log("manipulating floor {}".format( floor_id ), SOLE.LOG_INFO)
+                f.set("elevation", running_height)
+                _elevation_of[floor_id] = running_height
+                running_height += f.get("height")
+                f.set("elevation_top", running_height)
+                f.set("building", self)
+            self.set("height", running_height)
         self.set("_elevation_of", _elevation_of)
 
         elevators = self.get("elevators")
-        for e in elevators:
-            e.set("building", self)
-        self.set("elevators", elevators)
-
+        if(type(elevators) == list):
+            for e in elevators:
+                e.set("building", self)
+            self.set("elevators", elevators)
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
