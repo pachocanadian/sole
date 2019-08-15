@@ -42,15 +42,15 @@ class BaseBuilding:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        self.attribute[name] = pickle.dumps(value)
+        self.attribute[name] = value
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
         if name in self.attribute:
-            return pickle.loads(self.attribute[name])
+            return self.attribute[name]
         else:
-            return ""
+            return None
 
     def elevation_of(self, object_id):
         eo = self.get("_elevation_of")
