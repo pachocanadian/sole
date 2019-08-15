@@ -31,6 +31,16 @@ class BaseElevator:
         if(name == "maximum_down_speed"):
             assert value < 0, "maximum_down_speed must be negative float"
 
+        if(name == "maximum_up_speed"):
+            assert value > 0, "maximum_up_speed must be positive float"
+
+        if(name == "velocity"):
+            if(value > 0):
+                assert value <= self.get("maximum_up_speed"), "upward velocity must be <= maximum_up_speed"
+            if(value < 0):
+                assert value >= self.get("maximum_down_speed"), "downward velocity must be >= maximum_down_speed"
+
+
         self.attribute[name] = value
         return self
 
