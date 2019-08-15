@@ -11,14 +11,25 @@ class elevator:
 	float dest_y
 	string current_floor	
 	string Person.target_floor
+	list carrying # Correct data type? Could be better-named variable.	
+
+
+	# Public methods
 	
+	def set_carrying(self, p):
+		self.carrying = p
 
-	# Methods
+	def get_carring(self):
+		return self.carrying
 
+	def get_current_floor(self):
+		return self.current_floor
+	
+	
 	def move():
 		''' Called once per tick(). '''
-		# Get person's requested target floor.
-		dest_y = elevation_at(Person.target_floor) # Person object as a move() parameter?
+		# Get Elevator's next target floor.
+		dest_y = elevation_at(Elevator.destination_floor)  
 		pos_y = elevator.pos_y
 
 		if (dest_y - pos_y) > self.pos_y:
@@ -36,7 +47,7 @@ class elevator:
 
 
 	def change_velocity(r):
-		''' Modify elevator's movement rate. In future, modify to make non-integers.'''
+		''' Modify elevator's movement rate.'''
 		if r > 0:
 			velocity = maximum_up_speed
 		 
@@ -57,13 +68,5 @@ class elevator:
 
 		else:
 			self.status = "Stationary."			
-	
-	def set_carrying(people):
-		# Setting/checking who the elevator is carrying will need a better implementation than what I have here.
-		self.carrying.append(p)
-
-	
-	def return_current_floor():
-		return current_floor
 	
 	
