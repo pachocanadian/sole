@@ -19,7 +19,7 @@ class elevator:
 	def set_carrying(self, p):
 		self.carrying = p
 
-	def get_carring(self):
+	def get_carrying(self):
 		return self.carrying
 
 	def get_current_floor(self):
