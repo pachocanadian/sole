@@ -1,6 +1,4 @@
 import SOLE
-import pickle
-
 
 class BaseBuilding:
     default_attributes = {"height": None, "floors": [], "elevators": [] }

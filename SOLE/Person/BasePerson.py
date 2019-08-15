@@ -1,6 +1,5 @@
 import SOLE
 
-
 class BasePerson:
     default_attributes = {"height": 1.77}
 

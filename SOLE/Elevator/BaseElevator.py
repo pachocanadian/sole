@@ -1,5 +1,4 @@
 import SOLE
-import pickle
 
 class BaseElevator:
     default_attributes = {

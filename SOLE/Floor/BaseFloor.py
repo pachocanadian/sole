@@ -1,6 +1,4 @@
 import SOLE
-import pickle
-
 
 class BaseFloor:
     default_attributes = {
