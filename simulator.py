@@ -27,8 +27,8 @@ elevator = SOLE.Elevator.SimpleElevator(
 )
 
 elevator.add_to_request_queue(floors[3].get("id"))
-elevator.add_to_request_queue(floors[2].get("id"))
 elevator.add_to_request_queue(floors[1].get("id"))
+elevator.add_to_request_queue(floors[2].get("id"))
 elevator.add_to_request_queue(floors[0].get("id"))
 
 elevators = []
