@@ -35,16 +35,16 @@ elevators = []
 elevators.append(elevator)
 
 SOLE.log("Creating initial building")
-a = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
+building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
 
 for t in range(50):
     SOLE.current_tick += 1
-    a.tick()
+    building.tick()
 
 timeElapsed = time.time() - startTime
 
-print(
-    "Simulation started at: {}. \n Time elapsed: {}".format(
+
+SOLE.log("Simulation started at: {}. Time elapsed: {}".format(
         time.strftime("%x %X", time.localtime(startTime)), timeElapsed
     )
 )
