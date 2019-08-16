@@ -10,6 +10,7 @@ class BaseElevator:
         "maximum_up_speed": 1,  # elevators generally can go up faster than down
         "maximum_down_speed": -1,  # elevators generally can go up faster than down
         "carrying": [],  # a list of Person objects presently within the elevator
+        "floor_requests": [], # a list of Floor ID's in sequential order
     }
 
     def __init__(self, attributes=None):
@@ -81,6 +82,21 @@ class BaseElevator:
             for p in carrying:
                 p.load()
 
+    def add_to_request_queue(self,floor_id):
+        """add_to_request_queue(floor_id) will add floor_id to the list of floors to travel to"""
+        SOLE.log("[{}] BaseElevator->add_to_request_queue({})".format(self.get("id"), floor_id), SOLE.LOG_INFO)
+
+        self.get("floor_requests").append(floor_id)
+
+    def queue(self):
+        """queue() will iterate through the queue of floor_requests if there is no current desination_floor"""
+        SOLE.log("[{}] BaseElevator->queue()".format(self.get("id")), SOLE.LOG_INFO)
+        if(self.get("destination_floor") is None):
+            if(type(self.get("floor_requests")) == list):
+                if( len(self.get("floor_requests")) > 0):
+                    floor_id = self.get("floor_requests").pop(0)
+                    self.set("destination_floor", floor_id)
+
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BaseElevator->tick()".format(self.get("id")), SOLE.LOG_INFO)
@@ -90,6 +106,14 @@ class BaseElevator:
         b = self.get("building")
         elevation = self.get("elevation")
         destination_floor = self.get("destination_floor")
+
+        if(destination_floor is None):
+            self.queue()
+            destination_floor = self.get("destination_floor")
+
+        if(destination_floor is None):
+            return
+
         destination_elevation = b.elevation_of(destination_floor)
         distance = (destination_elevation - elevation)
         velocity = self.get("velocity")
@@ -98,6 +122,7 @@ class BaseElevator:
             self.unload()
             self.load()
             self.set("destination_floor", None)
+            self.queue()
         elif((distance > 0) and (distance < velocity)):
             self.set("elevation", destination_elevation)
             self.change_velocity(0)
