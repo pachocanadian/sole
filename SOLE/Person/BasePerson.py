@@ -31,6 +31,14 @@ class BasePerson:
         else:
             return None
 
+    def unload():
+        """unload() to remove person from elevator."""
+        pass
+
+    def load():
+        """load() will add person to an elevator."""
+        pass
+
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)

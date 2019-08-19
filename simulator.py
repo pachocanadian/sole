@@ -10,6 +10,7 @@ SOLE.verbosity = SOLE.LOG_INFO | SOLE.LOG_NOTICE | SOLE.LOG_WARNING | SOLE.LOG_E
 SOLE.log("Starting simulation")
 startTime = time.time()
 
+# Assign labels to floors.
 floor_labels = ["Lobby", 1, 2, 3]
 floors = []
 for fl in floor_labels:
