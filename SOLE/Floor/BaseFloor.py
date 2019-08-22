@@ -1,5 +1,6 @@
 import SOLE
 
+
 class BaseFloor:
     default_attributes = {
         "height": 3,

@@ -4,7 +4,15 @@ from pprint import pprint
 import SOLE
 import time
 
-SOLE.verbosity = SOLE.LOG_INFO | SOLE.LOG_NOTICE | SOLE.LOG_WARNING | SOLE.LOG_ERR | SOLE.LOG_CRIT | SOLE.LOG_ALERT | SOLE.LOG_EMERG
+SOLE.verbosity = (
+    SOLE.LOG_INFO
+    | SOLE.LOG_NOTICE
+    | SOLE.LOG_WARNING
+    | SOLE.LOG_ERR
+    | SOLE.LOG_CRIT
+    | SOLE.LOG_ALERT
+    | SOLE.LOG_EMERG
+)
 
 # Simulation parameters
 SOLE.log("Starting simulation")
@@ -19,12 +27,7 @@ for fl in floor_labels:
 
 initial_location = floor_labels[0]
 elevator = SOLE.Elevator.SimpleElevator(
-    {
-        "floors": floors,
-        "elevation": 0,
-        "status": "waiting",
-        "destination_floor": None
-    }
+    {"floors": floors, "elevation": 0, "status": "waiting", "destination_floor": None}
 )
 
 elevator.add_to_request_queue(floors[3].get("id"))
@@ -45,7 +48,8 @@ for t in range(50):
 timeElapsed = time.time() - startTime
 
 
-SOLE.log("Simulation started at: {}. Time elapsed: {}".format(
+SOLE.log(
+    "Simulation started at: {}. Time elapsed: {}".format(
         time.strftime("%x %X", time.localtime(startTime)), timeElapsed
     )
 )

@@ -1,8 +1,9 @@
 import SOLE
 import re
 
+
 class BaseBuilding:
-    default_attributes = {"height": 0, "floors": [], "elevators": [] }
+    default_attributes = {"height": 0, "floors": [], "elevators": []}
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
@@ -16,7 +17,7 @@ class BaseBuilding:
 
         running_height = 0
         floors = self.get("floors")
-        if(type(floors) == list):
+        if type(floors) == list:
             for f in floors:
                 floor_id = f.get("id")
                 f.set("elevation", running_height)
@@ -25,7 +26,6 @@ class BaseBuilding:
                 f.set("building", self)
             self.set("height", running_height)
 
-
     def __str__(self):
         """allow print() to function in some intelligible way"""
         return str(self.__class__) + ": " + str(self.__dict__)
@@ -33,17 +33,25 @@ class BaseBuilding:
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
 
-        assert re.search(r'^[a-z_]+$', name), "set(name, value) requires that name contain only [a-z_]"
+        assert re.search(
+            r"^[a-z_]+$", name
+        ), "set(name, value) requires that name contain only [a-z_]"
 
-        if name == 'height':
-            assert (type(value) == float) or (type(value) == int), "set(height, value) requires that value be float or int"
+        if name == "height":
+            assert (type(value) == float) or (
+                type(value) == int
+            ), "set(height, value) requires that value be float or int"
             assert value >= 0, "set(height, value) requires that value be non-negative"
 
-        if name == 'floors':
-            assert (type(value) == list), "set(floors, value) requires that value be a list"
+        if name == "floors":
+            assert (
+                type(value) == list
+            ), "set(floors, value) requires that value be a list"
 
-        if name == 'elevators':
-            assert (type(value) == list), "set(elevators, value) requires that value be a list"
+        if name == "elevators":
+            assert (
+                type(value) == list
+            ), "set(elevators, value) requires that value be a list"
 
         self.attribute[name] = value
         return self
@@ -57,7 +65,7 @@ class BaseBuilding:
 
     def elevation_of(self, object_id):
         eo = self.get("_elevation_of")
-        if(object_id is None):
+        if object_id is None:
             return 0
 
         if object_id in eo:
@@ -87,7 +95,7 @@ class BaseBuilding:
         running_height = 0
 
         floors = self.get("floors")
-        if(type(floors) == list and len(floors) > 0):
+        if type(floors) == list and len(floors) > 0:
             for f in floors:
                 floor_id = f.get("id")
                 floor_elevation = f.get("elevation")
@@ -95,7 +103,7 @@ class BaseBuilding:
                 _elevation_of[floor_id] = floor_elevation
                 _at_elevation[floor_elevation] = floor_id
                 carrying = f.get("carrying")
-                if(type(carrying) == list and len(carrying) > 0):
+                if type(carrying) == list and len(carrying) > 0:
                     for p in carrying:
                         person_id = p.get("id")
                         person_elevation = p.get("elevation")
@@ -106,14 +114,14 @@ class BaseBuilding:
         self.set("_at_elevation", _at_elevation)
 
         elevators = self.get("elevators")
-        if(type(elevators) == list):
+        if type(elevators) == list:
             for e in elevators:
                 elevator_id = e.get("id")
                 elevator_elevation = e.get("elevation")
                 _ref_to[elevator_id] = e
                 _elevation_of[elevator_id] = elevator_elevation
                 carrying = e.get("carrying")
-                if(type(carrying) == list and len(carrying) > 0):
+                if type(carrying) == list and len(carrying) > 0:
                     for p in carrying:
                         person_id = p.get("id")
                         person_elevation = p.get("elevation")

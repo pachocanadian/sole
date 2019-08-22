@@ -1,5 +1,6 @@
 import SOLE
 
+
 class BaseElevator:
     default_attributes = {
         "height": 2.44,
@@ -10,7 +11,7 @@ class BaseElevator:
         "maximum_up_speed": 1,  # elevators generally can go up faster than down
         "maximum_down_speed": -1,  # elevators generally can go up faster than down
         "carrying": [],  # a list of Person objects presently within the elevator
-        "floor_requests": [], # a list of Floor ID's in sequential order
+        "floor_requests": [],  # a list of Floor ID's in sequential order
     }
 
     def __init__(self, attributes=None):
@@ -29,18 +30,21 @@ class BaseElevator:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        if(name == "maximum_down_speed"):
+        if name == "maximum_down_speed":
             assert value < 0, "maximum_down_speed must be negative float"
 
-        if(name == "maximum_up_speed"):
+        if name == "maximum_up_speed":
             assert value > 0, "maximum_up_speed must be positive float"
 
-        if(name == "velocity"):
-            if(value > 0):
-                assert value <= self.get("maximum_up_speed"), "upward velocity must be <= maximum_up_speed"
-            if(value < 0):
-                assert value >= self.get("maximum_down_speed"), "downward velocity must be >= maximum_down_speed"
-
+        if name == "velocity":
+            if value > 0:
+                assert value <= self.get(
+                    "maximum_up_speed"
+                ), "upward velocity must be <= maximum_up_speed"
+            if value < 0:
+                assert value >= self.get(
+                    "maximum_down_speed"
+                ), "downward velocity must be >= maximum_down_speed"
 
         self.attribute[name] = value
         return self
@@ -54,14 +58,14 @@ class BaseElevator:
 
     def change_velocity(self, velocity):
         """change_velocity(velocity) changes elevator velocity. Pass positive float for up, negative for down, and 0 for stop."""
-        if(velocity == 0):
+        if velocity == 0:
             self.set("velocity", velocity)
-        elif(velocity > 0):
+        elif velocity > 0:
             self.set("velocity", self.get("maximum_up_speed"))
-        elif(velocity < 0):
+        elif velocity < 0:
             self.set("velocity", self.get("maximum_down_speed"))
         else:
-            assert(False, "unmatched velocity")
+            assert (False, "unmatched velocity")
 
     def move(self):
         """move() moves the elevator by one unit of velocity."""
@@ -71,9 +75,9 @@ class BaseElevator:
         elevation = self.get("elevation")
         b = self.get("building")
         floor_id = b.at_elevation(elevation)
-        floor= b.ref_to(floor_id)
+        floor = b.ref_to(floor_id)
         carrying = self.get("carrying")
-        if(type(carrying) == list):
+        if type(carrying) == list:
             for p in carrying:
                 p.unload(self, floor)
 
@@ -83,22 +87,27 @@ class BaseElevator:
         floor_id = b.at_elevation(elevation)
         floor = b.ref_to(floor_id)
         carrying = floor.get("carrying")
-        if(type(carrying) == list):
+        if type(carrying) == list:
             for p in carrying:
                 p.load(self, floor)
 
-    def add_to_request_queue(self,floor_id):
+    def add_to_request_queue(self, floor_id):
         """add_to_request_queue(floor_id) will add floor_id to the list of floors to travel to"""
-        SOLE.log("[{}] BaseElevator->add_to_request_queue({})".format(self.get("id"), floor_id), SOLE.LOG_INFO)
+        SOLE.log(
+            "[{}] BaseElevator->add_to_request_queue({})".format(
+                self.get("id"), floor_id
+            ),
+            SOLE.LOG_INFO,
+        )
 
         self.get("floor_requests").append(floor_id)
 
     def queue(self):
         """queue() will iterate through the queue of floor_requests if there is no current desination_floor"""
         SOLE.log("[{}] BaseElevator->queue()".format(self.get("id")), SOLE.LOG_INFO)
-        if(self.get("destination_floor") is None):
-            if(type(self.get("floor_requests")) == list):
-                if( len(self.get("floor_requests")) > 0):
+        if self.get("destination_floor") is None:
+            if type(self.get("floor_requests")) == list:
+                if len(self.get("floor_requests")) > 0:
                     floor_id = self.get("floor_requests").pop(0)
                     self.set("destination_floor", floor_id)
 
@@ -112,27 +121,27 @@ class BaseElevator:
         elevation = self.get("elevation")
         destination_floor = self.get("destination_floor")
 
-        if(destination_floor is None):
+        if destination_floor is None:
             self.queue()
             destination_floor = self.get("destination_floor")
 
-        if(destination_floor is None):
+        if destination_floor is None:
             return
 
         destination_elevation = b.elevation_of(destination_floor)
-        distance = (destination_elevation - elevation)
+        distance = destination_elevation - elevation
         velocity = self.get("velocity")
 
-        if((velocity == 0) and (distance == 0)):
+        if (velocity == 0) and (distance == 0):
             self.unload()
             self.load()
             self.set("destination_floor", None)
             self.queue()
-        elif((distance > 0) and (distance < velocity)):
+        elif (distance > 0) and (distance < velocity):
             self.set("elevation", destination_elevation)
             self.change_velocity(0)
             self.move()
-        elif((distance < 0) and (distance > velocity)):
+        elif (distance < 0) and (distance > velocity):
             self.set("elevation", destination_elevation)
             self.change_velocity(0)
             self.move()
@@ -140,18 +149,16 @@ class BaseElevator:
             self.change_velocity(distance)
             self.move()
 
-
-
         SOLE.log(
             "[{}] destination_floor={}, destination_elevation={}, elevation={}, distance={}, velocity={}".format(
-                self.get("id"), 
-                destination_floor, 
+                self.get("id"),
+                destination_floor,
                 destination_elevation,
                 elevation,
                 distance,
-                velocity
+                velocity,
             ),
-            SOLE.LOG_INFO
+            SOLE.LOG_INFO,
         )
 
         return
