@@ -1,5 +1,6 @@
 import SOLE
 
+
 class BasePerson:
     default_attributes = {"height": 1.77}
 
@@ -31,13 +32,21 @@ class BasePerson:
         else:
             return None
 
-    def unload():
+    def unload(self):
         """unload() to remove person from elevator."""
-        pass
 
-    def load():
+        # Ask all elevators if they are carrying this person; if so then remove person.
+        for elevator in SOLE.BaseBuilding.default_attributes["elevators"]:
+            if self.id in elevator.get("carrying"):
+                elevator.set(carrying.remove(self.id))
+
+    def load(self):
         """load() will add person to an elevator."""
-        pass
+
+        # Ask all elevators if they are carrying this person; if not then add person.
+        for elevator in SOLE.BaseBuilding.default_attributes["elevators"]:
+            if self.id in elevator.get("carrying"):
+                elevator.set(carrying.append(self.id))
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
