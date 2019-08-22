@@ -2,7 +2,7 @@ import SOLE
 
 
 class BaseElevator:
-    default_attributes = {
+    _default_attributes = {
         "height": 2.44,
         "elevation": None,  # will calculate dynamically each tick
         "destination_floor": None,  # set dynamically during normal operation, in normal operation will return to startingFloor
@@ -17,8 +17,8 @@ class BaseElevator:
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self.attribute = {}
-        for key in BaseElevator.default_attributes:
-            self.set(key, BaseElevator.default_attributes[key])
+        for key in BaseElevator._default_attributes:
+            self.set(key, BaseElevator._default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])

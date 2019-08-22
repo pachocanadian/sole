@@ -2,11 +2,13 @@ import SOLE
 
 
 class BasePerson:
-    default_attributes = {"height": 1.77}
+    _default_attributes = {"height": 1.77}
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self.attribute = BasePerson.default_attributes
+        self.attribute = {}
+        for key in BasePerson._default_attributes:
+            self.set(key, BasePerson._default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])

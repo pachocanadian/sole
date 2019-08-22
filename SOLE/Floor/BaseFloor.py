@@ -2,7 +2,7 @@ import SOLE
 
 
 class BaseFloor:
-    default_attributes = {
+    _default_attributes = {
         "height": 3,
         "elevation": None,
         "elevation_top": None,
@@ -13,8 +13,8 @@ class BaseFloor:
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self.attribute = {}
-        for key in BaseFloor.default_attributes:
-            self.set(key, BaseFloor.default_attributes[key])
+        for key in BaseFloor._default_attributes:
+            self.set(key, BaseFloor._default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])

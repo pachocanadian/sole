@@ -3,13 +3,13 @@ import re
 
 
 class BaseBuilding:
-    default_attributes = {"height": 0, "floors": [], "elevators": []}
+    _default_attributes = {"height": 0, "floors": [], "elevators": []}
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self.attribute = {}
-        for key in BaseBuilding.default_attributes:
-            self.set(key, BaseBuilding.default_attributes[key])
+        for key in BaseBuilding._default_attributes:
+            self.set(key, BaseBuilding._default_attributes[key])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
