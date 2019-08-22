@@ -68,19 +68,24 @@ class BaseElevator:
         self.set("elevation", (self.get("elevation") + self.get("velocity")))
 
     def unload(self):
+        elevation = self.get("elevation")
+        b = self.get("building")
+        floor_id = b.at_elevation(elevation)
+        floor= b.ref_to(floor_id)
         carrying = self.get("carrying")
         if(type(carrying) == list):
             for p in carrying:
-                p.unload()
+                p.unload(self, floor)
 
     def load(self):
         elevation = self.get("elevation")
         b = self.get("building")
         floor_id = b.at_elevation(elevation)
-        carrying = b.ref_to(floor_id).get("carrying")
+        floor = b.ref_to(floor_id)
+        carrying = floor.get("carrying")
         if(type(carrying) == list):
             for p in carrying:
-                p.load()
+                p.load(self, floor)
 
     def add_to_request_queue(self,floor_id):
         """add_to_request_queue(floor_id) will add floor_id to the list of floors to travel to"""

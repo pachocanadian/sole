@@ -165,16 +165,4 @@ def test_BASEPERSON_getset_iscopy():
     assert nv is ov, "set/get are returning a copy rather than the original object"
 
 
-def test_BASEPERSON_load_string():
-    a = SOLE.Person.BasePerson()
-    v = "1234"
-    a.set("id", v)
-
-    e = SOLE.Elevator.BaseElevator()
-    a.load(e)
-    assert (
-        v in e.default_attributes["carrying"]
-    ), "Person.load(elevator) did not load elevator"
-
-
 # END BASEPERSON TESTS
