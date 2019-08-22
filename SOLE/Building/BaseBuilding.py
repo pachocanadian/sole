@@ -1,7 +1,8 @@
 import SOLE
+import re
 
 class BaseBuilding:
-    default_attributes = {"height": None, "floors": [], "elevators": [] }
+    default_attributes = {"height": 0, "floors": [], "elevators": [] }
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
@@ -31,6 +32,19 @@ class BaseBuilding:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
+
+        assert re.search(r'^[a-z_]+$', name), "set(name, value) requires that name contain only [a-z_]"
+
+        if name == 'height':
+            assert (type(value) == float) or (type(value) == int), "set(height, value) requires that value be float or int"
+            assert value >= 0, "set(height, value) requires that value be non-negative"
+
+        if name == 'floors':
+            assert (type(value) == list), "set(floors, value) requires that value be a list"
+
+        if name == 'elevators':
+            assert (type(value) == list), "set(elevators, value) requires that value be a list"
+
         self.attribute[name] = value
         return self
 
