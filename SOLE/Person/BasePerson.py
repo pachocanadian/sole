@@ -37,16 +37,20 @@ class BasePerson:
 
         # Ask all elevators if they are carrying this person; if so then remove person.
         for elevator in SOLE.BaseBuilding.default_attributes["elevators"]:
-            if self.id in elevator.get("carrying"):
-                elevator.set(carrying.remove(self.id))
+            if self.get("id") in elevator.get("carrying"):
 
-    def load(self):
+
+    def load(self, elevator):
         """load() will add person to an elevator."""
 
-        # Ask all elevators if they are carrying this person; if not then add person.
-        for elevator in SOLE.BaseBuilding.default_attributes["elevators"]:
-            if self.id in elevator.get("carrying"):
-                elevator.set(carrying.append(self.id))
+        # Ask elevator if it is carrying this person; if not then add person.
+        if self.get("id") not in elevator.get("carrying"):
+            elevator.set(
+                self.get("carrying"), self.get("carrying").append(self.get("id"))
+            )
+            return
+
+        raise Exception("Invalid elevator.")
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
