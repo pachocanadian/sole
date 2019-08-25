@@ -38,8 +38,15 @@ elevator.add_to_request_queue(floors[0].get("id"))
 elevators = []
 elevators.append(elevator)
 
+p = SOLE.Person.BasePerson()
+floor_carrying = floors[1].get("carrying")
+p.set("location", floors[1].get("id"))
+floor_carrying.append(p)
+
 SOLE.log("Creating initial building")
 building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
+
+
 
 for t in range(50):
     SOLE.current_tick += 1

@@ -37,20 +37,31 @@ class BasePerson:
     def unload(self, elevator, floor):
         """unload() to remove person from elevator."""
 
-        # Add person to elevator's carrying list.
+        # Remove person from elevator's carrying list
         carrying = elevator.get("carrying")
-        carrying.remove(self.get("id"))
+        carrying.remove(self)
 
-        # Set person's floor attribute to the current floor.
-        self.set("floor", floor)
+        # Add person to floors carrying list
+        floor.get("carrying").append(self)
+
+        # Set person's location attribute to the current floor.
+        self.set("location", floor.get("id"))
 
     def load(self, elevator, floor):
         """load() will add person to an elevator."""
 
-        # Remove person from elevator's carrying list.
+        # Add person from elevator's carrying list.
         carrying = elevator.get("carrying")
-        carrying.append(self.get("id"))
+        carrying.append(self)
+
+        # Remove person from floors carrying list
+        floor.get("carrying").remove(self)
+
+        # Set person's location attribute to the elevator
+        self.set("location", elevator.get("id"))
+
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
+        SOLE.log("[{}] BasePerson->location={}".format(self.get("id"), self.get("location")), SOLE.LOG_INFO)

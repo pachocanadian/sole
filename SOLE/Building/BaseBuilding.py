@@ -106,7 +106,8 @@ class BaseBuilding:
                 if type(carrying) == list and len(carrying) > 0:
                     for p in carrying:
                         person_id = p.get("id")
-                        person_elevation = p.get("elevation")
+                        person_elevation = floor_elevation
+                        p.set("elevation", person_elevation)
                         _ref_to[person_id] = p
                         _elevation_of[person_id] = person_elevation
 
@@ -124,7 +125,8 @@ class BaseBuilding:
                 if type(carrying) == list and len(carrying) > 0:
                     for p in carrying:
                         person_id = p.get("id")
-                        person_elevation = p.get("elevation")
+                        person_elevation = elevator_elevation
+                        p.set("elevation", person_elevation)
                         _ref_to[person_id] = p
                         _elevation_of[person_id] = person_elevation
 
