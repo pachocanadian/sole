@@ -47,7 +47,7 @@ class BasePerson:
     def load(self, elevator, floor):
         """load() will add person to an elevator."""
 
-        # Remove person to elevator's carrying list.
+        # Remove person from elevator's carrying list.
         carrying = elevator.get("carrying")
         carrying.append(self.get("id"))
 
