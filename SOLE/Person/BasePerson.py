@@ -22,7 +22,7 @@ class BasePerson:
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
         if name == "height":
             if not (value > 0):
-                raise Exception("attribute weight must be greater than zero")
+                raise Exception("attribute height must be greater than zero")
 
         self.attribute[name] = value
         return self
@@ -37,24 +37,20 @@ class BasePerson:
     def unload(self, elevator, floor):
         """unload() to remove person from elevator."""
 
-    #        Ask all elevators if they are carrying this person; if so then remove person.
-    #        for elevator in SOLE.BaseBuilding.default_attributes["elevators"]:
-    #            if self.get("id") in elevator.get("carrying"):
+        # Add person to elevator's carrying list.
+        carrying = elevator.get("carrying")
+        carrying.remove(self.get("id"))
+
+        # Set person's floor attribute to the current floor.
+        self.set("floor", floor)
 
     def load(self, elevator, floor):
         """load() will add person to an elevator."""
 
-        # Ask elevator if it is carrying this person; if not then add person.
-
-    #        if self.get("id") not in elevator.get("carrying"):
-    #            elevator.set(
-    #                self.get("carrying"), self.get("carrying").append(self.get("id"))
-    #            )
-    #            return
-    #
-    #        raise Exception("Invalid elevator.")
+        # Remove person to elevator's carrying list.
+        carrying = elevator.get("carrying")
+        carrying.append(self.get("id"))
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
-        return
