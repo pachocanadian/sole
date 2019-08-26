@@ -73,6 +73,8 @@ class BaseElevator:
         self.set("elevation", (self.get("elevation") + self.get("velocity")))
 
     def unload(self):
+        """unload() iterates through the elevators carrying attribute and dumps out passenges"""
+        SOLE.log("[{}] BaseElevator->unload()".format(self.get("id")), SOLE.LOG_INFO)
         elevation = self.get("elevation")
         b = self.get("building")
         floor_id = b.at_elevation(elevation)
@@ -83,6 +85,8 @@ class BaseElevator:
                 p.unload(self, floor)
 
     def load(self):
+        """load() iterates through the floors carrying attribute and loads up passenges"""
+        SOLE.log("[{}] BaseElevator->load()".format(self.get("id")), SOLE.LOG_INFO)
         elevation = self.get("elevation")
         b = self.get("building")
         floor_id = b.at_elevation(elevation)
