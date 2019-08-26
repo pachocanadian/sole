@@ -18,10 +18,15 @@ class BasePerson:
             for key in attributes:
                 self.set(key, attributes[key])
         self.set("id", SOLE.new_id("BasePerson"))
+        SOLE.log("[{}] BasePerson->created".format(self.get("id")), SOLE.LOG_INFO)
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
         return str(self.__class__) + ": " + str(self.__dict__)
+
+    def __del__(self):
+        """track destruction of object"""
+        SOLE.log("[{}] BasePerson->destroyed".format(self.get("id")), SOLE.LOG_INFO)
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
@@ -58,7 +63,8 @@ class BasePerson:
         # Check the destination for the person
         destination_floor = self.get("destination_floor")
 
-        if(floor.get("id") == destination_floor):
+        if(floor == destination_floor):
+            SOLE.log("[{}] BasePerson reached destination={}".format(self.get("id"), destination_floor.get("id"), SOLE.LOG_INFO))
             self.set("location", None)
             del(self)
         else:
@@ -81,4 +87,4 @@ class BasePerson:
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
-        SOLE.log("[{}] BasePerson->location={}".format(self.get("id"), self.get("location").get("id"), SOLE.LOG_INFO))
+        SOLE.log("[{}] BasePerson->location={} destination={}".format(self.get("id"), self.get("location").get("id"), self.get("destination_floor").get("id"), SOLE.LOG_INFO))
