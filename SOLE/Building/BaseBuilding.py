@@ -26,6 +26,11 @@ class BaseBuilding:
                 f.set("building", self)
             self.set("height", running_height)
 
+        elevators = self.get("elevators")
+        if type(elevators) == list:
+            for e in elevators:
+                e.set("building", self)
+
     def __str__(self):
         """allow print() to function in some intelligible way"""
         return str(self.__class__) + ": " + str(self.__dict__)

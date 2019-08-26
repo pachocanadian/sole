@@ -11,6 +11,7 @@ class BaseElevator:
         "maximum_up_speed": 1,  # elevators generally can go up faster than down
         "maximum_down_speed": -1,  # elevators generally can go up faster than down
         "carrying": [],  # a list of Person objects presently within the elevator
+        "building": None,  # a reference to the parent building
         "floor_requests": [],  # a list of Floor ID's in sequential order
     }
 
