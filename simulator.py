@@ -3,6 +3,7 @@
 from pprint import pprint
 import SOLE
 import time
+import random
 
 SOLE.verbosity = (
     SOLE.LOG_INFO
@@ -35,11 +36,12 @@ elevators.append(elevator)
 
 building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
 
-p = SOLE.Person.BasePerson()
-p.set("destination_floor", building.get("floors")[3])
-p.set("location", building.get("floors")[1])
 
-for t in range(50):
+for t in range(999):
+    if(t % 100 == 0):
+        p = SOLE.Person.BasePerson()
+        p.set("destination_floor", building.get("floors")[0])
+        p.set("location", building.get("floors")[random.randint(1,3)])
     SOLE.current_tick += 1
     building.tick()
 
