@@ -6,6 +6,7 @@ class BasePerson:
         "height": 1.77,
         "location": None,  # a reference to the parent Elevator/Floor object
         "building": None,  # a reference to the parent building object
+        "destination": None  # a reference to the floor/elevator object that we are destined to
     }
 
     def __init__(self, attributes=None):
@@ -34,6 +35,9 @@ class BasePerson:
                 carrying = value.get("carrying")
                 carrying.append(self)
 
+                if(self.get("building") is None):
+                    self.set("building", value.get("building"))
+
         self.attribute[name] = value
         return self
 
@@ -51,8 +55,15 @@ class BasePerson:
         carrying = elevator.get("carrying")
         carrying.remove(self)
 
-        # Set person's location attribute to the current floor.
-        self.set("location", floor)
+        # Check the destination for the person
+        destination_floor = self.get("destination_floor")
+
+        if(floor.get("id") == destination_floor):
+            self.set("location", None)
+            del(self)
+        else:
+            # Set person's location attribute to the current floor.
+            self.set("location", floor)
 
     def load(self, elevator, floor):
         """load() will add person to an elevator."""
@@ -60,9 +71,12 @@ class BasePerson:
         # Remove person from floors carrying list
         floor.get("carrying").remove(self)
 
+        # Get the destination for the person
+        destination_floor = self.get("destination_floor")
+
         # Set person's location attribute to the elevator
         self.set("location", elevator)
-
+        elevator.add_to_request_queue(destination_floor.get("id"))
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
