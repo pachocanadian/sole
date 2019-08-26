@@ -2,7 +2,11 @@ import SOLE
 
 
 class BasePerson:
-    _default_attributes = {"height": 1.77}
+    _default_attributes = {
+        "height": 1.77,
+        "location": None,  # a reference to the parent Elevator/Floor object
+        "building": None,  # a reference to the parent building object
+    }
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
