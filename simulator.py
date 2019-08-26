@@ -30,11 +30,6 @@ elevator = SOLE.Elevator.SimpleElevator(
     {"floors": floors, "elevation": 0, "status": "waiting", "destination_floor": None}
 )
 
-elevator.add_to_request_queue(floors[3].get("id"))
-elevator.add_to_request_queue(floors[1].get("id"))
-elevator.add_to_request_queue(floors[2].get("id"))
-elevator.add_to_request_queue(floors[0].get("id"))
-
 elevators = []
 elevators.append(elevator)
 

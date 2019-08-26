@@ -47,3 +47,7 @@ class BaseFloor:
         for p in self.get("carrying"):
             p.tick()
         return
+
+    def add_to_request_queue(self, floor_id):
+        """add_to_request_queue() will pass on the request for floor_id to associated elevator for floor"""
+        self.get("building").get("elevators")[0].add_to_request_queue(floor_id)

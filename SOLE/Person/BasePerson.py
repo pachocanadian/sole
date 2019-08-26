@@ -40,6 +40,9 @@ class BasePerson:
                 carrying = value.get("carrying")
                 carrying.append(self)
 
+                if(self.get("destination_floor") is not None):
+                    value.add_to_request_queue(value.get("id"))
+
                 if self.get("building") is None:
                     self.set("building", value.get("building"))
 
