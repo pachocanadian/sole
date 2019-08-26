@@ -28,6 +28,12 @@ class BasePerson:
             if not (value > 0):
                 raise Exception("attribute height must be greater than zero")
 
+        if name == "location":
+            # if we are being added to a parent object then access its carrying attribute and add ourselves
+            if value is not None:
+                carrying = value.get("carrying")
+                carrying.append(self)
+
         self.attribute[name] = value
         return self
 
@@ -45,27 +51,20 @@ class BasePerson:
         carrying = elevator.get("carrying")
         carrying.remove(self)
 
-        # Add person to floors carrying list
-        floor.get("carrying").append(self)
-
         # Set person's location attribute to the current floor.
-        self.set("location", floor.get("id"))
+        self.set("location", floor)
 
     def load(self, elevator, floor):
         """load() will add person to an elevator."""
-
-        # Add person from elevator's carrying list.
-        carrying = elevator.get("carrying")
-        carrying.append(self)
 
         # Remove person from floors carrying list
         floor.get("carrying").remove(self)
 
         # Set person's location attribute to the elevator
-        self.set("location", elevator.get("id"))
+        self.set("location", elevator)
 
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
-        SOLE.log("[{}] BasePerson->location={}".format(self.get("id"), self.get("location")), SOLE.LOG_INFO)
+        SOLE.log("[{}] BasePerson->location={}".format(self.get("id"), self.get("location").get("id"), SOLE.LOG_INFO))

@@ -39,9 +39,9 @@ elevators = []
 elevators.append(elevator)
 
 p = SOLE.Person.BasePerson()
-floor_carrying = floors[1].get("carrying")
-p.set("location", floors[1].get("id"))
-floor_carrying.append(p)
+#floor_carrying = floors[1].get("carrying")
+p.set("location", floors[1])
+#floor_carrying.append(p)
 
 SOLE.log("Creating initial building")
 building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
