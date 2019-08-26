@@ -8,7 +8,7 @@ class BaseFloor:
         "elevation_top": None,
         "label": None,  # if the object has a friendly identifier
         "carrying": [],  # a list of Person objects presently within the elevator
-        "building": None  # a reference to the parent building object
+        "building": None,  # a reference to the parent building object
     }
 
     def __init__(self, attributes=None):

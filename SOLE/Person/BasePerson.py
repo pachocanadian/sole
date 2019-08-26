@@ -6,7 +6,7 @@ class BasePerson:
         "height": 1.77,
         "location": None,  # a reference to the parent Elevator/Floor object
         "building": None,  # a reference to the parent building object
-        "destination": None  # a reference to the floor/elevator object that we are destined to
+        "destination": None,  # a reference to the floor/elevator object that we are destined to
     }
 
     def __init__(self, attributes=None):
@@ -40,7 +40,7 @@ class BasePerson:
                 carrying = value.get("carrying")
                 carrying.append(self)
 
-                if(self.get("building") is None):
+                if self.get("building") is None:
                     self.set("building", value.get("building"))
 
         self.attribute[name] = value
@@ -63,10 +63,14 @@ class BasePerson:
         # Check the destination for the person
         destination_floor = self.get("destination_floor")
 
-        if(floor == destination_floor):
-            SOLE.log("[{}] BasePerson reached destination={}".format(self.get("id"), destination_floor.get("id"), SOLE.LOG_INFO))
+        if floor == destination_floor:
+            SOLE.log(
+                "[{}] BasePerson reached destination={}".format(
+                    self.get("id"), destination_floor.get("id"), SOLE.LOG_INFO
+                )
+            )
             self.set("location", None)
-            del(self)
+            del self
         else:
             # Set person's location attribute to the current floor.
             self.set("location", floor)
@@ -87,4 +91,11 @@ class BasePerson:
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
-        SOLE.log("[{}] BasePerson->location={} destination={}".format(self.get("id"), self.get("location").get("id"), self.get("destination_floor").get("id"), SOLE.LOG_INFO))
+        SOLE.log(
+            "[{}] BasePerson->location={} destination={}".format(
+                self.get("id"),
+                self.get("location").get("id"),
+                self.get("destination_floor").get("id"),
+                SOLE.LOG_INFO,
+            )
+        )
