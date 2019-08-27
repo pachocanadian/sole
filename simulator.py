@@ -15,6 +15,17 @@ SOLE.verbosity = (
     | SOLE.LOG_EMERG
 )
 
+def new_person():
+    """ Return a new Person object with randomized destination and location. """
+    p = SOLE.Person.BasePerson()
+
+    # Randomize person's destination and location.
+    with building.get("floors") as floors:
+        p.set("destination_floor", floors[random.randint(0, len(floors))])
+        p.set("location", floors[random.randint(0, len(floors))])
+        
+    return p
+
 # Simulation parameters
 SOLE.log("Starting simulation")
 startTime = time.time()
