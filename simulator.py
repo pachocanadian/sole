@@ -37,6 +37,7 @@ for fl in floor_labels:
     f = SOLE.Floor.SimpleFloor({"label": fl})
     floors.append(f)
 
+# Create an elevator.
 initial_location = floor_labels[0]
 elevator = SOLE.Elevator.SimpleElevator(
     {"floors": floors, "elevation": 0, "status": "waiting", "destination_floor": None}
@@ -45,9 +46,10 @@ elevator = SOLE.Elevator.SimpleElevator(
 elevators = []
 elevators.append(elevator)
 
+# Create a building.
 building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
 
-
+# Create people for simulation testing.
 for t in range(999):
     if(t % 100 == 0):
         p = SOLE.Person.BasePerson()
@@ -56,8 +58,9 @@ for t in range(999):
     SOLE.current_tick += 1
     building.tick()
 
-timeElapsed = time.time() - startTime
 
+# Summarize simulation.
+timeElapsed = time.time() - startTime
 
 SOLE.log(
     "Simulation started at: {}. Time elapsed: {}".format(
