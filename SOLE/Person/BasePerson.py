@@ -1,4 +1,50 @@
 import SOLE
+import random
+
+
+def sole_baseperson_random_name():
+    possible_first_names = (
+        "Mike",
+        "Annika",
+        "Bronwyn",
+        "Katie",
+        "Carol",
+        "Jen",
+        "Myrna",
+        "Dane",
+        "Jeanne",
+        "Chrystal",
+        "Brennon",
+        "Greg",
+        "Danielle",
+        "Dawn",
+        "Bruce",
+        "Joyce",
+        "Eve",
+        "Ted",
+        "Deidre",
+        "Monica",
+        "Toni",
+        "Kevin",
+        "Glenda",
+        "Laura",
+        "Tina",
+        "Hollie",
+        "Lhalic",
+        "Andrea",
+        "Sherry",
+        "Jonathan",
+        "Ashleigh",
+        "Christian",
+        "Rob",
+        "Nathan",
+        "Vanessa",
+        "Angela",
+        "Eva",
+        "Bud",
+        "Chloe",
+    )
+    return possible_first_names[random.randint(0, len(possible_first_names) - 1)]
 
 
 class BasePerson:
@@ -7,6 +53,7 @@ class BasePerson:
         "location": None,  # a reference to the parent Elevator/Floor object
         "building": None,  # a reference to the parent building object
         "destination": None,  # a reference to the floor/elevator object that we are destined to
+        "label": None,  # a human friendly identifier
     }
 
     def __init__(self, attributes=None):
@@ -17,7 +64,23 @@ class BasePerson:
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
+        if self.get("label") is None:
+            self.set("label", sole_baseperson_random_name())
         self.set("id", SOLE.new_id("BasePerson"))
+
+        if (
+            self.get("location") is not None
+            and self.get("destination_floor") is not None
+        ):
+            SOLE.log(
+                "{} was created on {} with a destination of {}".format(
+                    self.get("label"),
+                    self.get("location").get("label"),
+                    self.get("destination_floor").get("label"),
+                ),
+                SOLE.LOG_NOTICE,
+            )
+
         SOLE.log("[{}] BasePerson->created".format(self.get("id")), SOLE.LOG_INFO)
 
     def __str__(self):
@@ -70,9 +133,18 @@ class BasePerson:
         if floor == destination_floor:
             SOLE.log(
                 "[{}] BasePerson reached destination={}".format(
-                    self.get("id"), destination_floor.get("id"), SOLE.LOG_INFO
-                )
+                    self.get("id"), destination_floor.get("id")
+                ),
+                SOLE.LOG_INFO,
             )
+
+            SOLE.log(
+                "{} reached destination {}".format(
+                    self.get("label"), destination_floor.get("label")
+                ),
+                SOLE.LOG_NOTICE,
+            )
+
             self.set("location", None)
             del self
         else:
@@ -100,6 +172,6 @@ class BasePerson:
                 self.get("id"),
                 self.get("location").get("id"),
                 self.get("destination_floor").get("id"),
-                SOLE.LOG_INFO,
-            )
+            ),
+            SOLE.LOG_INFO,
         )

@@ -5,15 +5,7 @@ import SOLE
 import time
 import random
 
-SOLE.verbosity = (
-    SOLE.LOG_INFO
-    | SOLE.LOG_NOTICE
-    | SOLE.LOG_WARNING
-    | SOLE.LOG_ERR
-    | SOLE.LOG_CRIT
-    | SOLE.LOG_ALERT
-    | SOLE.LOG_EMERG
-)
+SOLE.verbosity = SOLE.LOG_NOTICE
 
 
 def new_person():
@@ -33,7 +25,7 @@ SOLE.log("Starting simulation")
 startTime = time.time()
 
 # Assign labels to floors.
-floor_labels = ["Lobby", 1, 2, 3]
+floor_labels = ["Lobby", "1st Floor", "2nd Floor", "3rd Floor"]
 floors = []
 for fl in floor_labels:
     f = SOLE.Floor.SimpleFloor({"label": fl})
@@ -54,9 +46,11 @@ building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevator
 # Create people for simulation testing.
 for t in range(999):
     if t % 100 == 0:
-        p = SOLE.Person.BasePerson()
-        p.set("destination_floor", building.get("floors")[0])
-        p.set("location", building.get("floors")[random.randint(1, 3)])
+        destination_floor = building.get("floors")[0]
+        location = building.get("floors")[random.randint(1, 3)]
+        p = SOLE.Person.BasePerson(
+            {"destination_floor": destination_floor, "location": location}
+        )
     SOLE.current_tick += 1
     building.tick()
 
