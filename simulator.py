@@ -8,14 +8,21 @@ import random
 SOLE.verbosity = SOLE.LOG_NOTICE
 
 
-def new_person():
+def new_person(building):
     """ Return a new Person object with randomized destination and location. """
-    p = SOLE.Person.BasePerson()
 
     # Randomize person's destination and location.
-    with building.get("floors") as floors:
-        p.set("destination_floor", floors[random.randint(0, len(floors))])
-        p.set("location", floors[random.randint(0, len(floors))])
+    floors = building.get("floors")
+    location_floor = random.randint(0, len(floors) - 1)
+    destination_floor = (random.randint(0, len(floors) - 2) + location_floor) % len(
+        floors
+    )
+    p = SOLE.Person.BasePerson(
+        {
+            "location": floors[location_floor],
+            "destination_floor": floors[destination_floor],
+        }
+    )
 
     return p
 
@@ -46,11 +53,7 @@ building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevator
 # Create people for simulation testing.
 for t in range(999):
     if t % 100 == 0:
-        destination_floor = building.get("floors")[0]
-        location = building.get("floors")[random.randint(1, 3)]
-        p = SOLE.Person.BasePerson(
-            {"destination_floor": destination_floor, "location": location}
-        )
+        new_person(building)
     SOLE.current_tick += 1
     building.tick()
 
