@@ -46,7 +46,7 @@ See https://github.com/pachocanadian/sole/wiki/Internals
 ## TEAM MEMBERS
 
 Christian Pearson <christian.pearson@stemist.ca>
-* Fedora 30 5.1.19-300.fc30.x86_64
+* Ubuntu 18.04 LTS 5.0.0-27-generic x64
 * IDE: Vim, VSCode
 
 Mike Carr <mcarr@pachogrande.com>
