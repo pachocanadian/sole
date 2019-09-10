@@ -1,0 +1,48 @@
+<h1>SOLE - Simulator Of Lifts and Elevators</h1>
+<p>SOLE is a Python based project which will simulate elevator operation within a given building including the creation or destruction of people within the simulation.</p>
+<h2>STANDARDS</h2>
+<ul>
+<li>All code in repo to use Python Black (https://github.com/python/black)</li>
+<li>Cross platform support (Windows and Linux). </li>
+<li>SVG Vector graphics to allow for arbitrary scaling</li>
+<li>Open source audio for things like elevator dinging at floors</li>
+<li>Attributes within our project use snake_case rather than PascalCase or camelCase</li>
+</ul>
+<h2>Where are we going?</h2>
+<ul>
+<li>Capacity for GUI display</li>
+<li>Will allow for arbitrary building files</li>
+<li>E.g. floors named unusually, exclusion of 13th floor</li>
+<li>E.g. service elevators which have dedicated floor assignments (lobby to penthouse)</li>
+<li>E.g. certain floors being residences vs businesses</li>
+<li>People will be extended to allow for ages, names, history</li>
+<li>E.g. want to provide an ActurialPerson class which will instantiate members according to a standard population distribution for height/weight/age/BMI</li>
+<li>Will provide for analysis of efficiencies, wait times, etc.</li>
+<li>Will allow for different queueing algorithms for the elevator itself</li>
+<li>Time system will be based on ticks, e.g. 1 second, with travel time between floors, speed of elevator door opening, etc. being based on real world times. The simulation will allow for arbitrary scaling of time, e.g. 20 ticks per real world second.</li>
+<li>Will allow for support of different types of elevators - e.g. historically slow freight elevators vs Star Trek turbolifts</li>
+</ul>
+<h2>INTERNALS</h2>
+<p>See https://github.com/pachocanadian/sole/wiki/Internals</p>
+<h2>SIMULATOR FLOW</h2>
+<ul>
+<li>Presently, there will be one and only one simulator.</li>
+<li>The simulator will host one and only one building.</li>
+<li>A building will be made up of at least two floors. Each floor will have a label. Typically labelled like ['Lobby', '1', 2', '3'].</li>
+<li>A building will be made up of at least one elevator. The elevator will connect two or more floors. Typically every elevator in a building will connect every floor, although there may exceptions to this. We impose the restriction that all floors must be connected - that is, that someone on any floor must be able to reach all other floors through some combination of elevators.</li>
+<li>The simulator will create people as it sees fit. In the typical case, people will be created on any of the floors with a destination of any other floor. That is, random start floor and random destination floor. Later simulators might purposefully create people in residential floors and send them to commercial floors or things like this.</li>
+<li>Upon creation people will move from their starting floor to their destination floor. Upon reaching their destination floor, in the initial case, they will be destroyed.</li>
+<li>Initially the elevator will impose no restrictions on people entering the elevator. However, we may allow for cases where the elevator imposes restrictions on # of bodies, overall weight, volume of space, etc.</li>
+<li>The simulator operates on the unit of the tick() with this method being repeatedly called on the simulator. The simulator will then iterate throughout its contained objects - probably all elevators first, all floors second, all people third. Need to think through the logic but probably something like that.</li>
+<li>Each tick the elevator will do something like checking if it has people in it and disembarking them; checking if it is at a floor and loading any waiting people; if in motion to a destination floor will continue to that destination floor (picking people up as it iterates through floors); and lastly, if not in motion then will look at the requests and move towards a destination floor.</li>
+<li>Initially the floors and people will tick but will do nothing. The elevator will be the object that operates the people.</li>
+<li>At the end of each tick() cycle on the simulator, it will create people if it feels it appropriate based on whatever parameters are imposed.</li>
+<li>There are many things not being stated above - what is the distance between floors (is it constant or variable), what is the speed of the elevator, how many ticks should it take to open/close doors, how long does it take for people to enter/exit. All of these things will be expanded upon as we move forward and likely will have different simulator/people/elevator objects depending on how we'd like things to operate. All relevant issues though as if we're going to link a GUI to things then we want the animations to line up with the ticks.</li>
+</ul>
+<h2>TEAM MEMBERS</h2>
+<p>Christian Pearson <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#104;&#114;&#105;&#115;&#116;&#105;&#97;&#110;&#46;&#112;&#101;&#97;&#114;&#115;&#111;&#110;&#64;&#115;&#116;&#101;&#109;&#105;&#115;&#116;&#46;&#99;&#97;">&#99;&#104;&#114;&#105;&#115;&#116;&#105;&#97;&#110;&#46;&#112;&#101;&#97;&#114;&#115;&#111;&#110;&#64;&#115;&#116;&#101;&#109;&#105;&#115;&#116;&#46;&#99;&#97;</a>
+* Ubuntu 18.04 LTS 5.0.0-27-generic x64
+* IDE: Vim, VSCode</p>
+<p>Mike Carr <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#109;&#99;&#97;&#114;&#114;&#64;&#112;&#97;&#99;&#104;&#111;&#103;&#114;&#97;&#110;&#100;&#101;&#46;&#99;&#111;&#109;">&#109;&#99;&#97;&#114;&#114;&#64;&#112;&#97;&#99;&#104;&#111;&#103;&#114;&#97;&#110;&#100;&#101;&#46;&#99;&#111;&#109;</a>
+* Windows 10 x64, Windows 7 x64
+* IDE: PyDev</p>
