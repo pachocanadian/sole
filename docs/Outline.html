@@ -1,20 +1,20 @@
-<h2>Basic Elevator Behaviour Outline</h2>
+<h2 id="basic-elevator-behaviour-outline">Basic Elevator Behaviour Outline</h2>
 <p>A SOLE elevator behaves as follows:</p>
-<p>A person on floor x requests an elevator so they can move to floor y. 
-Receiving a request causes an elevator to start moving to floor x to pick up the person.
-The elevator reaches floor x and stops, allowing the person to get onto it.
+<p>A person on floor x requests an elevator so they can move to floor y. <br />
+Receiving a request causes an elevator to start moving to floor x to pick up the person.<br />
+The elevator reaches floor x and stops, allowing the person to get onto it.<br />
 The elevator moves the person to floor y and stops, allowing the person to get off.</p>
 <p>Additional requests are ignored until the elevator completes the first request it receieves. </p>
-<h3>Basic Elevator Example Scenario</h3>
+<h3 id="basic-elevator-example-scenario">Basic Elevator Example Scenario</h3>
 <p>Assuming one elevator idle at Lobby:</p>
-<p>1) Person A at floor 2 requests an elevator to move them to floor 1.
-2) Elevator at Lobby receives request and begins to move to floor 2
-3) Elevator reaches floor 2, stops, and picks up person.
-4) Person B requests an elevator to move Person B to Lobby [Request is ignored].
-5) Elevator (person A onboard) begins moving to floor 1.
-6) Elevator (person A onboard) reaches floor 1 and stops, letting person A off.
+<p>1) Person A at floor 2 requests an elevator to move them to floor 1.<br />
+2) Elevator at Lobby receives request and begins to move to floor 2<br />
+3) Elevator reaches floor 2, stops, and picks up person.<br />
+4) Person B requests an elevator to move Person B to Lobby [Request is ignored].<br />
+5) Elevator (person A onboard) begins moving to floor 1.<br />
+6) Elevator (person A onboard) reaches floor 1 and stops, letting person A off.<br />
 7) Elevator is now idle and can repeat step 1 for a new request.</p>
-<h3>Basic Elevator Timeline and Ruleset</h3>
+<h3 id="basic-elevator-timeline-and-ruleset">Basic Elevator Timeline and Ruleset</h3>
 <hr />
 <ul>
 <li>Boarding an elevator takes 5 seconds.</li>
@@ -23,28 +23,161 @@ The elevator moves the person to floor y and stops, allowing the person to get o
 <li>Acceleration is instantaneous</li>
 <li>Elevator base velocity units are +1 m/s, 0 m/s or -1 m/s.</li>
 </ul>
-<p>Time (sec)   | Velocity  | Elevation | Status                  | Current Floor | People aboard
------------- | --------  | --------- | --------------------    | ------------- | -------------
-0            |  +0 m / s |  0 m      | Idle                    |  Lobby        |  None
-1        |  +0 m / s |  0 m      | About to go to floor 2  |  Lobby        |
-2            |  +1 m / s |  1 m      | Going to floor 2        |  None         |  None
-3            |  +1 m / s |  2 m      | Going to floor 2        |  None         |  None
-4            |  +1 m / s |  3 m      | Going to floor 2        |  None         |  None
-5            |  +1 m / s |  4 m      | Going to floor 2        |  None         |  None
-6            |  0 m / s  |  5 m      | At floor 2              |  Floor 2      |  None
-7 - 11       |  0 m / s  |  5 m      | People entering         |  Floor 2      | +x people
-12           |  0 m / s  |  5 m      | About to go to floor 1  |  Floor 2      |  x people
-13           |  1 m / s  |  4 m      | Going to floor 1        |  None         |  x people
-14           |  1 m / s  |  3 m      | Going to floor 1        |  None         |  x people
-15           |  0 m / s  |  2.5 m    | At floor 1              |  Floor 1      |  x people
-16 - 21      |  0 m / s  |  2.5 m    | People exiting          |  Floor 1      | -x people
-22           |  0 m / s  |  2.5 m    | Idle                |  Floor 1      |  None</p>
-<h2>Building Layout</h2>
+<table>
+<thead>
+<tr>
+<th>Time (sec)</th>
+<th>Velocity</th>
+<th>Elevation</th>
+<th>Status</th>
+<th>Current Floor</th>
+<th>People aboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>+0 m / s</td>
+<td>0 m</td>
+<td>Idle</td>
+<td>Lobby</td>
+<td>None</td>
+</tr>
+<tr>
+<td>1</td>
+<td>+0 m / s</td>
+<td>0 m</td>
+<td>About to go to floor 2</td>
+<td>Lobby</td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td>+1 m / s</td>
+<td>1 m</td>
+<td>Going to floor 2</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>3</td>
+<td>+1 m / s</td>
+<td>2 m</td>
+<td>Going to floor 2</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>4</td>
+<td>+1 m / s</td>
+<td>3 m</td>
+<td>Going to floor 2</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>5</td>
+<td>+1 m / s</td>
+<td>4 m</td>
+<td>Going to floor 2</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>At floor 2</td>
+<td>Floor 2</td>
+<td>None</td>
+</tr>
+<tr>
+<td>7 - 11</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>People entering</td>
+<td>Floor 2</td>
+<td>+x people</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>About to go to floor 1</td>
+<td>Floor 2</td>
+<td>x people</td>
+</tr>
+<tr>
+<td>13</td>
+<td>1 m / s</td>
+<td>4 m</td>
+<td>Going to floor 1</td>
+<td>None</td>
+<td>x people</td>
+</tr>
+<tr>
+<td>14</td>
+<td>1 m / s</td>
+<td>3 m</td>
+<td>Going to floor 1</td>
+<td>None</td>
+<td>x people</td>
+</tr>
+<tr>
+<td>15</td>
+<td>0 m / s</td>
+<td>2.5 m</td>
+<td>At floor 1</td>
+<td>Floor 1</td>
+<td>x people</td>
+</tr>
+<tr>
+<td>16 - 21</td>
+<td>0 m / s</td>
+<td>2.5 m</td>
+<td>People exiting</td>
+<td>Floor 1</td>
+<td>-x people</td>
+</tr>
+<tr>
+<td>22</td>
+<td>0 m / s</td>
+<td>2.5 m</td>
+<td>Idle</td>
+<td>Floor 1</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<h2 id="building-layout">Building Layout</h2>
 <p>Floor height: 2.5 m / floor</p>
-<p>Elevation (m)   |   Floor       | <br />
---------------- |   -------     |
-10      |   Floor 4     |
-7.5     |   Floor 3     | <br />
-5       |   Floor 2     |
-2.5     |   Floor 1     |
-0       |   Lobby       |</p>
+<table>
+<thead>
+<tr>
+<th>Elevation (m)</th>
+<th>Floor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>Floor 4</td>
+</tr>
+<tr>
+<td>7.5</td>
+<td>Floor 3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Floor 2</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>Floor 1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>Lobby</td>
+</tr>
+</tbody>
+</table>

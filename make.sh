@@ -20,7 +20,7 @@ fi
 
 echo -n 'Creating HTML documentation: '
 for i in `find . -name \*.md`; do
-	markdown_py $i -f `echo $i | sed 's/\.md$/.html/'`
+	markdown_py $i -x extra -x toc -x nl2br -f `echo $i | sed 's/\.md$/.html/'`
 done
 if [ $? == 0 ]; then
 	echo 'OK'
