@@ -166,3 +166,45 @@ def test_BASEPERSON_getset_iscopy():
 
 
 # END BASEPERSON TESTS
+
+
+# BEGIN SIMPLEPERSON TESTS
+
+
+def test_SIMPLEPERSON_getset_string():
+    a = SOLE.Person.SimplePerson()
+    v = "var"
+    a.set("test_string", v)
+    assert a.get("test_string") == v, "set/get don't match for string type"
+
+
+def test_SIMPLEPERSON_getset_float():
+    a = SOLE.Person.SimplePerson()
+    v = 3.14159
+    a.set("test_float", v)
+    assert a.get("test_float") == v, "set/get don't match for float type"
+
+
+def test_SIMPLEPERSON_getset_list():
+    a = SOLE.Person.SimplePerson()
+    v = [1, 2, 3]
+    a.set("test_list", v)
+    assert a.get("test_list") == v, "set/get don't match for list type"
+
+
+def test_SIMPLEPERSON_getset_dict():
+    a = SOLE.Person.SimplePerson()
+    v = {"a": "b", "c": "d"}
+    a.set("test_dict", v)
+    assert a.get("test_dict") == v, "set/get don't match for dict type"
+
+
+def test_SIMPLEPERSON_getset_iscopy():
+    a = SOLE.Person.SimplePerson()
+    ov = "foo"
+    a.set("test_iscopy", ov)
+    nv = a.get("test_iscopy")
+    assert nv is ov, "set/get are returning a copy rather than the original object"
+
+
+# END SIMPLEPERSON TESTS

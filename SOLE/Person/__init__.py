@@ -1,3 +1,4 @@
-__all__ = ["SimplePerson"]
+__all__ = ["SimplePerson", "SpeakerPerson"]
 
 from SOLE.Person.SimplePerson import *
+from SOLE.Person.SpeakerPerson import *
