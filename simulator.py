@@ -17,7 +17,7 @@ def new_person(building):
     destination_floor = (random.randint(0, len(floors) - 2) + location_floor) % len(
         floors
     )
-    p = SOLE.Person.BasePerson(
+    p = SOLE.Person.SimplePerson(
         {
             "location": floors[location_floor],
             "destination_floor": floors[destination_floor],
