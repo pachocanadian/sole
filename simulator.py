@@ -58,6 +58,13 @@ for t in range(999):
     building.tick()
 
 
+# Test SpeakerPerson -- Needs fix
+
+# speaker = SOLE.Person.SpeakerPerson
+# for i in range(10):
+#    speaker.speak_positive()
+
+
 # Summarize simulation.
 timeElapsed = time.time() - startTime
 

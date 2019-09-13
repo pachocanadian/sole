@@ -48,6 +48,7 @@ def sole_baseperson_random_name():
 
 
 class BasePerson:
+
     _default_attributes = {
         "height": 1.77,
         "location": None,  # a reference to the parent Elevator/Floor object
