@@ -5,7 +5,7 @@ import SOLE
 import time
 import random
 
-SOLE.verbosity = SOLE.LOG_NOTICE
+SOLE.verbosity = SOLE.LOG_NOTICE | SOLE.LOG_INFO
 
 
 def new_person(building):
