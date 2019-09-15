@@ -1,5 +1,4 @@
 import SOLE
-import SOLE.Building
 import re
 
 

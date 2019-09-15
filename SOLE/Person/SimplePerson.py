@@ -1,4 +1,5 @@
-from SOLE.Person.BasePerson import *
+import SOLE
+from SOLE.Person.BasePerson import BasePerson
 
 
 class SimplePerson(BasePerson):

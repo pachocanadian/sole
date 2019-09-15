@@ -1,4 +1,4 @@
-from SOLE.Floor.BaseFloor import *
+from SOLE.Floor.BaseFloor import BaseFloor
 
 
 class SimpleFloor(BaseFloor):

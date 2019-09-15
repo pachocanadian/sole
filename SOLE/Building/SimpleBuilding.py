@@ -1,4 +1,4 @@
-from SOLE.Building.BaseBuilding import *
+from SOLE.Building.BaseBuilding import BaseBuilding
 
 
 class SimpleBuilding(BaseBuilding):

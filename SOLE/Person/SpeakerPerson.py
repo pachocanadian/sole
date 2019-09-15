@@ -1,8 +1,9 @@
 import SOLE
+from SOLE.Person.BasePerson import BasePerson
 import random
 
 
-class SpeakerPerson(SOLE.Person.BasePerson):
+class SpeakerPerson(BasePerson):
 
     _day_times = ["morning", "afternoon", "evening"]
     _jobs = ["manager", "accountant", "technician", "consultant", "office worker"]

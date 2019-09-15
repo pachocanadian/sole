@@ -1,4 +1,4 @@
-from SOLE.Elevator.BaseElevator import *
+from SOLE.Elevator.BaseElevator import BaseElevator
 
 
 class SimpleElevator(BaseElevator):
