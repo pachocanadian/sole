@@ -104,7 +104,7 @@ class BasePerson:
                 carrying = value.get("carrying")
                 carrying.append(self)
 
-                if isinstance(value, SOLE.Floor.BaseFloor):
+                if value.get("is_floor"):
                     if self.get("destination_floor") is not None:
                         value.add_to_request_queue(value.get("id"))
 

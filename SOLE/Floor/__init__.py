@@ -1,3 +1,1 @@
-__all__ = ["SimpleFloor"]
-
-from SOLE.Floor.SimpleFloor import *
+__all__ = ["BaseFloor", "SimpleFloor"]

@@ -4,20 +4,20 @@ import pytest
 import SOLE
 
 # BUILDING
-import SOLE.Building.BaseBuilding
-import SOLE.Building.SimpleBuilding
+from SOLE.Building.BaseBuilding import BaseBuilding
+from SOLE.Building.SimpleBuilding import SimpleBuilding
 
 # ELEVATOR
-import SOLE.Elevator.BaseElevator
-import SOLE.Elevator.SimpleElevator
+from SOLE.Elevator.BaseElevator import BaseElevator
+from SOLE.Elevator.SimpleElevator import SimpleElevator
 
 # FLOOR
-import SOLE.Floor.BaseFloor
-import SOLE.Floor.SimpleFloor
+from SOLE.Floor.BaseFloor import BaseFloor
+from SOLE.Floor.SimpleFloor import SimpleFloor
 
 # PERSON
-import SOLE.Person.BasePerson
-import SOLE.Person.SimplePerson
+from SOLE.Person.BasePerson import BasePerson
+from SOLE.Person.SimplePerson import SimplePerson
 
 ###### BEGIN BUILDING TESTS ######
 ###
@@ -26,35 +26,35 @@ import SOLE.Person.SimplePerson
 
 
 def test_BASEBUILDING_getset_string():
-    a = SOLE.Building.BaseBuilding()
+    a = BaseBuilding()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_BASEBUILDING_getset_float():
-    a = SOLE.Building.BaseBuilding()
+    a = BaseBuilding()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_BASEBUILDING_getset_list():
-    a = SOLE.Building.BaseBuilding()
+    a = BaseBuilding()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_BASEBUILDING_getset_dict():
-    a = SOLE.Building.BaseBuilding()
+    a = BaseBuilding()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_BASEBUILDING_getset_iscopy():
-    a = SOLE.Building.BaseBuilding()
+    a = BaseBuilding()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -69,35 +69,35 @@ def test_BASEBUILDING_getset_iscopy():
 
 
 def test_SIMPLEBUILDING_getset_string():
-    a = SOLE.Building.SimpleBuilding()
+    a = SimpleBuilding()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_SIMPLEBUILDING_getset_float():
-    a = SOLE.Building.SimpleBuilding()
+    a = SimpleBuilding()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_SIMPLEBUILDING_getset_list():
-    a = SOLE.Building.SimpleBuilding()
+    a = SimpleBuilding()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_SIMPLEBUILDING_getset_dict():
-    a = SOLE.Building.SimpleBuilding()
+    a = SimpleBuilding()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_SIMPLEBUILDING_getset_iscopy():
-    a = SOLE.Building.SimpleBuilding()
+    a = SimpleBuilding()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -116,35 +116,35 @@ def test_SIMPLEBUILDING_getset_iscopy():
 
 
 def test_BASEELEVATOR_getset_string():
-    a = SOLE.Elevator.BaseElevator()
+    a = BaseElevator()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_BASEELEVATOR_getset_float():
-    a = SOLE.Elevator.BaseElevator()
+    a = BaseElevator()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_BASEELEVATOR_getset_list():
-    a = SOLE.Elevator.BaseElevator()
+    a = BaseElevator()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_BASEELEVATOR_getset_dict():
-    a = SOLE.Elevator.BaseElevator()
+    a = BaseElevator()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_BASEELEVATOR_getset_iscopy():
-    a = SOLE.Elevator.BaseElevator()
+    a = BaseElevator()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -159,35 +159,35 @@ def test_BASEELEVATOR_getset_iscopy():
 
 
 def test_SIMPLEELEVATOR_getset_string():
-    a = SOLE.Elevator.SimpleElevator()
+    a = SimpleElevator()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_SIMPLEELEVATOR_getset_float():
-    a = SOLE.Elevator.SimpleElevator()
+    a = SimpleElevator()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_SIMPLEELEVATOR_getset_list():
-    a = SOLE.Elevator.SimpleElevator()
+    a = SimpleElevator()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_SIMPLEELEVATOR_getset_dict():
-    a = SOLE.Elevator.SimpleElevator()
+    a = SimpleElevator()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_SIMPLEELEVATOR_getset_iscopy():
-    a = SOLE.Elevator.SimpleElevator()
+    a = SimpleElevator()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -205,35 +205,35 @@ def test_SIMPLEELEVATOR_getset_iscopy():
 
 
 def test_BASEFLOOR_getset_string():
-    a = SOLE.Floor.BaseFloor()
+    a = BaseFloor()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_BASEFLOOR_getset_float():
-    a = SOLE.Floor.BaseFloor()
+    a = BaseFloor()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_BASEFLOOR_getset_list():
-    a = SOLE.Floor.BaseFloor()
+    a = BaseFloor()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_BASEFLOOR_getset_dict():
-    a = SOLE.Floor.BaseFloor()
+    a = BaseFloor()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_BASEFLOOR_getset_iscopy():
-    a = SOLE.Floor.BaseFloor()
+    a = BaseFloor()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -248,35 +248,35 @@ def test_BASEFLOOR_getset_iscopy():
 
 
 def test_SIMPLEFLOOR_getset_string():
-    a = SOLE.Floor.SimpleFloor()
+    a = SimpleFloor()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_SIMPLEFLOOR_getset_float():
-    a = SOLE.Floor.SimpleFloor()
+    a = SimpleFloor()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_SIMPLEFLOOR_getset_list():
-    a = SOLE.Floor.SimpleFloor()
+    a = SimpleFloor()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_SIMPLEFLOOR_getset_dict():
-    a = SOLE.Floor.SimpleFloor()
+    a = SimpleFloor()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_SIMPLEFLOOR_getset_iscopy():
-    a = SOLE.Floor.SimpleFloor()
+    a = SimpleFloor()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -295,35 +295,35 @@ def test_SIMPLEFLOOR_getset_iscopy():
 
 
 def test_BASEPERSON_getset_string():
-    a = SOLE.Person.BasePerson()
+    a = BasePerson()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_BASEPERSON_getset_float():
-    a = SOLE.Person.BasePerson()
+    a = BasePerson()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_BASEPERSON_getset_list():
-    a = SOLE.Person.BasePerson()
+    a = BasePerson()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_BASEPERSON_getset_dict():
-    a = SOLE.Person.BasePerson()
+    a = BasePerson()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_BASEPERSON_getset_iscopy():
-    a = SOLE.Person.BasePerson()
+    a = BasePerson()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")
@@ -338,35 +338,35 @@ def test_BASEPERSON_getset_iscopy():
 
 
 def test_SIMPLEPERSON_getset_string():
-    a = SOLE.Person.SimplePerson()
+    a = SimplePerson()
     v = "var"
     a.set("test_string", v)
     assert a.get("test_string") == v, "set/get don't match for string type"
 
 
 def test_SIMPLEPERSON_getset_float():
-    a = SOLE.Person.SimplePerson()
+    a = SimplePerson()
     v = 3.14159
     a.set("test_float", v)
     assert a.get("test_float") == v, "set/get don't match for float type"
 
 
 def test_SIMPLEPERSON_getset_list():
-    a = SOLE.Person.SimplePerson()
+    a = SimplePerson()
     v = [1, 2, 3]
     a.set("test_list", v)
     assert a.get("test_list") == v, "set/get don't match for list type"
 
 
 def test_SIMPLEPERSON_getset_dict():
-    a = SOLE.Person.SimplePerson()
+    a = SimplePerson()
     v = {"a": "b", "c": "d"}
     a.set("test_dict", v)
     assert a.get("test_dict") == v, "set/get don't match for dict type"
 
 
 def test_SIMPLEPERSON_getset_iscopy():
-    a = SOLE.Person.SimplePerson()
+    a = SimplePerson()
     ov = "foo"
     a.set("test_iscopy", ov)
     nv = a.get("test_iscopy")

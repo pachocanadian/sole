@@ -2,10 +2,10 @@
 
 from pprint import pprint
 import SOLE
-import SOLE.Building.SimpleBuilding
-import SOLE.Elevator.SimpleElevator
-import SOLE.Floor.SimpleFloor
-import SOLE.Person.SimplePerson
+from SOLE.Building.SimpleBuilding import SimpleBuilding as Building
+from SOLE.Elevator.SimpleElevator import SimpleElevator as Elevator
+from SOLE.Floor.SimpleFloor import SimpleFloor as Floor
+from SOLE.Person.SimplePerson import SimplePerson as Person
 import time
 import random
 
@@ -21,7 +21,7 @@ def new_person(building):
     destination_floor = (random.randint(0, len(floors) - 2) + location_floor) % len(
         floors
     )
-    p = SOLE.Person.SimplePerson(
+    p = Person(
         {
             "location": floors[location_floor],
             "destination_floor": floors[destination_floor],
@@ -39,12 +39,12 @@ startTime = time.time()
 floor_labels = ["Lobby", "1st Floor", "2nd Floor", "3rd Floor"]
 floors = []
 for fl in floor_labels:
-    f = SOLE.Floor.SimpleFloor({"label": fl})
+    f = Floor({"label": fl})
     floors.append(f)
 
 # Create an elevator.
 initial_location = floor_labels[0]
-elevator = SOLE.Elevator.SimpleElevator(
+elevator = Elevator(
     {"floors": floors, "elevation": 0, "status": "waiting", "destination_floor": None}
 )
 
@@ -52,7 +52,7 @@ elevators = []
 elevators.append(elevator)
 
 # Create a building.
-building = SOLE.Building.SimpleBuilding({"floors": floors, "elevators": elevators})
+building = Building({"floors": floors, "elevators": elevators})
 
 # Create people for simulation testing.
 for t in range(999):

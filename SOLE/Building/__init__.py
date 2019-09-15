@@ -1,3 +1,1 @@
-__all__ = ["SimpleBuilding"]
-
-from SOLE.Building.SimpleBuilding import *
+__all__ = ["BaseBuilding", "SimpleBuilding"]
