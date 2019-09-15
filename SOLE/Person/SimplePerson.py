@@ -7,4 +7,3 @@ class SimplePerson(BasePerson):
         SOLE.log("[{}] SimplePerson->created".format(self.get("id")), SOLE.LOG_INFO)
 
     pass
-

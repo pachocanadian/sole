@@ -2,10 +2,14 @@
 
 from pprint import pprint
 import SOLE
+import SOLE.Building.SimpleBuilding
+import SOLE.Elevator.SimpleElevator
+import SOLE.Floor.SimpleFloor
+import SOLE.Person.SimplePerson
 import time
 import random
 
-SOLE.verbosity = SOLE.LOG_NOTICE | SOLE.LOG_INFO
+SOLE.verbosity = SOLE.LOG_NOTICE
 
 
 def new_person(building):
