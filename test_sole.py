@@ -2,6 +2,11 @@
 
 import pytest
 import SOLE
+import SOLE.Building.BaseBuilding
+import SOLE.Elevator.BaseElevator
+import SOLE.Floor.BaseFloor
+import SOLE.Person.BasePerson
+import SOLE.Person.SimplePerson
 
 # BEGIN BASEBUILDING TESTS
 

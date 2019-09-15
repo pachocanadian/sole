@@ -3,10 +3,6 @@ __all__ = ["Building", "Elevator", "Floor", "Person"]
 import time
 import re
 import uuid
-from SOLE.Building import *
-from SOLE.Elevator import *
-from SOLE.Floor import *
-from SOLE.Person import *
 
 current_tick = 0
 
