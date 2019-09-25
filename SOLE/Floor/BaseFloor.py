@@ -28,6 +28,7 @@ class BaseFloor:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
+
         if name == "label":
             if not (str(value).strip()):
                 raise Exception("attribute label must not be empty")
@@ -45,6 +46,7 @@ class BaseFloor:
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BaseFloor->tick()".format(self.get("id")), SOLE.LOG_INFO)
+        SOLE.log("{} and I'm carrying {}".format(self.get("id"), self.get("carrying")))
         for p in self.get("carrying"):
             p.tick()
         return

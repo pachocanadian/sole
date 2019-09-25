@@ -94,19 +94,32 @@ class BasePerson:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
+        
         if name == "height":
             if not (value > 0):
                 raise Exception("attribute height must be greater than zero")
 
+        if name == "destination_floor":
+            # if our destination_floor changes then indicate it to our carrying object if we're on a floor
+            location = self.get("location")
+            destination_floor = value
+            if location is not None:
+                if location.get("is_floor"):
+                    if destination_floor is not None:
+                        location.add_to_request_queue(destination_floor.get("id"))
+
         if name == "location":
             # if we are being added to a parent object then access its carrying attribute and add ourselves
-            if value is not None:
-                carrying = value.get("carrying")
+            location = value
+            destination_floor = self.get("destination_floor")
+            if location is not None:
+                carrying = location.get("carrying")
                 carrying.append(self)
+                location.set("carrying", carrying)
 
-                if value.get("is_floor"):
-                    if self.get("destination_floor") is not None:
-                        value.add_to_request_queue(value.get("id"))
+                if location.get("is_floor"):
+                    if destination_floor is not None:
+                        location.add_to_request_queue(destination_floor.get("id"))
 
                 if self.get("building") is None:
                     self.set("building", value.get("building"))
@@ -168,11 +181,6 @@ class BasePerson:
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
-        SOLE.log(
-            "[{}] BasePerson->location={} destination={}".format(
-                self.get("id"),
-                self.get("location").get("id"),
-                self.get("destination_floor").get("id"),
-            ),
-            SOLE.LOG_INFO,
-        )
+        carrying = self.get("carrying")
+        if(carrying is not None):
+            self.set("elevation", self.get("carrying").get("elevation"))

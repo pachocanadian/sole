@@ -18,9 +18,10 @@ def new_person(building):
     # Randomize person's destination and location.
     floors = building.get("floors")
     location_floor = random.randint(0, len(floors) - 1)
-    destination_floor = (random.randint(0, len(floors) - 2) + location_floor) % len(
+    destination_floor = (random.randint(1, len(floors) - 1) + location_floor) % len(
         floors
     )
+    
     p = Person(
         {
             "location": floors[location_floor],
@@ -56,7 +57,7 @@ building = Building({"floors": floors, "elevators": elevators})
 
 # Create people for simulation testing.
 for t in range(999):
-    if t % 100 == 0:
+    if t % 100 == 10:
         new_person(building)
     SOLE.current_tick += 1
     building.tick()
@@ -65,7 +66,7 @@ for t in range(999):
 timeElapsed = time.time() - startTime
 
 SOLE.log(
-    "Simulation started at: {}. Time elapsed: {}".format(
-        time.strftime("%x %X", time.localtime(startTime)), timeElapsed
+    "Simulation started at: {}. Time elapsed: {}. Simulator time elapsed {} seconds.".format(
+        time.strftime("%x %X", time.localtime(startTime)), timeElapsed, (SOLE.current_tick / SOLE.tick_ratio_to_real_time)
     )
 )

@@ -107,14 +107,15 @@ class BaseBuilding:
                 _ref_to[floor_id] = f
                 _elevation_of[floor_id] = floor_elevation
                 _at_elevation[floor_elevation] = floor_id
-                carrying = f.get("carrying")
-                if type(carrying) == list and len(carrying) > 0:
-                    for p in carrying:
-                        person_id = p.get("id")
-                        person_elevation = floor_elevation
-                        p.set("elevation", person_elevation)
-                        _ref_to[person_id] = p
-                        _elevation_of[person_id] = person_elevation
+#                carrying = f.get("carrying")
+                
+#                if type(carrying) == list and len(carrying) > 0:
+#                    for p in carrying:
+#                        person_id = p.get("id")
+#                        person_elevation = floor_elevation
+#                        p.set("elevation", person_elevation)
+#                        _ref_to[person_id] = p
+#                        _elevation_of[person_id] = person_elevation
 
         self.set("_elevation_of", _elevation_of)
         self.set("_at_elevation", _at_elevation)
@@ -126,14 +127,14 @@ class BaseBuilding:
                 elevator_elevation = e.get("elevation")
                 _ref_to[elevator_id] = e
                 _elevation_of[elevator_id] = elevator_elevation
-                carrying = e.get("carrying")
-                if type(carrying) == list and len(carrying) > 0:
-                    for p in carrying:
-                        person_id = p.get("id")
-                        person_elevation = elevator_elevation
-                        p.set("elevation", person_elevation)
-                        _ref_to[person_id] = p
-                        _elevation_of[person_id] = person_elevation
+ #               carrying = e.get("carrying")
+ #               if type(carrying) == list and len(carrying) > 0:
+ #                   for p in carrying:
+ #                       person_id = p.get("id")
+ #                       person_elevation = elevator_elevation
+ #                       p.set("elevation", person_elevation)
+ #                       _ref_to[person_id] = p
+ #                       _elevation_of[person_id] = person_elevation
 
                 e.set("building", self)
 
