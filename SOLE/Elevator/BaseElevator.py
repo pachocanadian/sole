@@ -74,7 +74,13 @@ class BaseElevator:
 
     def move(self):
         """move() moves the elevator by one unit of velocity."""
-        self.set("elevation", (self.get("elevation") + (self.get("velocity") / SOLE.tick_ratio_to_real_time) ))
+        self.set(
+            "elevation",
+            (
+                self.get("elevation")
+                + (self.get("velocity") / SOLE.tick_ratio_to_real_time)
+            ),
+        )
 
     def unload(self):
         """unload() iterates through the elevators carrying attribute and dumps out passengers"""
@@ -86,8 +92,12 @@ class BaseElevator:
         carrying = self.get("carrying")
         if type(carrying) == list:
             for p in carrying:
-                if(p.get("destination_floor") == floor):
-                    SOLE.log("Unloaded {} from the elevator at the {}".format(p.get("label"), floor.get("label") ))
+                if p.get("destination_floor") == floor:
+                    SOLE.log(
+                        "Unloaded {} from the elevator at the {}".format(
+                            p.get("label"), floor.get("label")
+                        )
+                    )
                     p.unload(self, floor)
 
     def load(self):
@@ -97,10 +107,14 @@ class BaseElevator:
         b = self.get("building")
         floor_id = b.at_elevation(elevation)
         floor = b.ref_to(floor_id)
-        carrying = floor.get("carrying")        
+        carrying = floor.get("carrying")
         if type(carrying) == list:
             for p in carrying:
-                SOLE.log("Loaded {} into the elevator from the {}".format(p.get("label"), floor.get("label") ))
+                SOLE.log(
+                    "Loaded {} into the elevator from the {}".format(
+                        p.get("label"), floor.get("label")
+                    )
+                )
                 p.load(self, floor)
 
     def add_to_request_queue(self, floor_id):
@@ -122,7 +136,7 @@ class BaseElevator:
                 if len(self.get("floor_requests")) > 0:
                     floor_id = self.get("floor_requests").pop(0)
                     building = self.get("building")
-                    destination_floor = building.ref_to(floor_id)                    
+                    destination_floor = building.ref_to(floor_id)
                     self.set("destination_floor", destination_floor)
 
     def tick(self):
@@ -130,7 +144,10 @@ class BaseElevator:
         SOLE.log("[{}] BaseElevator->tick()".format(self.get("id")), SOLE.LOG_INFO)
         SOLE.log(
             "[{}] BaseElevator->tick() elevation={:.2f} status={} status_percent={:.0%}".format(
-                self.get("id"), self.get("elevation"), self.get("status"), self.get("status_percent")
+                self.get("id"),
+                self.get("elevation"),
+                self.get("status"),
+                self.get("status_percent"),
             ),
             SOLE.LOG_DEBUG,
         )
@@ -156,9 +173,12 @@ class BaseElevator:
                 return
 
             self.set("status", "unloading")
-            self.set("status_percent", status_percent + 1 / (
-                self.get("unloading_time_needed") * SOLE.tick_ratio_to_real_time
-            ))
+            self.set(
+                "status_percent",
+                status_percent
+                + 1
+                / (self.get("unloading_time_needed") * SOLE.tick_ratio_to_real_time),
+            )
             return
 
         # from loading state, we can either continue loading or start waiting
@@ -170,9 +190,11 @@ class BaseElevator:
                 return
 
             self.set("status", "loading")
-            self.set("status_percent", status_percent + 1 / (
-                self.get("loading_time_needed") * SOLE.tick_ratio_to_real_time
-            ))
+            self.set(
+                "status_percent",
+                status_percent
+                + 1 / (self.get("loading_time_needed") * SOLE.tick_ratio_to_real_time),
+            )
             return
 
         # from waiting state, we can either continue waiting or start moving
@@ -189,7 +211,7 @@ class BaseElevator:
                 return
 
             if destination_floor is not None:
-                # there is a destination floor so start moving next tick                
+                # there is a destination floor so start moving next tick
                 self.set("status", "moving")
                 self.set("status_percent", 0.00)
                 return
@@ -199,14 +221,16 @@ class BaseElevator:
             distance = destination_elevation - elevation
             velocity = self.get("velocity")
 
-            SOLE.log("BaseElevator (moving) my_elevation={:.2f} destination_floor={} destination_elevation={:.2f} distance={:.2f} velocity={:.2f}".format(
-                self.get("elevation"),
-                self.get("destination_floor").get("id"),
-                destination_elevation,
-                distance,
-                velocity            
-            ), SOLE.LOG_DEBUG)
-
+            SOLE.log(
+                "BaseElevator (moving) my_elevation={:.2f} destination_floor={} destination_elevation={:.2f} distance={:.2f} velocity={:.2f}".format(
+                    self.get("elevation"),
+                    self.get("destination_floor").get("id"),
+                    destination_elevation,
+                    distance,
+                    velocity,
+                ),
+                SOLE.LOG_DEBUG,
+            )
 
             # if we've arrived then stop and unload next tick
             if distance == 0:
@@ -216,7 +240,9 @@ class BaseElevator:
                 self.set("status_percent", 0)
                 return
 
-            if (distance > 0) and (distance < (velocity/SOLE.tick_ratio_to_real_time)):
+            if (distance > 0) and (
+                distance < (velocity / SOLE.tick_ratio_to_real_time)
+            ):
                 self.set("destination_floor", None)
                 self.set("elevation", destination_elevation)
                 self.change_velocity(0)
@@ -224,7 +250,9 @@ class BaseElevator:
                 self.set("status_percent", 0)
                 return
 
-            elif (distance < 0) and (distance > (velocity/SOLE.tick_ratio_to_real_time)):
+            elif (distance < 0) and (
+                distance > (velocity / SOLE.tick_ratio_to_real_time)
+            ):
                 self.set("destination_floor", None)
                 self.set("elevation", destination_elevation)
                 self.change_velocity(0)
@@ -238,7 +266,9 @@ class BaseElevator:
                 velocity = self.get("velocity")
                 self.move()
                 self.set("status", "moving")
-                self.set("status_percent", distance) # TOFIX: NEED TO KEEP TRACK OF RELATIVE DISTANCE TRAVELLED FOR % TO WORK
+                self.set(
+                    "status_percent", distance
+                )  # TOFIX: NEED TO KEEP TRACK OF RELATIVE DISTANCE TRAVELLED FOR % TO WORK
                 return
 
         return

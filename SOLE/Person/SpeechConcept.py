@@ -1,16 +1,17 @@
 import random
 
+
 class SpeakerTest:
     """ Concept for variables and f strings that people will speak. Variables are current just a placeholder for testing. """
 
     day_times = ["morning", "afternoon", "evening"]
     jobs = ["manager", "accountant", "technician", "consultant", "office worker"]
     ages = [i for i in range(18, 71)]
-    genders = ['man', 'woman']
-    times = ['morning', 'afternoon', 'evening']
-    sports_teams = ['X-rays', 'Yankees', 'Zulus']
-    foods = ['apples', 'bananas', 'steak', 'potatoes', 'rice', 'curries']
-    drinks = ['water', 'milk', 'juice', 'tea', 'coffee', 'beer', 'wine', 'vodka']
+    genders = ["man", "woman"]
+    times = ["morning", "afternoon", "evening"]
+    sports_teams = ["X-rays", "Yankees", "Zulus"]
+    foods = ["apples", "bananas", "steak", "potatoes", "rice", "curries"]
+    drinks = ["water", "milk", "juice", "tea", "coffee", "beer", "wine", "vodka"]
 
     place_holder_variable = "x"
 
@@ -44,7 +45,8 @@ class SpeakerTest:
         "Another day, another crashed server.",
         "Another day, another coffee.",
         "Ugh... here we go again.",
-        "I need to go to the bathroom." f"I am a {gender}, let me on the elevator, please.",
+        "I need to go to the bathroom."
+        f"I am a {gender}, let me on the elevator, please.",
         f"{first_name} will hopefully be ready by the time I get there.",
         f"I want to be a good {occupation}",
         f"I hope {favourite_drink} and {favourite_food} are on the menu today.",
@@ -70,12 +72,13 @@ class SpeakerTest:
 
     def speak_positive(self):
         print(random.choice(self.positive_phrases))
-    
+
     def speak_neutral(self):
         print(random.choice(self.neutral_phrases))
 
     def speak_negative(self):
         print(random.choice(self.negative_phrases))
+
 
 a = SpeakerTest()
 a.speak_positive()

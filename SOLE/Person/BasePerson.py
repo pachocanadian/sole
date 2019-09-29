@@ -94,7 +94,7 @@ class BasePerson:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        
+
         if name == "height":
             if not (value > 0):
                 raise Exception("attribute height must be greater than zero")
@@ -182,5 +182,5 @@ class BasePerson:
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BasePerson->tick()".format(self.get("id")), SOLE.LOG_INFO)
         carrying = self.get("carrying")
-        if(carrying is not None):
+        if carrying is not None:
             self.set("elevation", self.get("carrying").get("elevation"))

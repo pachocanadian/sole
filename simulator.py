@@ -21,7 +21,7 @@ def new_person(building):
     destination_floor = (random.randint(1, len(floors) - 1) + location_floor) % len(
         floors
     )
-    
+
     p = Person(
         {
             "location": floors[location_floor],
@@ -67,6 +67,8 @@ timeElapsed = time.time() - startTime
 
 SOLE.log(
     "Simulation started at: {}. Time elapsed: {}. Simulator time elapsed {} seconds.".format(
-        time.strftime("%x %X", time.localtime(startTime)), timeElapsed, (SOLE.current_tick / SOLE.tick_ratio_to_real_time)
+        time.strftime("%x %X", time.localtime(startTime)),
+        timeElapsed,
+        (SOLE.current_tick / SOLE.tick_ratio_to_real_time),
     )
 )
