@@ -239,6 +239,16 @@ def test_BASEFLOOR_getset_iscopy():
     nv = a.get("test_iscopy")
     assert nv is ov, "set/get are returing a copy rather than the original object"
 
+def test_BASEFLOOR_getset_diffsaredifferent():
+    a = BaseFloor()
+    b = BaseFloor()
+    pre_av = "foo"
+    pre_bv = "bar"
+    a.set("test_unique", pre_av)
+    b.set("test_unique", pre_bv)
+    post_av = a.get("test_unique")
+    post_bv = b.get("test_unique")
+    assert post_av != post_bv, "set/get are returning different return values on objects with different initial set values"
 
 ###
 ### END BASEFLOOR TESTS

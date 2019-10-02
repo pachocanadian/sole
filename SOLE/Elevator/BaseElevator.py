@@ -10,9 +10,9 @@ class BaseElevator:
         "label": None,  # if the object has a friendly identifier
         "maximum_up_speed": 1,  # elevators generally can go up faster than down
         "maximum_down_speed": -1,  # elevators generally can go up faster than down
-        "carrying": [],  # a list of Person objects presently within the elevator
+        "carrying": None,  # a list of Person objects presently within the elevator
         "building": None,  # a reference to the parent building
-        "floor_requests": [],  # a list of Floor ID's in sequential order
+        "floor_requests": None,  # a list of Floor ID's in sequential order
         "status": "waiting",  # a string outlining what activity we are currently performing
         "status_percent": 1,  # a float from 0..1 indicating percentage completion of the status
         "unloading_time_needed": 5,  # float in real-world seconds
@@ -24,6 +24,8 @@ class BaseElevator:
         self.attribute = {}
         for key in BaseElevator._default_attributes:
             self.set(key, BaseElevator._default_attributes[key])
+        self.set("floor_requests", [])
+        self.set("carrying", [])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])

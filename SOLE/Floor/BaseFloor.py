@@ -7,7 +7,7 @@ class BaseFloor:
         "elevation": None,
         "elevation_top": None,
         "label": None,  # if the object has a friendly identifier
-        "carrying": [],  # a list of Person objects presently within the elevator
+        "carrying": None,  # a list of Person objects presently within the elevator
         "building": None,  # a reference to the parent building object
         "is_floor": True,  # an explicit confirmation that we're actually a floor
     }
@@ -17,6 +17,7 @@ class BaseFloor:
         self.attribute = {}
         for key in BaseFloor._default_attributes:
             self.set(key, BaseFloor._default_attributes[key])
+        self.set("carrying", [])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
@@ -46,7 +47,6 @@ class BaseFloor:
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
         SOLE.log("[{}] BaseFloor->tick()".format(self.get("id")), SOLE.LOG_INFO)
-        SOLE.log("{} and I'm carrying {}".format(self.get("id"), self.get("carrying")))
         for p in self.get("carrying"):
             p.tick()
         return

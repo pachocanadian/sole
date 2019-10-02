@@ -113,10 +113,7 @@ class BasePerson:
             location = value
             destination_floor = self.get("destination_floor")
             if location is not None:
-                print(location.get("id") + " is where we're manipulating")
-                carrying = location.get("carrying")
-                carrying.append(self)
-                location.set("carrying", carrying)
+                location.get("carrying").append(self)
 
                 if location.get("is_floor"):
                     if destination_floor is not None:
