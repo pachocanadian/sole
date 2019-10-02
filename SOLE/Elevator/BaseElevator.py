@@ -140,6 +140,7 @@ class BaseElevator:
                     building = self.get("building")
                     destination_floor = building.ref_to(floor_id)
                     self.set("destination_floor", destination_floor)
+                    SOLE.log("{} moving to {}".format(self.get("label"), destination_floor.get("label")), SOLE.LOG_NOTICE)
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
@@ -236,6 +237,7 @@ class BaseElevator:
 
             # if we've arrived then stop and unload next tick
             if distance == 0:
+                SOLE.log("{} has arrived at {}".format(self.get("label"), destination_floor.get("label")), SOLE.LOG_NOTICE)
                 self.set("destination_floor", None)
                 self.change_velocity(0)
                 self.set("status", "unloading")
@@ -245,6 +247,7 @@ class BaseElevator:
             if (distance > 0) and (
                 distance < (velocity / SOLE.tick_ratio_to_real_time)
             ):
+                SOLE.log("{} has arrived at {}".format(self.get("label"), destination_floor.get("label")), SOLE.LOG_NOTICE)
                 self.set("destination_floor", None)
                 self.set("elevation", destination_elevation)
                 self.change_velocity(0)
@@ -255,6 +258,7 @@ class BaseElevator:
             elif (distance < 0) and (
                 distance > (velocity / SOLE.tick_ratio_to_real_time)
             ):
+                SOLE.log("{} has arrived at {}".format(self.get("label"), destination_floor.get("label")), SOLE.LOG_NOTICE)
                 self.set("destination_floor", None)
                 self.set("elevation", destination_elevation)
                 self.change_velocity(0)
