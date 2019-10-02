@@ -40,7 +40,7 @@ startTime = time.time()
 floor_labels = ["Lobby", "1st Floor", "2nd Floor", "3rd Floor"]
 floors = []
 for fl in floor_labels:
-    f = Floor({"label": fl})
+    f = Floor({"label": fl, "carrying": []})
     floors.append(f)
 
 # Create an elevator.
