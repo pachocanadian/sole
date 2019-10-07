@@ -19,6 +19,10 @@ from SOLE.Floor.SimpleFloor import SimpleFloor
 from SOLE.Person.BasePerson import BasePerson
 from SOLE.Person.SimplePerson import SimplePerson
 
+# SETTINGS
+from SOLE.Settings.BaseSettings import BaseSettings
+
+
 ###### BEGIN BUILDING TESTS ######
 ###
 ### BEGIN BASEBUILDING TESTS
@@ -391,3 +395,47 @@ def test_SIMPLEPERSON_getset_iscopy():
 ### END SIMPLEPERSON TESTS
 ###
 ###### END PERSON TESTS ######
+
+### BEGIN BASESETTINGS TESTS
+###
+
+
+def test_BASESETTINGS_getset_string():
+    a = BaseSettings({"test_string": {"type": "string"}})
+    v = "var"
+    a.set("test_string", v)
+    assert a.get("test_string") == v, "set/get don't match for string type"
+
+
+def test_BASESETTINGS_getset_float():
+    a = BaseSettings({"test_float": {"type": "float"}})
+    v = 3.14159
+    a.set("test_float", v)
+    assert a.get("test_float") == v, "set/get don't match for float type"
+
+
+def test_BASESETTINGS_getset_list():
+    a = BaseSettings({"test_list": {"type": "list"}})
+    v = [1, 2, 3]
+    a.set("test_list", v)
+    assert a.get("test_list") == v, "set/get don't match for list type"
+
+
+def test_BASESETTINGS_getset_dict():
+    a = BaseSettings({"test_dict": {"type": "dict"}})
+    v = {"a": "b", "c": "d"}
+    a.set("test_dict", v)
+    assert a.get("test_dict") == v, "set/get don't match for dict type"
+
+
+def test_BASESETTINGS_getset_iscopy():
+    a = BaseSettings({"test_iscopy": {"type": "string"}})
+    ov = "foo"
+    a.set("test_iscopy", ov)
+    nv = a.get("test_iscopy")
+    assert nv is ov, "set/get are returning a copy rather than the original object"
+
+
+###
+### END BASESETTINGS TESTS
+#
