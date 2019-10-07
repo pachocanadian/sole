@@ -46,7 +46,13 @@ for fl in floor_labels:
 # Create an elevator.
 initial_location = floor_labels[0]
 elevator = Elevator(
-        {"floors": floors, "elevation": 0, "status": "waiting", "destination_floor": None, "label": "Main Elevator"}
+    {
+        "floors": floors,
+        "elevation": 0,
+        "status": "waiting",
+        "destination_floor": None,
+        "label": "Main Elevator",
+    }
 )
 
 elevators = []

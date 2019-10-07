@@ -13,7 +13,7 @@ class BaseSettngs:
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
 
-        if(name in self._variable_definitions):
+        if name in self._variable_definitions:
             self._attributes[name] = value
             return self
 
