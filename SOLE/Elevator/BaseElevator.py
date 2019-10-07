@@ -1,4 +1,5 @@
 import SOLE
+from SOLE.Settings.BaseSettings import BaseSettings
 
 
 class BaseElevator:
@@ -21,6 +22,28 @@ class BaseElevator:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
+        self.settings = BaseSettings(
+            {
+                "height": {
+                    "type": "float",
+                    "validation": "gt_zero",
+                    "default": 2.44,
+                    "comment": "The height of the elevator itself.",
+                },
+                "elevation": {
+                    "type": "float",
+                    "validation": "",
+                    "default": None,
+                    "comment": "The elevation of the top-most point of the elevator.",
+                },
+                "destination_floor": {
+                    "type": "floor",
+                    "validation": "",
+                    "default": None,
+                    "comment": "The current destination floor that we are moving towards. Set to None when not in motion.",
+                },
+            }
+        )
         self.attribute = {}
         for key in BaseElevator._default_attributes:
             self.set(key, BaseElevator._default_attributes[key])
