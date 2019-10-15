@@ -8,7 +8,8 @@ class BaseSettings:
         self._variable_definitions = variable_definitions
         self._attributes = {}
         for key in self._variable_definitions:
-            self.set(key, self._variable_definitions[key]["default"])
+            if("default" in self._variable_definitions[key]):
+                self.set(key, self._variable_definitions[key]["default"])
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
