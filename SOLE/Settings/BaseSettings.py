@@ -7,6 +7,8 @@ class BaseSettings:
         """init() requires a dict of variable definitions"""
         self._variable_definitions = variable_definitions
         self._attributes = {}
+        for key in self._variable_definitions:
+            self.set(key, self._variable_definitions[key]["default"])
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
@@ -14,22 +16,28 @@ class BaseSettings:
         if name in self._variable_definitions:
             _type = self._variable_definitions[name]["type"]
             if _type == "float":
-                assert type(value) == float, "Value must be a float()"
+                if(type(value) == int):
+                    value = float(value)
+                assert type(value) == float, "Named attribute {} of value {} of type {} must be a float()".format(name, value, _type)
             elif _type == "string":
-                assert type(value) == str, "Value must be a str()"
+                assert type(value) == str, "Named attribute {} of value {} of type {} must be a str()".format(name, value, _type)
+            elif _type == "building":
+                pass
             elif _type == "floor":
                 pass
             elif _type == "dict":
-                assert type(value) == dict, "Value must be a dict()"
+                assert type(value) == dict, "Named attribute {} of value {} of type {} must be a dict()".format(name, value, _type)
             elif _type == "list":
-                assert type(value) == list, "Value must be a list()"
+                assert type(value) == list, "Named attribute {} of value {} of type {} must be a list()".format(name, value, _type)
             else:
                 raise Exception("unmatched variable type {}".format(_type))
 
             if "validation" in self._variable_definitions[name]:
                 _validation = self._variable_definitions[name]["validation"]
                 if _validation == "gt_zero":
-                    assert value > 0, "Value must be greater than zero"
+                    assert value > 0, "Named attribute {} of value {} of type {} must be greater than zero".format(name, value, _type)
+                elif _validation == "lt_zero":
+                    assert value < 0, "Named attribute {} of value {} of type {} must be less than zero".format(name, value, _type)
                 else:
                     assert 1, "Unmatched validation type found"
 

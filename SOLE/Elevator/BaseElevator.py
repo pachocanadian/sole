@@ -3,23 +3,6 @@ from SOLE.Settings.BaseSettings import BaseSettings
 
 
 class BaseElevator:
-    _default_attributes = {
-        "height": 2.44,
-        "elevation": None,  # will calculate dynamically each tick
-        "destination_floor": None,  # set dynamically during normal operation, in normal operation will return to startingFloor
-        "velocity": 0,  # we start at rest. positive velocity is up, negative velocity is down
-        "label": None,  # if the object has a friendly identifier
-        "maximum_up_speed": 1,  # elevators generally can go up faster than down
-        "maximum_down_speed": -1,  # elevators generally can go up faster than down
-        "carrying": None,  # a list of Person objects presently within the elevator
-        "building": None,  # a reference to the parent building
-        "floor_requests": None,  # a list of Floor ID's in sequential order
-        "status": "waiting",  # a string outlining what activity we are currently performing
-        "status_percent": 1,  # a float from 0..1 indicating percentage completion of the status
-        "unloading_time_needed": 5,  # float in real-world seconds
-        "loading_time_needed": 5,  # float in real-world seconds
-    }
-
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self.settings = BaseSettings(
@@ -33,7 +16,7 @@ class BaseElevator:
                 "elevation": {
                     "type": "float",
                     "validation": "",
-                    "default": None,
+                    "default": 0.00,
                     "comment": "The elevation of the top-most point of the elevator.",
                 },
                 "destination_floor": {
@@ -45,25 +28,25 @@ class BaseElevator:
                 "velocity": {
                     "type": "float",
                     "validation": "",
-                    "default": 0,
+                    "default": 0.00,
                     "comment": "Positive velocity means upwards, negative means downward, 0 is at rest",
                 },
                 "label": {
                     "type": "string",
                     "validation": "",
-                    "default": None,
+                    "default": "",
                     "comment": "A friendly identifier for the elevator",
                 },
                 "maximum_up_speed": {
                     "type": "float",
                     "validation": "gt_zero",
-                    "default": 1,
+                    "default": 1.00,
                     "comment": "A maximum upward velocity for the elevator, must be >0",
                 },
                 "maximum_down_speed": {
                     "type": "float",
                     "validation": "lt_zero",
-                    "default": 1,
+                    "default": -1.00,
                     "comment": "A maximum downward velocity for the elevator, must be <0",
                 },
                 "carrying": {
@@ -73,7 +56,7 @@ class BaseElevator:
                     "comment": "A list of Person objects presently within the elevator",
                 },
                 "building": {
-                    "type": "reference",
+                    "type": "building",
                     "validation": "",
                     "default": None,
                     "comment": "A reference to the current building object the elevator is contained within.",
@@ -108,13 +91,14 @@ class BaseElevator:
                     "default": 5.00,
                     "comment": "Real world seconds that it takes to load the elevator.",
                 },
+                "id": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "",
+                    "comment": "A unique string identifying the object. Generally not human friendly.",
+                },
             }
         )
-        self.attribute = {}
-        for key in BaseElevator._default_attributes:
-            self.set(key, BaseElevator._default_attributes[key])
-        self.set("floor_requests", [])
-        self.set("carrying", [])
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
@@ -126,31 +110,12 @@ class BaseElevator:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-        if name == "maximum_down_speed":
-            assert value < 0, "maximum_down_speed must be negative float"
-
-        if name == "maximum_up_speed":
-            assert value > 0, "maximum_up_speed must be positive float"
-
-        if name == "velocity":
-            if value > 0:
-                assert value <= self.get(
-                    "maximum_up_speed"
-                ), "upward velocity must be <= maximum_up_speed"
-            if value < 0:
-                assert value >= self.get(
-                    "maximum_down_speed"
-                ), "downward velocity must be >= maximum_down_speed"
-
-        self.attribute[name] = value
+        self.settings.set(name, value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
-        if name in self.attribute:
-            return self.attribute[name]
-        else:
-            return None
+        return self.settings.get(name)
 
     def change_velocity(self, velocity):
         """change_velocity(velocity) changes elevator velocity. Pass positive float for up, negative for down, and 0 for stop."""
