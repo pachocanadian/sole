@@ -364,6 +364,21 @@ def test_BASESETTINGS_getset_iscopy():
     assert nv is ov, "set/get are returning a copy rather than the original object"
 
 
+def test_BASESETTINGS_getset_defaultsdosomething():
+    a = BaseSettings({"test_default1": {"type": "string", "default": "value1"}})
+    ov = "value1"
+    nv = a.get("test_default1")
+    assert nv == ov, "defaults are populating correctly in absence of a set"
+
+
+def test_BASESETTINGS_getset_defaultsdontoverride():
+    a = BaseSettings({"test_default2": {"type": "string", "default": "value2"}})
+    ov = "value1"
+    a.set("test_default2", ov)
+    nv = a.get("test_default2")
+    assert nv == ov, "set is overriding default arguments when supplied"
+
+
 ###
 ### END BASESETTINGS TESTS
 #

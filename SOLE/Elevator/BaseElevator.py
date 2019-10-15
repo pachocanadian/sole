@@ -237,9 +237,14 @@ class BaseElevator:
             self.set("status", "unloading")
             self.set(
                 "status_percent",
-                status_percent
-                + 1
-                / (self.get("unloading_time_needed") * SOLE.tick_ratio_to_real_time),
+                min(
+                    status_percent
+                    + 1
+                    / (
+                        self.get("unloading_time_needed") * SOLE.tick_ratio_to_real_time
+                    ),
+                    1,
+                ),
             )
             return
 
@@ -254,8 +259,12 @@ class BaseElevator:
             self.set("status", "loading")
             self.set(
                 "status_percent",
-                status_percent
-                + 1 / (self.get("loading_time_needed") * SOLE.tick_ratio_to_real_time),
+                min(
+                    status_percent
+                    + 1
+                    / (self.get("loading_time_needed") * SOLE.tick_ratio_to_real_time),
+                    1,
+                ),
             )
             return
 
@@ -347,7 +356,7 @@ class BaseElevator:
                 self.move()
                 self.set("status", "moving")
                 self.set(
-                    "status_percent", distance
+                    "status_percent", 1.00
                 )  # TOFIX: NEED TO KEEP TRACK OF RELATIVE DISTANCE TRAVELLED FOR % TO WORK
                 return
 
