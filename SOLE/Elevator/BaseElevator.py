@@ -42,6 +42,72 @@ class BaseElevator:
                     "default": None,
                     "comment": "The current destination floor that we are moving towards. Set to None when not in motion.",
                 },
+                "velocity": {
+                    "type": "float",
+                    "validation": "",
+                    "default": 0,
+                    "comment": "Positive velocity means upwards, negative means downward, 0 is at rest",
+                },
+                "label": {
+                    "type": "string",
+                    "validation": "",
+                    "default": None,
+                    "comment": "A friendly identifier for the elevator",
+                },
+                "maximum_up_speed": {
+                    "type": "float",
+                    "validation": "gt_zero",
+                    "default": 1,
+                    "comment": "A maximum upward velocity for the elevator, must be >0",
+                },
+                "maximum_down_speed": {
+                    "type": "float",
+                    "validation": "lt_zero",
+                    "default": 1,
+                    "comment": "A maximum downward velocity for the elevator, must be <0",
+                },
+                "carrying": {
+                    "type": "list",
+                    "validation": "",
+                    "default": [],
+                    "comment": "A list of Person objects presently within the elevator",
+                },
+                "building": {
+                    "type": "reference",
+                    "validation": "",
+                    "default": None,
+                    "comment": "A reference to the current building object the elevator is contained within.",
+                },
+                "floor_requests": {
+                    "type": "list",
+                    "validation": "",
+                    "default": [],
+                    "comment": "A list of floor requests in sequential order.",
+                },
+                "status": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "waiting",
+                    "comment": "The current status of the elevator.",
+                },
+                "status_percent": {
+                    "type": "float",
+                    "validation": "is_percent",
+                    "default": 1.00,
+                    "comment": "A float inside [0,1] indicating percentage completion of status.",
+                },
+                "unloading_time_needed": {
+                    "type": "float",
+                    "validation": "gt_zero",
+                    "default": 5.00,
+                    "comment": "Real world seconds that it takes to unload the elevator.",
+                },
+                "loading_time_needed": {
+                    "type": "float",
+                    "validation": "gt_zero",
+                    "default": 5.00,
+                    "comment": "Real world seconds that it takes to load the elevator.",
+                },
             }
         )
         self.attribute = {}
