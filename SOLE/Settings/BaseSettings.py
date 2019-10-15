@@ -31,7 +31,7 @@ class BaseSettings:
                 if _validation == "gt_zero":
                     assert value > 0, "Value must be greater than zero"
                 else:
-                    pass
+                    assert 1, "Unmatched validation type found"
 
             self._attributes[name] = value
             return self
