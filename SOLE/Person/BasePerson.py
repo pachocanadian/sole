@@ -106,7 +106,7 @@ class BasePerson:
             if location is not None:
                 if location.get("is_floor"):
                     if destination_floor is not None:
-                        location.add_to_request_queue(destination_floor.get("id"))
+                        location.add_to_request_queue(location.get("id"))
 
         if name == "location":
             # if we are being added to a parent object then access its carrying attribute and add ourselves
