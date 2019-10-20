@@ -1,5 +1,6 @@
 import SOLE
 import random
+from SOLE.Settings.BaseSettings import BaseSettings
 
 
 def sole_baseperson_random_name():
@@ -59,34 +60,59 @@ class BasePerson:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self.attribute = {}
-        for key in BasePerson._default_attributes:
-            self.set(key, BasePerson._default_attributes[key])
+        self.settings = BaseSettings(
+            {
+                "id": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "",
+                    "comment": "A unique string identifying the object. Generally not human friendly.",
+                },
+
+                "height": {
+                    "type": "float",
+                    "validation": "gt_zero",
+                    "default": 1.77,
+                    "comment": "The height of the person.",
+                },
+
+                "location": {
+                    "type": "reference",
+                    "validation": "",
+                    "default": None,
+                    "comment": "A reference to the object the person is contained in, whether floor or elevator.",
+                },
+
+                "building": {
+                    "type": "building",
+                    "validation": "",
+                    "default": None,
+                    "comment": "A reference to the parent building.",
+                },
+
+                "destination": {
+                    "type": "reference",
+                    "validation": "",
+                    "default": None,
+                    "comment": "A reference to the floor/elevator that we are destined to.",
+                },
+
+                "label": {
+                    "type": "string",
+                    "validation": "",
+                    "default": sole_baseperson_random_name(),
+                    "comment": "A human friendly descriptor of the object.",
+                },
+            }
+        )
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
-        if self.get("label") is None:
-            self.set("label", sole_baseperson_random_name())
         self.set("id", SOLE.new_id("BasePerson"))
-
-        if (
-            self.get("location") is not None
-            and self.get("destination_floor") is not None
-        ):
-            SOLE.log(
-                "{} was created on {} with a destination of {}".format(
-                    self.get("label"),
-                    self.get("location").get("label"),
-                    self.get("destination_floor").get("label"),
-                ),
-                SOLE.LOG_NOTICE,
-            )
-
-        SOLE.log("[{}] BasePerson->created".format(self.get("id")), SOLE.LOG_INFO)
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
-        return str(self.__class__) + ": " + str(self.__dict__)
+        return "{}".format(self.settings)
 
     def __del__(self):
         """track destruction of object"""
@@ -95,42 +121,35 @@ class BasePerson:
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
 
-        if name == "height":
-            if not (value > 0):
-                raise Exception("attribute height must be greater than zero")
-
-        if name == "destination_floor":
-            # if our destination_floor changes then indicate it to our carrying object if we're on a floor
-            location = self.get("location")
-            destination_floor = value
-            if location is not None:
-                if location.get("is_floor"):
-                    if destination_floor is not None:
-                        location.add_to_request_queue(location.get("id"))
-
-        if name == "location":
-            # if we are being added to a parent object then access its carrying attribute and add ourselves
-            location = value
-            destination_floor = self.get("destination_floor")
-            if location is not None:
-                location.get("carrying").append(self)
-
-                if location.get("is_floor"):
-                    if destination_floor is not None:
-                        location.add_to_request_queue(destination_floor.get("id"))
-
-                if self.get("building") is None:
-                    self.set("building", value.get("building"))
-
-        self.attribute[name] = value
+#        if name == "destination_floor":
+#           # if our destination_floor changes then indicate it to our carrying object if we're on a floor
+#           location = self.get("location")
+#            destination_floor = value
+#            if location is not None:
+#                if location.get("is_floor"):
+#                    if destination_floor is not None:
+#                        location.add_to_request_queue(location.get("id"))
+#
+#        if name == "location":
+#            # if we are being added to a parent object then access its carrying attribute and add ourselves
+#            location = value
+#            destination_floor = self.get("destination_floor")
+#            if location is not None:
+#                location.get("carrying").append(self)#
+#
+#                if location.get("is_floor"):
+#                    if destination_floor is not None:
+#                        location.add_to_request_queue(destination_floor.get("id"))
+#
+#                if self.get("building") is None:
+#                    self.set("building", value.get("building"))
+        
+        self.settings.set(name, value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
-        if name in self.attribute:
-            return self.attribute[name]
-        else:
-            return None
+        return self.settings.get(name)
 
     def unload(self, elevator, floor):
         """unload() to remove person from elevator."""
@@ -174,7 +193,7 @@ class BasePerson:
 
         # Set person's location attribute to the elevator
         self.set("location", elevator)
-        elevator.add_to_request_queue(destination_floor.get("id"))
+        elevator.add_to_request_queue(destination_floor)
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""

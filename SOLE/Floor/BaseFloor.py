@@ -17,7 +17,7 @@ class BaseFloor:
                     "type": "float",
                     "validation": "gt_zero",
                     "default": 3.00,
-                    "comment": "The height of the floor",
+                    "comment": "The height of the floor.",
                 },
                 "elevation": {
                     "type": "float",
@@ -64,7 +64,7 @@ class BaseFloor:
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
-        return str(self.__class__) + ": " + str(self.__dict__)
+        return "{}".format(self.settings)
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""

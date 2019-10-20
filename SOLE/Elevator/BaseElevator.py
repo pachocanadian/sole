@@ -19,7 +19,7 @@ class BaseElevator:
                     "default": 0.00,
                     "comment": "The elevation of the top-most point of the elevator.",
                 },
-                "destination_floor": {
+                "destination": {
                     "type": "floor",
                     "validation": "",
                     "default": None,
@@ -148,7 +148,7 @@ class BaseElevator:
         carrying = self.get("carrying")
         if type(carrying) == list:
             for p in carrying:
-                if p.get("destination_floor") == floor:
+                if p.get("destination") == floor:
                     SOLE.log(
                         "Unloaded {} from the elevator at the {}".format(
                             p.get("label"), floor.get("label")
@@ -173,33 +173,35 @@ class BaseElevator:
                 )
                 p.load(self, floor)
 
-    def add_to_request_queue(self, floor_id):
+    def add_to_request_queue(self, floor):
         """add_to_request_queue(floor_id) will add floor_id to the list of floors to travel to"""
         SOLE.log(
             "[{}] BaseElevator->add_to_request_queue({})".format(
-                self.get("id"), floor_id
+                self.get("id"), floor
             ),
             SOLE.LOG_INFO,
         )
 
-        self.get("floor_requests").append(floor_id)
+        self.get("floor_requests").append(floor)
 
     def queue(self):
         """queue() will iterate through the queue of floor_requests if there is no current desination_floor"""
         SOLE.log("[{}] BaseElevator->queue()".format(self.get("id")), SOLE.LOG_INFO)
-        if self.get("destination_floor") is None:
+        if self.get("destination") is None:
             if type(self.get("floor_requests")) == list:
                 if len(self.get("floor_requests")) > 0:
-                    floor_id = self.get("floor_requests").pop(0)
-                    building = self.get("building")
-                    destination_floor = building.ref_to(floor_id)
-                    self.set("destination_floor", destination_floor)
-                    SOLE.log(
-                        "{} moving to {}".format(
-                            self.get("label"), destination_floor.get("label")
-                        ),
-                        SOLE.LOG_NOTICE,
-                    )
+                    floor_requests = self.get("floor_requests")
+                    destination = floor_requests.pop(0)
+                    if(destination is None):
+                        pass
+                    else:
+                        self.set("destination", destination)
+                        SOLE.log(
+                            "{} moving to {}".format(
+                                self.get("label"), destination.get("label")
+                            ),
+                            SOLE.LOG_NOTICE,
+                        )
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
@@ -222,7 +224,7 @@ class BaseElevator:
 
         b = self.get("building")
         elevation = self.get("elevation")
-        destination_floor = self.get("destination_floor")
+        destination = self.get("destination")
         status = self.get("status")
         status_percent = self.get("status_percent")
 
@@ -270,32 +272,32 @@ class BaseElevator:
 
         # from waiting state, we can either continue waiting or start moving
         if status == "waiting":
-            if destination_floor is None:
+            if destination is None:
                 # check if there is any new destinations to move to
                 self.queue()
-                destination_floor = self.get("destination_floor")
+                destination = self.get("destination")
 
-            if destination_floor is None:
+            if destination is None:
                 # continue to wait if there is still no destination floor
                 self.set(status, "waiting")
                 self.set(status_percent, 1.00)
                 return
 
-            if destination_floor is not None:
+            if destination is not None:
                 # there is a destination floor so start moving next tick
                 self.set("status", "moving")
                 self.set("status_percent", 0.00)
                 return
 
         if status == "moving":
-            destination_elevation = destination_floor.get("elevation")
+            destination_elevation = destination.get("elevation")
             distance = destination_elevation - elevation
             velocity = self.get("velocity")
 
             SOLE.log(
-                "BaseElevator (moving) my_elevation={:.2f} destination_floor={} destination_elevation={:.2f} distance={:.2f} velocity={:.2f}".format(
+                "BaseElevator (moving) my_elevation={:.2f} destination={} destination_elevation={:.2f} distance={:.2f} velocity={:.2f}".format(
                     self.get("elevation"),
-                    self.get("destination_floor").get("id"),
+                    self.get("destination").get("id"),
                     destination_elevation,
                     distance,
                     velocity,
@@ -307,11 +309,11 @@ class BaseElevator:
             if distance == 0:
                 SOLE.log(
                     "{} has arrived at {}".format(
-                        self.get("label"), destination_floor.get("label")
+                        self.get("label"), destination.get("label")
                     ),
                     SOLE.LOG_NOTICE,
                 )
-                self.set("destination_floor", None)
+                self.set("destination", None)
                 self.change_velocity(0)
                 self.set("status", "unloading")
                 self.set("status_percent", 0)
@@ -322,11 +324,11 @@ class BaseElevator:
             ):
                 SOLE.log(
                     "{} has arrived at {}".format(
-                        self.get("label"), destination_floor.get("label")
+                        self.get("label"), destination.get("label")
                     ),
                     SOLE.LOG_NOTICE,
                 )
-                self.set("destination_floor", None)
+                self.set("destination", None)
                 self.set("elevation", destination_elevation)
                 self.change_velocity(0)
                 self.set("status", "unloading")
@@ -338,11 +340,11 @@ class BaseElevator:
             ):
                 SOLE.log(
                     "{} has arrived at {}".format(
-                        self.get("label"), destination_floor.get("label")
+                        self.get("label"), destination.get("label")
                     ),
                     SOLE.LOG_NOTICE,
                 )
-                self.set("destination_floor", None)
+                self.set("destination", None)
                 self.set("elevation", destination_elevation)
                 self.change_velocity(0)
                 self.set("status", "unloading")

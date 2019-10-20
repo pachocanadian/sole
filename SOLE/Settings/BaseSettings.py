@@ -52,6 +52,8 @@ class BaseSettings:
                 ), "Named attribute {} of value {} of type {} must be a bool()".format(
                     name, value, _type
                 )
+            elif _type == "reference":
+                pass
             else:
                 raise Exception("unmatched variable type {}".format(_type))
 
@@ -94,3 +96,17 @@ class BaseSettings:
             return self._attributes[name]
         else:
             return None
+
+    def __str__(self):
+        out = ""
+        for key in self._attributes:
+            _type = self._variable_definitions[key]["type"]
+            if(_type == "reference"):
+                out += "{}: REFERENCE<{}>,".format(key, self.get(key).get("id"))
+            elif(_type == "floor"):
+                out += "{}: FLOOR<{}>,".format(key, self.get(key).get("id"))
+            elif(_type == "building"):
+                out += "{}: BUILDING<{}>,".format(key, self.get(key).get("id"))
+            else:
+                out += "{}: {},".format(key, self.get(key))
+        return out

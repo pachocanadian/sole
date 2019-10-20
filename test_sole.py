@@ -177,42 +177,10 @@ def test_SIMPLEFLOOR_new():
 ### BEGIN BASEPERSON TESTS
 ###
 
-
-def test_BASEPERSON_getset_string():
+def test_BASEPERSON_new():
     a = BasePerson()
-    v = "var"
-    a.set("test_string", v)
-    assert a.get("test_string") == v, "set/get don't match for string type"
-
-
-def test_BASEPERSON_getset_float():
-    a = BasePerson()
-    v = 3.14159
-    a.set("test_float", v)
-    assert a.get("test_float") == v, "set/get don't match for float type"
-
-
-def test_BASEPERSON_getset_list():
-    a = BasePerson()
-    v = [1, 2, 3]
-    a.set("test_list", v)
-    assert a.get("test_list") == v, "set/get don't match for list type"
-
-
-def test_BASEPERSON_getset_dict():
-    a = BasePerson()
-    v = {"a": "b", "c": "d"}
-    a.set("test_dict", v)
-    assert a.get("test_dict") == v, "set/get don't match for dict type"
-
-
-def test_BASEPERSON_getset_iscopy():
-    a = BasePerson()
-    ov = "foo"
-    a.set("test_iscopy", ov)
-    nv = a.get("test_iscopy")
-    assert nv is ov, "set/get are returning a copy rather than the original object"
-
+    id = a.get("id")
+    assert type(id) == str and len(id) > 0, "can't create object"
 
 ###
 ### END BASEPERSON TESTS
@@ -220,42 +188,10 @@ def test_BASEPERSON_getset_iscopy():
 ### BEGIN SIMPLEPERSON TESTS
 ###
 
-
-def test_SIMPLEPERSON_getset_string():
+def test_SIMPLEPERSON_new():
     a = SimplePerson()
-    v = "var"
-    a.set("test_string", v)
-    assert a.get("test_string") == v, "set/get don't match for string type"
-
-
-def test_SIMPLEPERSON_getset_float():
-    a = SimplePerson()
-    v = 3.14159
-    a.set("test_float", v)
-    assert a.get("test_float") == v, "set/get don't match for float type"
-
-
-def test_SIMPLEPERSON_getset_list():
-    a = SimplePerson()
-    v = [1, 2, 3]
-    a.set("test_list", v)
-    assert a.get("test_list") == v, "set/get don't match for list type"
-
-
-def test_SIMPLEPERSON_getset_dict():
-    a = SimplePerson()
-    v = {"a": "b", "c": "d"}
-    a.set("test_dict", v)
-    assert a.get("test_dict") == v, "set/get don't match for dict type"
-
-
-def test_SIMPLEPERSON_getset_iscopy():
-    a = SimplePerson()
-    ov = "foo"
-    a.set("test_iscopy", ov)
-    nv = a.get("test_iscopy")
-    assert nv is ov, "set/get are returning a copy rather than the original object"
-
+    id = a.get("id")
+    assert type(id) == str and len(id) > 0, "can't create object"
 
 ###
 ### END SIMPLEPERSON TESTS
