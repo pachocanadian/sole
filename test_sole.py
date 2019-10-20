@@ -119,11 +119,23 @@ def test_SIMPLEBUILDING_getset_iscopy():
 ###
 
 
+def test_BASEELEVATOR_new():
+    a = BaseElevator()
+    id = a.get("id")
+    assert type(id) == str and len(id) > 0, "can't create object"
+
+
 ###
 ### END BASEELEVATOR TESTS
 ###
 ### BEGIN SIMPLEELEVATOR TESTS
 ###
+
+
+def test_SIMPLEELEVATOR_new():
+    a = SimpleElevator()
+    id = a.get("id")
+    assert type(id) == str and len(id) > 0, "can't create object"
 
 
 ###
@@ -136,54 +148,10 @@ def test_SIMPLEBUILDING_getset_iscopy():
 ### BEGIN BASEFLOOR TESTS
 
 
-def test_BASEFLOOR_getset_string():
+def test_BASEFLOOR_new():
     a = BaseFloor()
-    v = "var"
-    a.set("test_string", v)
-    assert a.get("test_string") == v, "set/get don't match for string type"
-
-
-def test_BASEFLOOR_getset_float():
-    a = BaseFloor()
-    v = 3.14159
-    a.set("test_float", v)
-    assert a.get("test_float") == v, "set/get don't match for float type"
-
-
-def test_BASEFLOOR_getset_list():
-    a = BaseFloor()
-    v = [1, 2, 3]
-    a.set("test_list", v)
-    assert a.get("test_list") == v, "set/get don't match for list type"
-
-
-def test_BASEFLOOR_getset_dict():
-    a = BaseFloor()
-    v = {"a": "b", "c": "d"}
-    a.set("test_dict", v)
-    assert a.get("test_dict") == v, "set/get don't match for dict type"
-
-
-def test_BASEFLOOR_getset_iscopy():
-    a = BaseFloor()
-    ov = "foo"
-    a.set("test_iscopy", ov)
-    nv = a.get("test_iscopy")
-    assert nv is ov, "set/get are returing a copy rather than the original object"
-
-
-def test_BASEFLOOR_getset_diffsaredifferent():
-    a = BaseFloor()
-    b = BaseFloor()
-    pre_av = "foo"
-    pre_bv = "bar"
-    a.set("test_unique", pre_av)
-    b.set("test_unique", pre_bv)
-    post_av = a.get("test_unique")
-    post_bv = b.get("test_unique")
-    assert (
-        post_av != post_bv
-    ), "set/get are returning different return values on objects with different initial set values"
+    id = a.get("id")
+    assert type(id) == str and len(id) > 0, "can't create object"
 
 
 ###
@@ -193,40 +161,10 @@ def test_BASEFLOOR_getset_diffsaredifferent():
 ###
 
 
-def test_SIMPLEFLOOR_getset_string():
+def test_SIMPLEFLOOR_new():
     a = SimpleFloor()
-    v = "var"
-    a.set("test_string", v)
-    assert a.get("test_string") == v, "set/get don't match for string type"
-
-
-def test_SIMPLEFLOOR_getset_float():
-    a = SimpleFloor()
-    v = 3.14159
-    a.set("test_float", v)
-    assert a.get("test_float") == v, "set/get don't match for float type"
-
-
-def test_SIMPLEFLOOR_getset_list():
-    a = SimpleFloor()
-    v = [1, 2, 3]
-    a.set("test_list", v)
-    assert a.get("test_list") == v, "set/get don't match for list type"
-
-
-def test_SIMPLEFLOOR_getset_dict():
-    a = SimpleFloor()
-    v = {"a": "b", "c": "d"}
-    a.set("test_dict", v)
-    assert a.get("test_dict") == v, "set/get don't match for dict type"
-
-
-def test_SIMPLEFLOOR_getset_iscopy():
-    a = SimpleFloor()
-    ov = "foo"
-    a.set("test_iscopy", ov)
-    nv = a.get("test_iscopy")
-    assert nv is ov, "set/get are returing a copy rather than the original object"
+    id = a.get("id")
+    assert type(id) == str and len(id) > 0, "can't create object"
 
 
 ###

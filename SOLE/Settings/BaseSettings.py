@@ -46,6 +46,12 @@ class BaseSettings:
                 ), "Named attribute {} of value {} of type {} must be a list()".format(
                     name, value, _type
                 )
+            elif _type == "boolean":
+                assert (
+                    type(value) == bool
+                ), "Named attribute {} of value {} of type {} must be a bool()".format(
+                    name, value, _type
+                )
             else:
                 raise Exception("unmatched variable type {}".format(_type))
 

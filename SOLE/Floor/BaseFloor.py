@@ -1,23 +1,62 @@
 import SOLE
+from SOLE.Settings.BaseSettings import BaseSettings
 
 
 class BaseFloor:
-    _default_attributes = {
-        "height": 3,
-        "elevation": None,
-        "elevation_top": None,
-        "label": None,  # if the object has a friendly identifier
-        "carrying": None,  # a list of Person objects presently within the elevator
-        "building": None,  # a reference to the parent building object
-        "is_floor": True,  # an explicit confirmation that we're actually a floor
-    }
-
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self.attribute = {}
-        for key in BaseFloor._default_attributes:
-            self.set(key, BaseFloor._default_attributes[key])
-        self.set("carrying", [])
+        self.settings = BaseSettings(
+            {
+                "id": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "",
+                    "comment": "A unique string identifying the object. Generally not human friendly.",
+                },
+                "height": {
+                    "type": "float",
+                    "validation": "gt_zero",
+                    "default": 3.00,
+                    "comment": "The height of the floor",
+                },
+                "elevation": {
+                    "type": "float",
+                    "validation": "",
+                    "default": 0.00,
+                    "comment": "The distance of the bottom-most point of the object from the ground.",
+                },
+                "elevation_top": {
+                    "type": "float",
+                    "validation": "",
+                    "default": 0.00,
+                    "comment": "The distance of the top-most point of the object from the ground.",
+                },
+                "label": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "",
+                    "comment": "A human friendly descriptor of the object.",
+                },
+                "carrying": {
+                    "type": "list",
+                    "validation": "",
+                    "default": [],
+                    "comment": "A list of the people contained within the floor object.",
+                },
+                "building": {
+                    "type": "building",
+                    "validation": "",
+                    "default": None,
+                    "comment": "A reference to the parent building object.",
+                },
+                "is_floor": {
+                    "type": "boolean",
+                    "validation": "",
+                    "default": True,
+                    "comment": "A boolean indicating whether we are a floor object or not.",
+                },
+            }
+        )
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
@@ -29,20 +68,12 @@ class BaseFloor:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-
-        if name == "label":
-            if not (str(value).strip()):
-                raise Exception("attribute label must not be empty")
-
-        self.attribute[name] = value
+        self.settings.set(name, value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
-        if name in self.attribute:
-            return self.attribute[name]
-        else:
-            return None
+        return self.settings.get(name)
 
     def tick(self):
         """tick() will advance one step for this object and any/all objects contained by it"""
