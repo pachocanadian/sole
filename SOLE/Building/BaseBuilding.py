@@ -1,5 +1,6 @@
 import SOLE
 import re
+from SOLE.Settings.BaseSettings import BaseSettings
 
 
 class BaseBuilding:
@@ -7,9 +8,58 @@ class BaseBuilding:
 
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
-        self.attribute = {}
-        for key in BaseBuilding._default_attributes:
-            self.set(key, BaseBuilding._default_attributes[key])
+        self.settings = BaseSettings(
+            {
+                "id": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "",
+                    "comment": "A unique string identifying the object. Generally not human friendly.",
+                },
+                "label": {
+                    "type": "string",
+                    "validation": "",
+                    "default": "",
+                    "comment": "A human friendly descriptor of the object.",
+                },
+                "height": {
+                    "type": "float",
+                    "validation": "",
+                    "default": 0.00,
+                    "comment": "The overall height of the building.",
+                },
+                "floors": {
+                    "type": "list",
+                    "validation": "",
+                    "default": [],
+                    "comment": "The floors contained in the building.",
+                },
+                "elevators": {
+                    "type": "list",
+                    "validation": "",
+                    "default": [],
+                    "comment": "The elevators contained in the building.",
+                },
+                "_elevation_of": {
+                    "type": "dict",
+                    "validation": "",
+                    "default": {},
+                    "comment": "A mapping of objects->elevations.",
+                },
+                "_at_elevation": {
+                    "type": "dict",
+                    "validation": "",
+                    "default": {},
+                    "comment": "A mapping of elevations->objects.",
+                },
+                "_ref_to": {
+                    "type": "dict",
+                    "validation": "",
+                    "default": {},
+                    "comment": "A mapping of ids->objects.",
+                },
+            }
+        )
         if attributes is not None:
             for key in attributes:
                 self.set(key, attributes[key])
@@ -33,40 +83,16 @@ class BaseBuilding:
 
     def __str__(self):
         """allow print() to function in some intelligible way"""
-        return str(self.__class__) + ": " + str(self.__dict__)
+        return "{}".format(self.settings)
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-
-        assert re.search(
-            r"^[a-z_]+$", name
-        ), "set(name, value) requires that name contain only [a-z_]"
-
-        if name == "height":
-            assert (type(value) == float) or (
-                type(value) == int
-            ), "set(height, value) requires that value be float or int"
-            assert value >= 0, "set(height, value) requires that value be non-negative"
-
-        if name == "floors":
-            assert (
-                type(value) == list
-            ), "set(floors, value) requires that value be a list"
-
-        if name == "elevators":
-            assert (
-                type(value) == list
-            ), "set(elevators, value) requires that value be a list"
-
-        self.attribute[name] = value
+        self.settings.set(name, value)
         return self
 
     def get(self, name):
         """get(attr) will return attribute attr for the object or empty string if not"""
-        if name in self.attribute:
-            return self.attribute[name]
-        else:
-            return None
+        return self.settings.get(name)
 
     def elevation_of(self, object_id):
         eo = self.get("_elevation_of")

@@ -176,9 +176,7 @@ class BaseElevator:
     def add_to_request_queue(self, floor):
         """add_to_request_queue(floor_id) will add floor_id to the list of floors to travel to"""
         SOLE.log(
-            "[{}] BaseElevator->add_to_request_queue({})".format(
-                self.get("id"), floor
-            ),
+            "[{}] BaseElevator->add_to_request_queue({})".format(self.get("id"), floor),
             SOLE.LOG_INFO,
         )
 
@@ -192,7 +190,7 @@ class BaseElevator:
                 if len(self.get("floor_requests")) > 0:
                     floor_requests = self.get("floor_requests")
                     destination = floor_requests.pop(0)
-                    if(destination is None):
+                    if destination is None:
                         pass
                     else:
                         self.set("destination", destination)

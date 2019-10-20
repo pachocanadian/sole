@@ -101,11 +101,11 @@ class BaseSettings:
         out = ""
         for key in self._attributes:
             _type = self._variable_definitions[key]["type"]
-            if(_type == "reference"):
+            if _type == "reference":
                 out += "{}: REFERENCE<{}>,".format(key, self.get(key).get("id"))
-            elif(_type == "floor"):
+            elif _type == "floor":
                 out += "{}: FLOOR<{}>,".format(key, self.get(key).get("id"))
-            elif(_type == "building"):
+            elif _type == "building":
                 out += "{}: BUILDING<{}>,".format(key, self.get(key).get("id"))
             else:
                 out += "{}: {},".format(key, self.get(key))

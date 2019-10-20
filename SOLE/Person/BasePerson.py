@@ -68,35 +68,30 @@ class BasePerson:
                     "default": "",
                     "comment": "A unique string identifying the object. Generally not human friendly.",
                 },
-
                 "height": {
                     "type": "float",
                     "validation": "gt_zero",
                     "default": 1.77,
                     "comment": "The height of the person.",
                 },
-
                 "location": {
                     "type": "reference",
                     "validation": "",
                     "default": None,
                     "comment": "A reference to the object the person is contained in, whether floor or elevator.",
                 },
-
                 "building": {
                     "type": "building",
                     "validation": "",
                     "default": None,
                     "comment": "A reference to the parent building.",
                 },
-
                 "destination": {
                     "type": "reference",
                     "validation": "",
                     "default": None,
                     "comment": "A reference to the floor/elevator that we are destined to.",
                 },
-
                 "label": {
                     "type": "string",
                     "validation": "",
@@ -120,30 +115,6 @@ class BasePerson:
 
     def set(self, name, value):
         """set() will set the given attribute for the object. Will perform basic sanity checks on the attribute itself."""
-
-#        if name == "destination_floor":
-#           # if our destination_floor changes then indicate it to our carrying object if we're on a floor
-#           location = self.get("location")
-#            destination_floor = value
-#            if location is not None:
-#                if location.get("is_floor"):
-#                    if destination_floor is not None:
-#                        location.add_to_request_queue(location.get("id"))
-#
-#        if name == "location":
-#            # if we are being added to a parent object then access its carrying attribute and add ourselves
-#            location = value
-#            destination_floor = self.get("destination_floor")
-#            if location is not None:
-#                location.get("carrying").append(self)#
-#
-#                if location.get("is_floor"):
-#                    if destination_floor is not None:
-#                        location.add_to_request_queue(destination_floor.get("id"))
-#
-#                if self.get("building") is None:
-#                    self.set("building", value.get("building"))
-        
         self.settings.set(name, value)
         return self
 

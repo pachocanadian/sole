@@ -31,13 +31,15 @@ def new_person(building):
     )
     floors[location_floor].get("carrying").append(p)
     floors[location_floor].add_to_request_queue(floors[location_floor])
-    
-    SOLE.log("Created {} on {} with destination of {}".format(
-        p.get("label"),
-        floors[location_floor].get("label"),
-        floors[destination_floor].get("label")
-    ))
-    
+
+    SOLE.log(
+        "Created {} on {} with destination of {}".format(
+            p.get("label"),
+            floors[location_floor].get("label"),
+            floors[destination_floor].get("label"),
+        )
+    )
+
     return p
 
 
