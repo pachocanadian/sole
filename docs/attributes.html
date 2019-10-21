@@ -10,29 +10,9 @@
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
-<td>A unique string identifying the object. Generally not human friendly.</td>
+<td><code>_at_elevation</code></td>
+<td>A mapping of elevations-&gt;objects.</td>
 <td></td>
-</tr>
-<tr>
-<td><code>label</code></td>
-<td>A human friendly descriptor of the object.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>The overall height of the building.</td>
-<td>0.0</td>
-</tr>
-<tr>
-<td><code>floors</code></td>
-<td>The floors contained in the building.</td>
-<td>[]</td>
-</tr>
-<tr>
-<td><code>elevators</code></td>
-<td>The elevators contained in the building.</td>
-<td>[]</td>
 </tr>
 <tr>
 <td><code>_elevation_of</code></td>
@@ -40,13 +20,33 @@
 <td></td>
 </tr>
 <tr>
-<td><code>_at_elevation</code></td>
-<td>A mapping of elevations-&gt;objects.</td>
+<td><code>_ref_to</code></td>
+<td>A mapping of ids-&gt;objects.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>_ref_to</code></td>
-<td>A mapping of ids-&gt;objects.</td>
+<td><code>elevators</code></td>
+<td>The elevators contained in the building.</td>
+<td>[]</td>
+</tr>
+<tr>
+<td><code>floors</code></td>
+<td>The floors contained in the building.</td>
+<td>[]</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>The overall height of the building.</td>
+<td>0.0</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>A unique string identifying the object. Generally not human friendly.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>A human friendly descriptor of the object.</td>
 <td></td>
 </tr>
 </tbody>
@@ -62,39 +62,9 @@
 </thead>
 <tbody>
 <tr>
-<td><code>height</code></td>
-<td>The height of the elevator itself.</td>
-<td>2.44</td>
-</tr>
-<tr>
-<td><code>elevation</code></td>
-<td>The elevation of the top-most point of the elevator.</td>
-<td>0.0</td>
-</tr>
-<tr>
-<td><code>destination</code></td>
-<td>The current destination floor that we are moving towards. Set to None when not in motion.</td>
+<td><code>building</code></td>
+<td>A reference to the current building object the elevator is contained within.</td>
 <td>None</td>
-</tr>
-<tr>
-<td><code>velocity</code></td>
-<td>Positive velocity means upwards, negative means downward, 0 is at rest</td>
-<td>0.0</td>
-</tr>
-<tr>
-<td><code>label</code></td>
-<td>A friendly identifier for the elevator</td>
-<td></td>
-</tr>
-<tr>
-<td><code>maximum_up_speed</code></td>
-<td>A maximum upward velocity for the elevator, must be &gt;0</td>
-<td>1.0</td>
-</tr>
-<tr>
-<td><code>maximum_down_speed</code></td>
-<td>A maximum downward velocity for the elevator, must be &lt;0</td>
-<td>-1.0</td>
 </tr>
 <tr>
 <td><code>carrying</code></td>
@@ -102,14 +72,49 @@
 <td>[]</td>
 </tr>
 <tr>
-<td><code>building</code></td>
-<td>A reference to the current building object the elevator is contained within.</td>
+<td><code>destination</code></td>
+<td>The current destination floor that we are moving towards. Set to None when not in motion.</td>
 <td>None</td>
+</tr>
+<tr>
+<td><code>elevation</code></td>
+<td>The elevation of the top-most point of the elevator.</td>
+<td>0.0</td>
 </tr>
 <tr>
 <td><code>floor_requests</code></td>
 <td>A list of floor requests in sequential order.</td>
 <td>[]</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>The height of the elevator itself.</td>
+<td>2.44</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>A unique string identifying the object. Generally not human friendly.</td>
+<td></td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>A friendly identifier for the elevator</td>
+<td></td>
+</tr>
+<tr>
+<td><code>loading_time_needed</code></td>
+<td>Real world seconds that it takes to load the elevator.</td>
+<td>5.0</td>
+</tr>
+<tr>
+<td><code>maximum_down_speed</code></td>
+<td>A maximum downward velocity for the elevator, must be &lt;0</td>
+<td>-1.0</td>
+</tr>
+<tr>
+<td><code>maximum_up_speed</code></td>
+<td>A maximum upward velocity for the elevator, must be &gt;0</td>
+<td>1.0</td>
 </tr>
 <tr>
 <td><code>status</code></td>
@@ -127,14 +132,9 @@
 <td>5.0</td>
 </tr>
 <tr>
-<td><code>loading_time_needed</code></td>
-<td>Real world seconds that it takes to load the elevator.</td>
-<td>5.0</td>
-</tr>
-<tr>
-<td><code>id</code></td>
-<td>A unique string identifying the object. Generally not human friendly.</td>
-<td></td>
+<td><code>velocity</code></td>
+<td>Positive velocity means upwards, negative means downward, 0 is at rest</td>
+<td>0.0</td>
 </tr>
 </tbody>
 </table>
@@ -149,14 +149,14 @@
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
-<td>A unique string identifying the object. Generally not human friendly.</td>
-<td></td>
+<td><code>building</code></td>
+<td>A reference to the parent building object.</td>
+<td>None</td>
 </tr>
 <tr>
-<td><code>height</code></td>
-<td>The height of the floor.</td>
-<td>3.0</td>
+<td><code>carrying</code></td>
+<td>A list of the people contained within the floor object.</td>
+<td>[]</td>
 </tr>
 <tr>
 <td><code>elevation</code></td>
@@ -169,24 +169,24 @@
 <td>0.0</td>
 </tr>
 <tr>
-<td><code>label</code></td>
-<td>A human friendly descriptor of the object.</td>
+<td><code>height</code></td>
+<td>The height of the floor.</td>
+<td>3.0</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>A unique string identifying the object. Generally not human friendly.</td>
 <td></td>
-</tr>
-<tr>
-<td><code>carrying</code></td>
-<td>A list of the people contained within the floor object.</td>
-<td>[]</td>
-</tr>
-<tr>
-<td><code>building</code></td>
-<td>A reference to the parent building object.</td>
-<td>None</td>
 </tr>
 <tr>
 <td><code>is_floor</code></td>
 <td>A boolean indicating whether we are a floor object or not.</td>
 <td>True</td>
+</tr>
+<tr>
+<td><code>label</code></td>
+<td>A human friendly descriptor of the object.</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -201,21 +201,6 @@
 </thead>
 <tbody>
 <tr>
-<td><code>id</code></td>
-<td>A unique string identifying the object. Generally not human friendly.</td>
-<td></td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>The height of the person.</td>
-<td>1.77</td>
-</tr>
-<tr>
-<td><code>location</code></td>
-<td>A reference to the object the person is contained in, whether floor or elevator.</td>
-<td>None</td>
-</tr>
-<tr>
 <td><code>building</code></td>
 <td>A reference to the parent building.</td>
 <td>None</td>
@@ -226,9 +211,24 @@
 <td>None</td>
 </tr>
 <tr>
+<td><code>height</code></td>
+<td>The height of the person.</td>
+<td>1.77</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>A unique string identifying the object. Generally not human friendly.</td>
+<td></td>
+</tr>
+<tr>
 <td><code>label</code></td>
 <td>A human friendly descriptor of the object.</td>
-<td>Annika</td>
+<td>Deidre</td>
+</tr>
+<tr>
+<td><code>location</code></td>
+<td>A reference to the object the person is contained in, whether floor or elevator.</td>
+<td>None</td>
 </tr>
 </tbody>
 </table>

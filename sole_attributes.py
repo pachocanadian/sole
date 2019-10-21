@@ -18,7 +18,7 @@ print("\n")
 print("### {}\n".format("SOLE.Building.BaseBuilding"))
 print("|*{}*|*{}*|*{}*|".format("Attribute", "Description", "Default Value"))
 print("| --- | --- | --- |")
-for attribute in building.settings._variable_definitions:
+for attribute in sorted(building.settings._variable_definitions):
     print(
         "|`{}`|{}|{}|".format(
             attribute,
@@ -31,7 +31,7 @@ print("\n")
 print("### {}\n".format("SOLE.Building.BaseElevator"))
 print("|*{}*|*{}*|*{}*|".format("Attribute", "Description", "Default Value"))
 print("| --- | --- | --- |")
-for attribute in elevator.settings._variable_definitions:
+for attribute in sorted(elevator.settings._variable_definitions):
     print(
         "|`{}`|{}|{}|".format(
             attribute,
@@ -44,7 +44,7 @@ print("\n")
 print("### {}\n".format("SOLE.Building.BaseFloor"))
 print("|*{}*|*{}*|*{}*|".format("Attribute", "Description", "Default Value"))
 print("| --- | --- | --- |")
-for attribute in floor.settings._variable_definitions:
+for attribute in sorted(floor.settings._variable_definitions):
     print(
         "|`{}`|{}|{}|".format(
             attribute,
@@ -57,7 +57,7 @@ print("\n")
 print("### {}\n".format("SOLE.Building.BasePerson"))
 print("|*{}*|*{}*|*{}*|".format("Attribute", "Description", "Default Value"))
 print("| --- | --- | --- |")
-for attribute in person.settings._variable_definitions:
+for attribute in sorted(person.settings._variable_definitions):
     print(
         "|`{}`|{}|{}|".format(
             attribute,
