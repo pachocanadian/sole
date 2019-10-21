@@ -4,8 +4,6 @@ from SOLE.Settings.BaseSettings import BaseSettings
 
 
 class BaseBuilding:
-    _default_attributes = {"height": 0, "floors": [], "elevators": []}
-
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self.settings = BaseSettings(
