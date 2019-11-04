@@ -89,6 +89,25 @@ class BasePerson:
                     "default": sole_baseperson_random_name(),
                     "comment": "A human friendly descriptor of the object.",
                 },
+                "status": {
+                    "type": "string",
+                    "validation": "in_list",
+                    "default": "idle",
+                    "valid_list": [
+                        "idle",
+                        "requesting",
+                        "entering",
+                        "aboard",
+                        "leaving",
+                    ],
+                    "comment": "The current status of the person.",
+                },
+                "status_percent": {
+                    "type": "float",
+                    "validation": "is_percent",
+                    "default": 1.00,
+                    "comment": "A float inside [0,1] indicating percentage completion of the status.",
+                },
             }
         )
         if attributes is not None:
