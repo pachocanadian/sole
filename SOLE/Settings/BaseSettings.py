@@ -80,6 +80,14 @@ class BaseSettings:
                         name, value, _type
                     )
 
+                elif _validation == "in_list":
+                    valid_list = self._variable_definitions[name]["valid_list"]
+                    assert (
+                        value in valid_list
+                    ), "Named attribute {} of value {} of type {} must be in valid_list".format(
+                        name, value, _type
+                    )
+
                 else:
                     assert (
                         False

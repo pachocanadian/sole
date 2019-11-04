@@ -370,6 +370,34 @@ def test_BASESETTINGS_validation_is_percent_notok():
         a.set("test_float", v)
 
 
+def test_BASESETTINGS_validation_is_percent_ok():
+    a = BaseSettings(
+        {
+            "test_string": {
+                "type": "string",
+                "validation": "in_list",
+                "valid_list": ["a", "b"],
+            }
+        }
+    )
+    a.set("test_string", "a")
+
+
+def test_BASESETTINGS_validation_is_percent_notok():
+    a = BaseSettings(
+        {
+            "test_string": {
+                "type": "string",
+                "validation": "in_list",
+                "valid_list": ["a", "b"],
+            }
+        }
+    )
+    v = "c"
+    with pytest.raises(AssertionError, match="test_string") as excinfo:
+        a.set("test_string", v)
+
+
 ###
 ### END BASESETTINGS TESTS
 #

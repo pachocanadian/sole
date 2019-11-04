@@ -58,5 +58,5 @@
 |`destination`|A reference to the floor/elevator that we are destined to.|None|
 |`height`|The height of the person.|1.77|
 |`id`|A unique string identifying the object. Generally not human friendly.||
-|`label`|A human friendly descriptor of the object.|Deidre|
+|`label`|A human friendly descriptor of the object.|Joyce|
 |`location`|A reference to the object the person is contained in, whether floor or elevator.|None|

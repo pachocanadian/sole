@@ -49,7 +49,6 @@ def sole_baseperson_random_name():
 
 
 class BasePerson:
-
     def __init__(self, attributes=None):
         """init() with no parameters or init(dict) can specify a dictionary of attributes"""
         self.settings = BaseSettings(
