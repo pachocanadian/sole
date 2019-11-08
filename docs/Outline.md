@@ -26,26 +26,30 @@ Assuming one elevator idle at Lobby:
 -------------------
 * Boarding an elevator takes 5 seconds.
 * Leaving an elevator takes 5 seconds.
-* Elevator prepares for 1 second in an "about to do x" state before doing x.
 * Acceleration is instantaneous
 * Elevator base velocity units are +1 m/s, 0 m/s or -1 m/s.
+* People can only enter elevator once elevator is in "Doors Open" state.
 
-Time (sec)   | Velocity	 | Elevation | Status                  | Current Floor | People aboard
------------- | --------  | --------- | --------------------    | ------------- | -------------
-0            |  +0 m / s |  0 m      | Idle                    |  Lobby        |  None
-1	     |  +0 m / s |  0 m      | About to go to floor 2  |  Lobby        |
-2            |  +1 m / s |  1 m      | Going to floor 2        |  None         |  None
-3            |  +1 m / s |  2 m      | Going to floor 2	       |  None         |  None
-4            |  +1 m / s |  3 m      | Going to floor 2        |  None         |  None
-5            |  +1 m / s |  4 m      | Going to floor 2        |  None         |  None
-6            |  0 m / s  |  5 m      | At floor 2              |  Floor 2      |  None
-7 - 11       |  0 m / s  |  5 m      | People entering         |  Floor 2      | +x people
-12           |  0 m / s  |  5 m      | About to go to floor 1  |  Floor 2      |  x people
-13           |  1 m / s  |  4 m      | Going to floor 1        |  None         |  x people
-14           |  1 m / s  |  3 m      | Going to floor 1        |  None         |  x people
-15           |  0 m / s  |  2.5 m    | At floor 1              |  Floor 1      |  x people
-16 - 21      |  0 m / s  |  2.5 m    | People exiting          |  Floor 1      | -x people
-22           |  0 m / s  |  2.5 m    | Idle	               |  Floor 1      |  None
+Time (sec)   | Velocity	 | Elevation | Elevator State           | Current Floor | People aboard  | Person A State
+------------ | --------  | --------- | --------------------     | ------------- | -------------  | -----------
+0            |  +0 m / s |  0 m      | Idle                     |  Lobby        |  None	        | Idle
+1	     |  +1 m / s |  1 m      | Moving		        |  None         |  None	        | Requesting
+2            |  +1 m / s |  2 m      | Moving		        |  None         |  None	        | Requesting
+3            |  +1 m / s |  3 m      | Moving		        |  None         |  None	        | Requesting
+4            |  +1 m / s |  4 m      | Moving	                |  None         |  None	        | Requesting
+5            |  0 m / s  |  5 m      | Doors Opening            |  Floor 2      |  None	        | Entering
+6-10         |  0 m / s  |  5 m      | Doors Opening            |  Floor 2      |  None		| Entering
+11-15        |  0 m / s  |  5 m      | Doors Open               |  Floor 2      |  None 	| Entering
+16-20        |  0 m / s  |  5 m      | Loading		        |  Floor 2      |  None		| Entering
+21-25        |  0 m / s  |  5 m      | Doors Closing            |  Floor 2      |  Person A	| Aboard
+26           |  0 m / s  |  5 m      | Doors Closed	        |  Floor 2      |  Person A	| Aboard 
+27           |  -1 m / s |  4 m      | Moving                   |  None         |  Person A	| Aboard
+28	     |  -1 m / s |  3 m      | Moving	                |  None	        |  Person A	| Aboard
+29-33        |  0 m / s  |  2.5 m    | Doors Opening            |  Floor 1      |  Person A	| Aboard
+34	     |  0 m / s  |  2.5 m    | Doors Open		|  Floor 1	|  Person A	| Aboard	
+35-39	     |  0 m / s  |  2.5 m    | Unloading		|  Floor 1      |  Person A     | Leaving
+40	     |  0 m / s	 |  2.5 m    | Idle			|  Floor 1	|  None		| Idle
+
 
 
 ## Building Layout
