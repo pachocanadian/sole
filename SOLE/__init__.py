@@ -22,19 +22,22 @@ tick_ratio_to_real_time = 10  # 10 ticks per real world second. 1m/s is 0.1m/t
 
 _sole_id_log = dict()
 
-''' Return a current time and tick as a string for use in logging. '''
+
 def timestamp():
+    """ Return a current time and tick as a string for use in logging. """
     return "[{0}] [{1:05d}]".format(
         time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), current_tick
     )
 
-''' Log a message to the console with timestamp. '''
+
 def log(message, loglevel=LOG_NOTICE):
+    """ Log a message to the console with timestamp. """
     if (loglevel & verbosity) > 0:
         print("{} {}".format(timestamp(), message))
 
-''' Define a new class id and return it and the count of its occurances. '''
+
 def new_id(classref="UnspecifiedClass"):
+    """ Define a new class id and return it and the count of its occurances. """
     key = re.sub("[^A-Z]", "", classref)
     key = key[0:2]
 
