@@ -30,7 +30,7 @@
 |`loading_time_needed`|Real world seconds that it takes to load the elevator.|5.0|
 |`maximum_down_speed`|A maximum downward velocity for the elevator, must be <0|-1.0|
 |`maximum_up_speed`|A maximum upward velocity for the elevator, must be >0|1.0|
-|`status`|The current status of the elevator.|waiting|
+|`status`|The current status of the elevator.|idle|
 |`status_percent`|A float inside [0,1] indicating percentage completion of status.|1.0|
 |`unloading_time_needed`|Real world seconds that it takes to unload the elevator.|5.0|
 |`velocity`|Positive velocity means upwards, negative means downward, 0 is at rest|0.0|
@@ -58,7 +58,7 @@
 |`destination`|A reference to the floor/elevator that we are destined to.|None|
 |`height`|The height of the person.|1.77|
 |`id`|A unique string identifying the object. Generally not human friendly.||
-|`label`|A human friendly descriptor of the object.|Jonathan|
+|`label`|A human friendly descriptor of the object.|Christian|
 |`location`|A reference to the object the person is contained in, whether floor or elevator.|None|
 |`status`|The current status of the person.|idle|
 |`status_percent`|A float inside [0,1] indicating percentage completion of the status.|1.0|

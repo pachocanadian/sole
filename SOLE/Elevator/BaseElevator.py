@@ -70,7 +70,7 @@ class BaseElevator:
                 "status": {
                     "type": "string",
                     "validation": "",
-                    "default": "waiting",
+                    "default": "idle",
                     "comment": "The current status of the elevator.",
                 },
                 "status_percent": {
@@ -218,7 +218,15 @@ class BaseElevator:
         for p in self.get("carrying"):
             p.tick()
 
-        valid_statuses = ("waiting", "unloading", "loading", "moving")
+        valid_statuses = (
+            "idle",
+            "unloading",
+            "loading",
+            "moving",
+            "doors_opening",
+            "doors_open",
+            "doors_closing"
+        )
 
         b = self.get("building")
         elevation = self.get("elevation")
@@ -248,11 +256,11 @@ class BaseElevator:
             )
             return
 
-        # from loading state, we can either continue loading or start waiting
+        # from loading state, we can either continue loading or start idle
         if status == "loading":
             self.load()
             if status_percent >= 1.00:
-                self.set("status", "waiting")
+                self.set("status", "idle")
                 self.set("status_percent", 0)
                 return
 
@@ -268,8 +276,8 @@ class BaseElevator:
             )
             return
 
-        # from waiting state, we can either continue waiting or start moving
-        if status == "waiting":
+        # from idle state, we can either continue idle or start moving
+        if status == "idle":
             if destination is None:
                 # check if there is any new destinations to move to
                 self.queue()
@@ -277,7 +285,7 @@ class BaseElevator:
 
             if destination is None:
                 # continue to wait if there is still no destination floor
-                self.set(status, "waiting")
+                self.set(status, "idle")
                 self.set(status_percent, 1.00)
                 return
 

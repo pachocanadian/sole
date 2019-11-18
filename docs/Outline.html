@@ -19,9 +19,9 @@ The elevator moves the person to floor y and stops, allowing the person to get o
 <ul>
 <li>Boarding an elevator takes 5 seconds.</li>
 <li>Leaving an elevator takes 5 seconds.</li>
-<li>Elevator prepares for 1 second in an "about to do x" state before doing x.</li>
 <li>Acceleration is instantaneous</li>
 <li>Elevator base velocity units are +1 m/s, 0 m/s or -1 m/s.</li>
+<li>People can only enter elevator once elevator is in "Doors Open" state.</li>
 </ul>
 <table>
 <thead>
@@ -29,9 +29,10 @@ The elevator moves the person to floor y and stops, allowing the person to get o
 <th>Time (sec)</th>
 <th>Velocity</th>
 <th>Elevation</th>
-<th>Status</th>
+<th>Elevator State</th>
 <th>Current Floor</th>
 <th>People aboard</th>
+<th>Person A State</th>
 </tr>
 </thead>
 <tbody>
@@ -42,110 +43,151 @@ The elevator moves the person to floor y and stops, allowing the person to get o
 <td>Idle</td>
 <td>Lobby</td>
 <td>None</td>
+<td>Idle</td>
 </tr>
 <tr>
 <td>1</td>
-<td>+0 m / s</td>
-<td>0 m</td>
-<td>About to go to floor 2</td>
-<td>Lobby</td>
-<td></td>
+<td>+1 m / s</td>
+<td>1 m</td>
+<td>Moving</td>
+<td>None</td>
+<td>None</td>
+<td>Requesting</td>
 </tr>
 <tr>
 <td>2</td>
 <td>+1 m / s</td>
-<td>1 m</td>
-<td>Going to floor 2</td>
+<td>2 m</td>
+<td>Moving</td>
 <td>None</td>
 <td>None</td>
+<td>Requesting</td>
 </tr>
 <tr>
 <td>3</td>
 <td>+1 m / s</td>
-<td>2 m</td>
-<td>Going to floor 2</td>
+<td>3 m</td>
+<td>Moving</td>
 <td>None</td>
 <td>None</td>
+<td>Requesting</td>
 </tr>
 <tr>
 <td>4</td>
 <td>+1 m / s</td>
-<td>3 m</td>
-<td>Going to floor 2</td>
+<td>4 m</td>
+<td>Moving</td>
 <td>None</td>
 <td>None</td>
+<td>Requesting</td>
 </tr>
 <tr>
 <td>5</td>
-<td>+1 m / s</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>Doors Opening</td>
+<td>Floor 2</td>
+<td>None</td>
+<td>Entering</td>
+</tr>
+<tr>
+<td>6-10</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>Doors Opening</td>
+<td>Floor 2</td>
+<td>None</td>
+<td>Entering</td>
+</tr>
+<tr>
+<td>11-15</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>Doors Open</td>
+<td>Floor 2</td>
+<td>None</td>
+<td>Entering</td>
+</tr>
+<tr>
+<td>16-20</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>Loading</td>
+<td>Floor 2</td>
+<td>None</td>
+<td>Entering</td>
+</tr>
+<tr>
+<td>21-25</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>Doors Closing</td>
+<td>Floor 2</td>
+<td>Person A</td>
+<td>Aboard</td>
+</tr>
+<tr>
+<td>26</td>
+<td>0 m / s</td>
+<td>5 m</td>
+<td>Doors Closed</td>
+<td>Floor 2</td>
+<td>Person A</td>
+<td>Aboard</td>
+</tr>
+<tr>
+<td>27</td>
+<td>-1 m / s</td>
 <td>4 m</td>
-<td>Going to floor 2</td>
+<td>Moving</td>
 <td>None</td>
-<td>None</td>
+<td>Person A</td>
+<td>Aboard</td>
 </tr>
 <tr>
-<td>6</td>
-<td>0 m / s</td>
-<td>5 m</td>
-<td>At floor 2</td>
-<td>Floor 2</td>
-<td>None</td>
-</tr>
-<tr>
-<td>7 - 11</td>
-<td>0 m / s</td>
-<td>5 m</td>
-<td>People entering</td>
-<td>Floor 2</td>
-<td>+x people</td>
-</tr>
-<tr>
-<td>12</td>
-<td>0 m / s</td>
-<td>5 m</td>
-<td>About to go to floor 1</td>
-<td>Floor 2</td>
-<td>x people</td>
-</tr>
-<tr>
-<td>13</td>
-<td>1 m / s</td>
-<td>4 m</td>
-<td>Going to floor 1</td>
-<td>None</td>
-<td>x people</td>
-</tr>
-<tr>
-<td>14</td>
-<td>1 m / s</td>
+<td>28</td>
+<td>-1 m / s</td>
 <td>3 m</td>
-<td>Going to floor 1</td>
+<td>Moving</td>
 <td>None</td>
-<td>x people</td>
+<td>Person A</td>
+<td>Aboard</td>
 </tr>
 <tr>
-<td>15</td>
+<td>29-33</td>
 <td>0 m / s</td>
 <td>2.5 m</td>
-<td>At floor 1</td>
+<td>Doors Opening</td>
 <td>Floor 1</td>
-<td>x people</td>
+<td>Person A</td>
+<td>Aboard</td>
 </tr>
 <tr>
-<td>16 - 21</td>
+<td>34</td>
 <td>0 m / s</td>
 <td>2.5 m</td>
-<td>People exiting</td>
+<td>Doors Open</td>
 <td>Floor 1</td>
-<td>-x people</td>
+<td>Person A</td>
+<td>Aboard</td>
 </tr>
 <tr>
-<td>22</td>
+<td>35-39</td>
+<td>0 m / s</td>
+<td>2.5 m</td>
+<td>Unloading</td>
+<td>Floor 1</td>
+<td>Person A</td>
+<td>Leaving</td>
+</tr>
+<tr>
+<td>40</td>
 <td>0 m / s</td>
 <td>2.5 m</td>
 <td>Idle</td>
 <td>Floor 1</td>
 <td>None</td>
+<td>Idle</td>
 </tr>
 </tbody>
 </table>

@@ -60,7 +60,7 @@ elevator = Elevator(
     {
         "floors": floors,
         "elevation": 0,
-        "status": "waiting",
+        "status": "idle",
         "destination_floor": None,
         "label": "Main Elevator",
     }
