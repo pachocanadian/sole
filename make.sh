@@ -19,7 +19,7 @@ else
 fi
 
 echo -n 'Updating attribute documentation: '
-python sole_attributes.py > docs/attributes.md
+python3 sole_attributes.py > docs/attributes.md
 if [ $? == 0 ]; then
 	echo 'OK'
 else
